@@ -5,6 +5,11 @@
 
 namespace ppbox
 {
+    namespace avbase
+    {
+        struct AudioInfo;
+    }
+
     namespace avcodec
     {
 
@@ -65,6 +70,10 @@ namespace ppbox
 
             void set_frequency(
                 size_t frequency);
+
+        public:
+            void get_format(
+                ppbox::avbase::AudioInfo & info) const;
 
         private:
             AacConfig * data_;

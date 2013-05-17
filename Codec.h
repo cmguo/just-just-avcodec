@@ -3,9 +3,10 @@
 #ifndef _PPBOX_AVCODEC_CODEC_H_
 #define _PPBOX_AVCODEC_CODEC_H_
 
-#include <ppbox/common/ClassFactory.h>
+#include "ppbox/avcodec/CodecType.h"
+#include "ppbox/avcodec/StreamInfo.h"
 
-#include <boost/intrusive_ptr.hpp>
+#include <ppbox/common/ClassFactory.h>
 
 namespace ppbox
 {
@@ -16,35 +17,21 @@ namespace ppbox
             : public ppbox::common::ClassFactory<
                 Codec, 
                 boost::uint32_t, 
-                Codec *(boost::uint32_t, std::vector<boost::uint8_t> const &)
+                Codec *()
             >
         {
         public:
-            Codec()
-            {
-            }
+            Codec();
 
-            virtual ~Codec()
-            {
-            }
+            virtual ~Codec();
 
-        private:
-            friend void intrusive_ptr_add_ref(
-                Codec const * p)
-            {
-                ++p->nref_;
-            }
+        public:
+            virtual bool finish_stream_info(
+                StreamInfo & info) = 0;
 
-            friend void intrusive_ptr_release(
-                Codec const * p)
-            {
-                if (--p->nref_ == 0) {
-                    delete p;
-                }
-            }
-
-        private:
-            mutable size_t nref_;
+        public:
+            static bool static_finish_stream_info(
+                StreamInfo & info);
         };
 
     } // namespace avcodec

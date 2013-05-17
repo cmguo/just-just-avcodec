@@ -42,17 +42,17 @@ namespace ppbox
         public:
             bool from_stream(
                 boost::uint32_t size, 
-                buffers_t const & data);
+                buffers_t const & datas);
 
             bool from_packet(
                 boost::uint32_t size, 
-                buffers_t const & data);
+                buffers_t const & datas);
 
             bool from_stream(
-                buffers_t const & data);
+                buffers_t const & datas);
 
             bool from_packet(
-                buffers_t const & data);
+                buffers_t const & datas);
 
         public:
             bool to_stream(
@@ -68,12 +68,6 @@ namespace ppbox
 
             bool to_packet(
                 buffers_t & data);
-
-        public:
-            // return 0 if not found
-            boost::uint8_t get_frame_type_from_stream(
-                std::vector<boost::uint8_t> const & data, 
-                boost::uint32_t * offset);
 
         private:
             boost::uint8_t nalu_length_size_;

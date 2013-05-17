@@ -1,12 +1,21 @@
 // AvcEncoder.cpp
 
 #include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/avc/AvcEncoder.h"
+#include "ppbox/avcodec/avc/AvcConfigHelper.h"
+#include "ppbox/avcodec/avc/AvcFormatType.h"
 
 #include <util/buffers/BuffersCopy.h>
 
 #include <stdint.h>
+
+#ifdef WIN32
+#  define X264_API_IMPORTS
+#endif
+
+extern "C"
+{
 #include <thirdparty/x264/x264.h>
+};
 
 namespace ppbox
 {
@@ -47,6 +56,10 @@ namespace ppbox
                 }
                 x264 = x264_encoder_open(&param);
                 x264_encoder_parameters(x264, &param);
+
+                output_format = input_format;
+                output_format.sub_type = VideoSubType::AVC1;
+                output_format.format_type = param.b_annexb ? AvcFormatType::byte_stream : AvcFormatType::packet;
                 // get sps pps
                 {
                     x264_encoder_headers(x264, &p_nal, &i_nal);
@@ -54,6 +67,11 @@ namespace ppbox
                         output_format.format_data.insert(output_format.format_data.end(), 
                             p_nal[i].p_payload, p_nal[i].p_payload + p_nal[i].i_payload);
                     }
+                    if (param.b_annexb == 0) {
+                        AvcConfigHelper h;
+                        h.from_es_data(output_format.format_data);
+                        h.to_data(output_format.format_data);
+                    };
                 }
 
                 return true;

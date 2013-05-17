@@ -1,10 +1,10 @@
 // AvcEncoder.h
 
-#ifndef _PPBOX_AVCODEC_ACV_AVC_ENCODER_H_
-#define _PPBOX_AVCODEC_ACV_AVC_ENCODER_H_
+#ifndef _PPBOX_AVCODEC_AVC_AVC_ENCODER_H_
+#define _PPBOX_AVCODEC_AVC_AVC_ENCODER_H_
 
 #include "ppbox/avcodec/Encoder.h"
-#include "ppbox/avcodec/Format.h"
+#include "ppbox/avcodec/CodecType.h"
 
 namespace ppbox
 {
@@ -43,9 +43,9 @@ namespace ppbox
             x264_impl * impl_;
         };
 
+        PPBOX_REGISTER_ENCODER(VideoSubType::AVC1, AvcEncoder);
+
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_ENCODER(key, cls) PPBOX_REGISTER_CLASS(key, cls)
-
-#endif // _PPBOX_AVCODEC_ACV_AVC_ENCODER_H_
+#endif // _PPBOX_AVCODEC_AVC_AVC_ENCODER_H_

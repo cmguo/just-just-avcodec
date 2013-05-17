@@ -99,11 +99,22 @@ namespace ppbox
             return true;
         }
 
+        bool AvcNaluHelper::from_stream(
+            buffers_t const & datas)
+        {
+            return from_stream(util::buffers::buffers_size(datas), datas);
+        }
+
+        bool AvcNaluHelper::from_packet(
+            buffers_t const & datas)
+        {
+            return from_packet(0, datas);
+        }
+
         bool AvcNaluHelper::to_stream(
             boost::uint32_t & size, 
-            buffers_t & data)
+            buffers_t & datas)
         {
-            std::deque<boost::asio::const_buffer> datas;
             for (boost::uint32_t i = 0; i < nalus_.size(); ++i) {
                 NaluBuffer const & nalu = nalus_[i];
                 NaluHeader nalu_header(nalu.begin.dereference_byte());
@@ -111,15 +122,13 @@ namespace ppbox
                 datas.insert(datas.end(), nalu.buffers_begin(), nalu.buffers_end());
                 size += nalu.size + 4;
             }
-            data.swap(datas);
             return true;
         }
 
         bool AvcNaluHelper::to_packet(
             boost::uint32_t & size, 
-            buffers_t & data)
+            buffers_t & datas)
         {
-            std::deque<boost::asio::const_buffer> datas;
             size_t n = 0;
             for (boost::uint32_t i = 0; i < nalus_.size(); ++i) {
                 NaluBuffer const & nalu = nalus_[i];
@@ -135,28 +144,21 @@ namespace ppbox
                         ++n;
                 }
             }
-            data.swap(datas);
             return true;
         }
 
-        boost::uint8_t AvcNaluHelper::get_frame_type_from_stream(
-            std::vector<boost::uint8_t> const & data, 
-            boost::uint32_t * offset)
+        bool AvcNaluHelper::to_stream(
+            buffers_t & data)
         {
-            buffers_t buffers;
-            buffers.push_back(boost::asio::buffer(data));
-            from_stream(data.size(), buffers);
-            if (nalus_.size() > 0) {
-                NaluHeader const nalu_header(nalus_.back().begin.dereference_byte());
-                if (nalu_header.nal_unit_type == 1 
-                    || nalu_header.nal_unit_type == 5) {
-                        if (offset) {
-                            *offset = nalus_.back().begin.skipped_bytes() - 4;
-                        }
-                        return (boost::uint8_t)nalu_header.nal_unit_type;
-                }
-            }
-            return 0;
+            boost::uint32_t size = 0;
+            return to_stream(size, data);
+        }
+
+        bool AvcNaluHelper::to_packet(
+            buffers_t & data)
+        {
+            boost::uint32_t size = 0;
+            return to_packet(size, data);
         }
 
     } // namespace avcodec

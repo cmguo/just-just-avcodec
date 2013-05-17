@@ -5,7 +5,6 @@
 
 #include "ppbox/avcodec/Codec.h"
 #include "ppbox/avcodec/aac/AacConfigHelper.h"
-#include "ppbox/avcodec/Format.h"
 
 namespace ppbox
 {
@@ -21,6 +20,10 @@ namespace ppbox
             AacCodec(
                 boost::uint32_t format, 
                 std::vector<boost::uint8_t> const & config);
+
+        public:
+            virtual bool finish_stream_info(
+                StreamInfo & info);
 
         public:
             AacConfigHelper const & config_helper() const

@@ -8,6 +8,7 @@
 #include <ppbox/avbase/stream/BitsIStream.h>
 #include <ppbox/avbase/stream/BitsOStream.h>
 #include <ppbox/avbase/stream/FormatBuffer.h>
+#include <ppbox/avbase/StreamInfo.h>
 using namespace ppbox::avbase;
 
 namespace ppbox
@@ -215,6 +216,13 @@ namespace ppbox
             FormatBuffer abuf((boost::uint8_t *)&buf[0], buf.size());
             BitsOStream<boost::uint8_t> os(abuf);
             os << adts;
+        }
+
+        void AacConfigHelper::get_format(
+            AudioInfo & info) const
+        {
+            info.channel_count = data_->channelConfiguration;
+            info.sample_rate = get_frequency();
         }
 
     } // namespace avcodec

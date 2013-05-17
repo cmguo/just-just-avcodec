@@ -115,6 +115,11 @@ namespace ppbox
             }
         }
 
+        bool AvcConfigHelper::ready() const
+        {
+            return !data_->sequenceParameterSetNALUnit.empty();
+        }
+
         void AvcConfigHelper::get_format(
             VideoInfo & info) const
         {

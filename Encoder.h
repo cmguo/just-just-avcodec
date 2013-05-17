@@ -8,8 +8,6 @@
 
 #include <ppbox/common/ClassFactory.h>
 
-#include <boost/intrusive_ptr.hpp>
-
 namespace ppbox
 {
     namespace avcodec
@@ -48,24 +46,6 @@ namespace ppbox
 
             virtual bool close(
                 boost::system::error_code & ec) = 0;
-
-        private:
-            friend void intrusive_ptr_add_ref(
-                Encoder const * p)
-            {
-                ++p->nref_;
-            }
-
-            friend void intrusive_ptr_release(
-                Encoder const * p)
-            {
-                if (--p->nref_ == 0) {
-                    delete p;
-                }
-            }
-
-        private:
-            mutable size_t nref_;
         };
 
     } // namespace avcodec

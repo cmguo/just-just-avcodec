@@ -2,6 +2,8 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/avc/AvcCodec.h"
+#include "ppbox/avcodec/avc/AvcFormatType.h"
+#include "ppbox/avcodec/avc/AvcConfigHelper.h"
 
 namespace ppbox
 {
@@ -12,15 +14,19 @@ namespace ppbox
         {
         }
 
-        AvcCodec::AvcCodec(
-            boost::uint32_t format, 
-            std::vector<boost::uint8_t> const & config)
+        bool AvcCodec::finish_stream_info(
+            StreamInfo & info)
         {
-            if (format == FormatType::video_avc_packet) {
-                config_helper_.from_data(config);
+            AvcConfigHelper config;
+            if (info.format_type == AvcFormatType::packet) {
+                config.from_data(info.format_data);
             } else {
-                config_helper_.from_es_data(config);
+                config.from_es_data(info.format_data);
             }
+            if (!config.ready())
+                return false;
+            config.get_format(info.video_format);
+            return true;
         }
 
     } // namespace avcodec

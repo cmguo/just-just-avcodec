@@ -50,6 +50,8 @@ namespace ppbox
                 std::vector<boost::uint8_t> & buf) const;
 
         public:
+            bool ready() const;
+
             void get_format(
                 ppbox::avbase::VideoInfo & info) const;
 
