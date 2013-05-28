@@ -1,6 +1,5 @@
-// AvcEncoder.cpp
+// AvcEncoderX264Impl.h
 
-#include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/avc/AvcConfigHelper.h"
 #include "ppbox/avcodec/avc/AvcFormatType.h"
 
@@ -81,12 +80,11 @@ namespace ppbox
                 Sample const & sample, 
                 boost::system::error_code & ec)
             {
-                assert(sample.size == panel_size);
+                assert(sample.size == (size_t)panel_size);
 
                 pic_in.i_pts = sample.dts;
                 if (sample.data.size() == 1) {
                     boost::uint8_t * data = const_cast<uint8_t *>(boost::asio::buffer_cast<boost::uint8_t const *>(sample.data.front()));
-                    boost::uint8_t * end = data + boost::asio::buffer_size(sample.data.front());
                     for (int i = 0; i < pic_in.img.i_plane; ++i) {
                         pic_in.img.plane[i] = data;
                         data += pic_in.img.i_stride[i];
