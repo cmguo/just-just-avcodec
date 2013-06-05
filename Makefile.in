@@ -49,7 +49,6 @@ PROJECT_LINK_FLAGS		:= $(PROJECT_LINK_FLAGS)
 ## 该项目依赖的其他项目
 
 PROJECT_DEPENDS			:= \
-				/thirdparty/x264 \
 				/ppbox/avbase \
 				$(PROJECT_DEPENDS)
 
