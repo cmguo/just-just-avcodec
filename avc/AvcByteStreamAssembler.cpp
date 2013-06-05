@@ -25,6 +25,7 @@ namespace ppbox
         {
             AvcConfigHelper const & config = *(AvcConfigHelper const *)info.context;
             config.to_es_data(info.format_data);
+            info.format_type = AvcFormatType::byte_stream;
 
             // access unit delimiter
             boost::uint8_t nalu_start_code[] = {0, 0, 0, 1};
