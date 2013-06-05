@@ -43,6 +43,6 @@ namespace ppbox
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_SPLITTER(codec, format, cls) PPBOX_REGISTER_CLASS(((boost::uint64_t)codec << 32) | format, cls)
+#define PPBOX_REGISTER_SPLITTER(codec_type, format, cls) PPBOX_REGISTER_CLASS(((boost::uint64_t)codec_type << 32) | format, cls)
 
 #endif // _PPBOX_AVCODEC_SPLITTER_H_

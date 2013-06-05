@@ -21,18 +21,25 @@ namespace ppbox
             >
         {
         public:
-            Encoder()
-            {
-            }
+            struct eos_t { eos_t(); };
 
-            virtual ~Encoder()
+            static eos_t eos()
             {
+                return eos_t();
             }
 
         public:
+            Encoder();
+
+            virtual ~Encoder();
+
+        public:
+            virtual bool config(
+                std::map<std::string, std::string> const & config, 
+                boost::system::error_code & ec) = 0;
+
             virtual bool open(
                 StreamInfo const & input_format, 
-                std::map<std::string, std::string> const & config, 
                 StreamInfo & output_format, 
                 boost::system::error_code & ec) = 0;
 
@@ -40,8 +47,15 @@ namespace ppbox
                 Sample const & sample, 
                 boost::system::error_code & ec) = 0;
 
+            virtual bool push(
+                eos_t const & eos, 
+                boost::system::error_code & ec) = 0;
+
             virtual bool pop(
                 Sample & sample, 
+                boost::system::error_code & ec) = 0;
+
+            virtual bool refresh(
                 boost::system::error_code & ec) = 0;
 
             virtual bool close(

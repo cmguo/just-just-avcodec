@@ -26,6 +26,7 @@ namespace ppbox
                 RGBX = MAKE_FOURC_TYPE('R', 'G', 'B', 'X'), // RGB32
                 BGR8 = MAKE_FOURC_TYPE('B', 'G', 'R', '8'), // BGR
                 ARGB = MAKE_FOURC_TYPE('A', 'R', 'G', 'B'), // ARGB32
+                BGRA = MAKE_FOURC_TYPE('B', 'G', 'R', 'A'), // BGRA32
                 // YUV                                      // Sampling Type    Bits
                 I420 = MAKE_FOURC_TYPE('I', '4', '2', '0'), // 4:2:0    Planar  8 Y4 V1 U1
                 YV12 = MAKE_FOURC_TYPE('Y', 'V', '1', '2'), // 4:2:0    Planar  8 Y4 U1 V1

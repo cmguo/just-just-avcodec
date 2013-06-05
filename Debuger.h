@@ -1,7 +1,7 @@
-// Assembler.h
+// Debuger.h
 
-#ifndef _PPBOX_AVCODEC_ASSEMBLER_H_
-#define _PPBOX_AVCODEC_ASSEMBLER_H_
+#ifndef _PPBOX_AVCODEC_DEBUGER_H_
+#define _PPBOX_AVCODEC_DEBUGER_H_
 
 #include "ppbox/avcodec/StreamInfo.h"
 #include "ppbox/avcodec/Sample.h"
@@ -13,29 +13,28 @@ namespace ppbox
     namespace avcodec
     {
 
-        class Assembler
+        class Debuger
             : public ppbox::common::ClassFactory<
-                Assembler, 
+                Debuger, 
                 boost::uint32_t, 
-                Assembler *()
+                Debuger *()
             >
         {
         public:
-            Assembler();
+            Debuger()
+            {
+            }
 
-            virtual ~Assembler();
-
-        public:
-            static Assembler * create(
-                boost::uint32_t codec_type, 
-                boost::uint32_t format);
+            virtual ~Debuger()
+            {
+            }
 
         public:
             virtual bool reset(
                 StreamInfo & info, 
                 boost::system::error_code & ec) = 0;
 
-            virtual bool assemble(
+            virtual bool debug(
                 Sample & sample, 
                 boost::system::error_code & ec) = 0;
         };
@@ -43,6 +42,6 @@ namespace ppbox
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_ASSEMBLER(codec_type, format, cls) PPBOX_REGISTER_CLASS(((boost::uint64_t)codec_type << 32) | format, cls)
+#define PPBOX_REGISTER_DEBUGER(key, cls) PPBOX_REGISTER_CLASS(key, cls)
 
-#endif // _PPBOX_AVCODEC_ASSEMBLER_H_
+#endif // _PPBOX_AVCODEC_DEBUGER_H_

@@ -24,6 +24,7 @@ namespace ppbox
         {
             AvcConfigHelper const & config = *(AvcConfigHelper const *)info.context;
             config.to_data(info.format_data);
+            info.format_type = AvcFormatType::packet;
             return true;
         }
 

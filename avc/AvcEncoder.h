@@ -22,9 +22,12 @@ namespace ppbox
             virtual ~AvcEncoder();
 
         public:
+            virtual bool config(
+                std::map<std::string, std::string> const & config, 
+                boost::system::error_code & ec);
+
             virtual bool open(
                 StreamInfo const & input_format, 
-                std::map<std::string, std::string> const & config, 
                 StreamInfo & output_format, 
                 boost::system::error_code & ec);
 
@@ -32,8 +35,15 @@ namespace ppbox
                 Sample const & sample, 
                 boost::system::error_code & ec);
 
+            virtual bool push(
+                eos_t const & eos, 
+                boost::system::error_code & ec);
+
             virtual bool pop(
                 Sample & sample, 
+                boost::system::error_code & ec);
+
+            virtual bool refresh(
                 boost::system::error_code & ec);
 
             virtual bool close(

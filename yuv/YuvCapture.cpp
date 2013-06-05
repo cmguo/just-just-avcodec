@@ -1,0 +1,51 @@
+// YuvCapture.cpp
+
+#include "ppbox/avcodec/Common.h"
+#include "ppbox/avcodec/yuv/YuvCapture.h"
+
+namespace ppbox
+{
+    namespace avcodec
+    {
+
+        YuvCapture::YuvCapture()
+            : index_(0)
+        {
+        }
+
+        YuvCapture::~YuvCapture()
+        {
+        }
+
+        bool YuvCapture::open(
+            std::map<std::string, std::string> const & config, 
+            boost::system::error_code & ec)
+        {
+            VideoCapture::open(config, ec);
+            ColorSpace::picture_size(info_, picture_, ec);
+            buffer_.resize(picture_.total_size);
+            config_.max_frame_size = picture_.total_size;
+            info_.format_data.assign((boost::uint8_t *)&config_, (boost::uint8_t *)(&config_ + 1));
+            index_ = 0;
+            return true;
+        }
+
+        bool YuvCapture::get(
+            Sample & sample, 
+            boost::system::error_code & ec)
+        {
+            memset(&buffer_.at(0), index_, buffer_.size());
+            sample.size = buffer_.size();
+            sample.data.push_back(boost::asio::buffer(buffer_));
+            ++index_;
+            return true;
+        }
+
+        bool YuvCapture::close(
+            boost::system::error_code & ec)
+        {
+            return true;
+        }
+
+    } // namespace avcodec
+} // namespace ppbox
