@@ -34,6 +34,7 @@ namespace ppbox
                 NV12 = MAKE_FOURC_TYPE('N', 'V', '1', '2'), // 4:2:0    Planar  8 with one y plane and one packed u+v
                 I422 = MAKE_FOURC_TYPE('I', '4', '2', '2'), // 4:2:2    Planar  8 
                 YV16 = MAKE_FOURC_TYPE('Y', 'V', '1', '6'), // 4:2:2    Planar  8 with one y plane and one packed u+v
+                NV16 = MAKE_FOURC_TYPE('N', 'V', '1', '6'), // 4:2:2    Planar  8 with one y plane and one packed u+v
                 NV11 = MAKE_FOURC_TYPE('N', 'V', '1', '1'), // 4:1:1    Planar  8 
                 I444 = MAKE_FOURC_TYPE('I', '4', '4', '4'), // 4:4:4    Planar  8
                 YV24 = MAKE_FOURC_TYPE('Y', 'V', '2', '4'), // 4:4:4    Planar  8

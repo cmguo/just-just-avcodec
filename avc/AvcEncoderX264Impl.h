@@ -8,7 +8,7 @@
 #include <util/buffers/BuffersCopy.h>
 
 #include <framework/logger/Logger.h>
-#include <framework/logger/FormatRecord.h>
+#include <framework/logger/StreamRecord.h>
 #include <framework/logger/VargRecord.h>
 #include <framework/library/Library.h>
 
@@ -40,7 +40,7 @@ namespace ppbox
             {VideoSubType::NV12, X264_CSP_NV12},
             {VideoSubType::I422, X264_CSP_I422},
             {VideoSubType::YV16, X264_CSP_YV16},
-            //{VideoSubType::NV16, X264_CSP_NV16},
+            {VideoSubType::NV16, X264_CSP_NV16},
             {VideoSubType::I444, X264_CSP_I444},
             {VideoSubType::YV24, X264_CSP_YV24},
             {VideoSubType::BGR8, X264_CSP_BGR},
@@ -179,6 +179,7 @@ namespace ppbox
                 param.pf_log = log;
                 std::map<std::string, std::string>::const_iterator iter = config.begin();
                 for (; iter != config.end(); ++iter) {
+                    LOG_INFO("[config]" <<  iter->first << ": " << iter->second);
                     x264_param_parse(&param, iter->first.c_str(), iter->second.c_str());
                 }
                 if ((iter = config.find("profile")) != config.end()) {
