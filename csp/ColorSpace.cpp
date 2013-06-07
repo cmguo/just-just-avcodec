@@ -21,6 +21,7 @@ namespace ppbox
             {VideoSubType::I420, 3, { 256*1, 256/2, 256/2 }, { 256*1, 256/2, 256/2 } },
             {VideoSubType::YV12, 3, { 256*1, 256/2, 256/2 }, { 256*1, 256/2, 256/2 } },
             {VideoSubType::NV12, 2, { 256*1, 256*1 },        { 256*1, 256/2 },       },
+            {VideoSubType::NV21, 2, { 256*1, 256*1 },        { 256*1, 256/2 },       },
             {VideoSubType::I422, 3, { 256*1, 256/2, 256/2 }, { 256*1, 256*1, 256*1 } },
             {VideoSubType::YV16, 3, { 256*1, 256/2, 256/2 }, { 256*1, 256*1, 256*1 } },
             {VideoSubType::NV16, 2, { 256*1, 256*1 },        { 256*1, 256*1 },       },
@@ -69,6 +70,28 @@ namespace ppbox
                 size.plane_sizes[i] = plane_size;
             }
             return true;
+        }
+
+        inline boost::uint32_t rotate(
+            boost::uint32_t v)
+        {
+            // 1 2 3 4
+            // 2 3 4 0
+            // 0 1 2 3
+            return ((v << 8) & 0xff00ff00) 
+                | ((v >> 8) & 0x00ff00ff);
+        }
+
+        void ColorSpace::transfer_nv21_nv12(
+            PictureSize const & pic, 
+            boost::uint8_t * data)
+        {
+            boost::uint32_t * p = 
+                (boost::uint32_t *)(data + pic.plane_sizes[0]);
+            boost::uint32_t * e = p + pic.plane_sizes[1] / sizeof(boost::uint32_t);
+            for (; p < e; ++p) {
+                *p = rotate(*p);
+            }
         }
 
     } // namespace avcodec

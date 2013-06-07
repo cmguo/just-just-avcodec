@@ -34,6 +34,14 @@ namespace ppbox
                 StreamInfo const & info, 
                 PictureSize & size, 
                 boost::system::error_code & ec);
+
+            typedef void (*transfer_t)(
+                PictureSize const & pic, 
+                boost::uint8_t * data);
+
+            static void transfer_nv21_nv12(
+                PictureSize const & pic, 
+                boost::uint8_t * data);
         };
 
     } // namespace avcodec

@@ -28,23 +28,28 @@ namespace ppbox
                 ARGB = MAKE_FOURC_TYPE('A', 'R', 'G', 'B'), // ARGB32
                 BGRA = MAKE_FOURC_TYPE('B', 'G', 'R', 'A'), // BGRA32
                 // YUV                                      // Sampling Type    Bits
+                //     9 bits
+                NV11 = MAKE_FOURC_TYPE('N', 'V', '1', '1'), // 4:1:1    Planar  8 
+                Y41P = MAKE_FOURC_TYPE('Y', '4', '1', 'P'), // 4:1:1    Packed  8 
+                Y41T = MAKE_FOURC_TYPE('Y', '4', '1', 'T'), // 4:1:1    Packed  8 
+                //    12 bits
                 I420 = MAKE_FOURC_TYPE('I', '4', '2', '0'), // 4:2:0    Planar  8 Y4 V1 U1
                 YV12 = MAKE_FOURC_TYPE('Y', 'V', '1', '2'), // 4:2:0    Planar  8 Y4 U1 V1
-                IYUV = MAKE_FOURC_TYPE('I', 'Y', 'U', 'Y'), // 4:2:0    Planar  8 
                 NV12 = MAKE_FOURC_TYPE('N', 'V', '1', '2'), // 4:2:0    Planar  8 with one y plane and one packed u+v
+                NV21 = MAKE_FOURC_TYPE('N', 'V', '2', '1'), // 4:2:0    Planar  8 with one y plane and one packed v+u
+                IYUV = MAKE_FOURC_TYPE('I', 'Y', 'U', 'Y'), // 4:2:0    Planar  8 
+                UYVY = MAKE_FOURC_TYPE('U', 'Y', 'V', 'Y'), // 4:2:2    Packed  8 
+                YUY2 = MAKE_FOURC_TYPE('Y', 'U', 'Y', '2'), // 4:2:2    Packed  8 
+                Y42T = MAKE_FOURC_TYPE('Y', '4', '2', 'T'), // 4:2:2    Packed  8 
+                //    16 bits
                 I422 = MAKE_FOURC_TYPE('I', '4', '2', '2'), // 4:2:2    Planar  8 
                 YV16 = MAKE_FOURC_TYPE('Y', 'V', '1', '6'), // 4:2:2    Planar  8 with one y plane and one packed u+v
                 NV16 = MAKE_FOURC_TYPE('N', 'V', '1', '6'), // 4:2:2    Planar  8 with one y plane and one packed u+v
-                NV11 = MAKE_FOURC_TYPE('N', 'V', '1', '1'), // 4:1:1    Planar  8 
+                //    24 bits
                 I444 = MAKE_FOURC_TYPE('I', '4', '4', '4'), // 4:4:4    Planar  8
                 YV24 = MAKE_FOURC_TYPE('Y', 'V', '2', '4'), // 4:4:4    Planar  8
                 AI44 = MAKE_FOURC_TYPE('A', 'I', '4', '4'), // 4:4:4    Packed  Palettized 
                 AYUV = MAKE_FOURC_TYPE('A', 'Y', 'U', 'V'), // 4:4:4    Packed  8 
-                UYVY = MAKE_FOURC_TYPE('U', 'Y', 'V', 'Y'), // 4:2:2    Packed  8 
-                Y41P = MAKE_FOURC_TYPE('Y', '4', '1', 'P'), // 4:1:1    Packed  8 
-                Y41T = MAKE_FOURC_TYPE('Y', '4', '1', 'T'), // 4:1:1    Packed  8 
-                Y42T = MAKE_FOURC_TYPE('Y', '4', '2', 'T'), // 4:2:2    Packed  8 
-                YUY2 = MAKE_FOURC_TYPE('Y', 'U', 'Y', '2'), // 4:2:2    Packed  8 
                 // Compress
                 AVC1 = MAKE_FOURC_TYPE('A', 'V', 'C', '1'), 
                 WMV3 = MAKE_FOURC_TYPE('W', 'M', 'V', '3'), 

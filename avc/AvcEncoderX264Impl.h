@@ -31,21 +31,23 @@ namespace ppbox
         struct x264_csp_t
         {
             boost::uint32_t type;
-            boost::uint32_t csp;
+            boost::uint32_t x264_csp;
+            ColorSpace::transfer_t transfer;
         };
 
         static x264_csp_t const x264_csp_tab[] = {
-            {VideoSubType::I420, X264_CSP_I420},
-            {VideoSubType::YV12, X264_CSP_YV12},
-            {VideoSubType::NV12, X264_CSP_NV12},
-            {VideoSubType::I422, X264_CSP_I422},
-            {VideoSubType::YV16, X264_CSP_YV16},
-            {VideoSubType::NV16, X264_CSP_NV16},
-            {VideoSubType::I444, X264_CSP_I444},
-            {VideoSubType::YV24, X264_CSP_YV24},
-            {VideoSubType::BGR8, X264_CSP_BGR},
-            {VideoSubType::BGRA, X264_CSP_BGRA},
-            {VideoSubType::RGB8, X264_CSP_RGB},
+            {VideoSubType::I420, X264_CSP_I420, NULL},
+            {VideoSubType::YV12, X264_CSP_YV12, NULL},
+            {VideoSubType::NV12, X264_CSP_NV12, NULL},
+            {VideoSubType::NV21, X264_CSP_NV12, ColorSpace::transfer_nv21_nv12},
+            {VideoSubType::I422, X264_CSP_I422, NULL},
+            {VideoSubType::YV16, X264_CSP_YV16, NULL},
+            {VideoSubType::NV16, X264_CSP_NV16, NULL},
+            {VideoSubType::I444, X264_CSP_I444, NULL},
+            {VideoSubType::YV24, X264_CSP_YV24, NULL},
+            {VideoSubType::BGR8, X264_CSP_BGR , NULL},
+            {VideoSubType::BGRA, X264_CSP_BGRA, NULL},
+            {VideoSubType::RGB8, X264_CSP_RGB , NULL},
         };
 
         struct x264_csp_equal_type
@@ -96,7 +98,7 @@ namespace ppbox
                 , x264_encoder_intra_refresh(NULL)
                 , x264_encoder_close(NULL)
             {
-                if (lib_.open("libx264-" BOOST_PP_STRINGIZE(X264_BUILD))) {
+                if (lib_.open("x264")) {
                     return;
                 }
 #define GET_FUNC(x) get_func(BOOST_PP_STRINGIZE(x), x)
@@ -200,8 +202,9 @@ namespace ppbox
                 }
 
                 ColorSpace::picture_size(input_format, picture_, ec);
+                transfer_ = csp->transfer;
 
-                x264_picture_alloc(&pic_in, csp->csp, input_format.video_format.width, input_format.video_format.height);
+                x264_picture_alloc(&pic_in, csp->x264_csp, input_format.video_format.width, input_format.video_format.height);
                 panel_buffer = pic_in.img.plane[0];
                 panel_size = picture_.total_size;
 
@@ -210,7 +213,7 @@ namespace ppbox
                     output_format.format_type = AvcFormatType::packet;
                 }
 
-                param.i_csp = csp->csp;
+                param.i_csp = csp->x264_csp;
                 param.i_width = input_format.video_format.width;
                 param.i_height = input_format.video_format.height;
                 param.i_fps_num = input_format.video_format.frame_rate;
@@ -256,6 +259,9 @@ namespace ppbox
                         boost::asio::buffer(panel_buffer, panel_size), 
                         sample.data);
                     data = panel_buffer;
+                }
+                if (transfer_) {
+                    transfer_(picture_, data);
                 }
                 for (int i = 0; i < pic_in.img.i_plane; ++i) {
                     pic_in.img.plane[i] = data;
@@ -341,6 +347,7 @@ namespace ppbox
             int i_nal;
 
             ColorSpace::PictureSize picture_;
+            ColorSpace::transfer_t transfer_;
             AvcConfigHelper config_;
             AvcNaluHelper nalus_;
         };
