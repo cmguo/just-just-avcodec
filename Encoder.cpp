@@ -5,6 +5,7 @@
 
 #include <ppbox/common/ClassRegister.h>
 #include "ppbox/avcodec/avc/AvcEncoder.h"
+#include "ppbox/avcodec/aac/AacEncoder.h"
 
 namespace ppbox
 {

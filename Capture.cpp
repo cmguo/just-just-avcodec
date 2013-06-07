@@ -5,6 +5,7 @@
 
 #include <ppbox/common/ClassRegister.h>
 #include "ppbox/avcodec/yuv/YuvCapture.h"
+#include "ppbox/avcodec/pcm/PcmCapture.h"
 
 namespace ppbox
 {

@@ -1,7 +1,7 @@
-// VideoCapture.cpp
+// AudioCapture.cpp
 
 #include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/VideoCapture.h"
+#include "ppbox/avcodec/AudioCapture.h"
 #include "ppbox/avcodec/CodecType.h"
 
 #include <framework/string/Parse.h>
@@ -12,16 +12,16 @@ namespace ppbox
     namespace avcodec
     {
 
-        VideoCapture::VideoCapture()
+        AudioCapture::AudioCapture()
         {
-            info_.type = ppbox::avbase::StreamType::VIDE;
+            info_.type = ppbox::avbase::StreamType::AUDI;
         }
 
-        VideoCapture::~VideoCapture()
+        AudioCapture::~AudioCapture()
         {
         }
 
-        bool VideoCapture::open(
+        bool AudioCapture::open(
             std::map<std::string, std::string> const & config, 
             boost::system::error_code & ec)
         {
@@ -31,20 +31,20 @@ namespace ppbox
                 std::string const & value = iter->second;
                 if (key == "type") {
                     info_.sub_type = StreamType::from_string(value);
-                } else if (key == "width") {
-                    parse2(value, info_.video_format.width);
-                } else if (key == "height") {
-                    parse2(value, info_.video_format.height);
-                } else if (key == "frame_rate") {
-                    parse2(value, info_.video_format.frame_rate);
+                } else if (key == "sample_size") {
+                    parse2(value, info_.audio_format.sample_size);
+                } else if (key == "sample_rate") {
+                    parse2(value, info_.audio_format.sample_rate);
+                } else if (key == "channel_count") {
+                    parse2(value, info_.audio_format.channel_count);
                 }
+                config_.frame_rate_num = info_.audio_format.sample_rate;
+                config_.frame_rate_den = 1024;
             }
-            config_.frame_rate_num = info_.video_format.frame_rate;
-            config_.frame_rate_den = 1;
             return true;
         }
 
-        bool VideoCapture::get(
+        bool AudioCapture::get(
             StreamInfo & info, 
             boost::system::error_code & ec)
         {
@@ -52,7 +52,7 @@ namespace ppbox
             return true;
         }
 
-        bool VideoCapture::close(
+        bool AudioCapture::close(
             boost::system::error_code & ec)
         {
             return true;

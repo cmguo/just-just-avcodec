@@ -1,36 +1,37 @@
-// YuvCapture.cpp
+// PcmCapture.cpp
 
 #include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/yuv/YuvCapture.h"
+#include "ppbox/avcodec/pcm/PcmCapture.h"
 
 namespace ppbox
 {
     namespace avcodec
     {
 
-        YuvCapture::YuvCapture()
+        PcmCapture::PcmCapture()
             : index_(0)
         {
         }
 
-        YuvCapture::~YuvCapture()
+        PcmCapture::~PcmCapture()
         {
         }
 
-        bool YuvCapture::open(
+        bool PcmCapture::open(
             std::map<std::string, std::string> const & config, 
             boost::system::error_code & ec)
         {
-            VideoCapture::open(config, ec);
-            ColorSpace::picture_size(info_, picture_, ec);
-            config_.max_frame_size = picture_.total_size;
+            AudioCapture::open(config, ec);
+            config_.max_frame_size = (info_.audio_format.sample_size / 8) 
+                * info_.audio_format.channel_count 
+                * config_.frame_rate_den;
             buffer_.resize(config_.max_frame_size);
             info_.format_data.assign((boost::uint8_t *)&config_, (boost::uint8_t *)(&config_ + 1));
             index_ = 0;
             return true;
         }
 
-        bool YuvCapture::get(
+        bool PcmCapture::get(
             Sample & sample, 
             boost::system::error_code & ec)
         {
@@ -41,7 +42,7 @@ namespace ppbox
             return true;
         }
 
-        bool YuvCapture::close(
+        bool PcmCapture::close(
             boost::system::error_code & ec)
         {
             return true;
