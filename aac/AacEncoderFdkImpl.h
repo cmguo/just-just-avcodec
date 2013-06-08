@@ -12,10 +12,9 @@
 
 #include <stdint.h>
 
-extern "C"
-{
+#define INT FDK_INT
+#define UINT FDK_UINT
 #include <thirdparty/fdk-aac/aacenc_lib.h>
-};
 
 namespace fdk_aac {
 
@@ -176,6 +175,14 @@ namespace ppbox
                 }
             }
 
+            void el_size(
+                INT s) 
+            {
+                for (size_t i = 0; i < AAC_MAX_INPUT_BUF_NUM; ++i) {
+                    vbufElSizes[i] = s;
+                }
+            }
+
             void * vbufs[AAC_MAX_INPUT_BUF_NUM];
             INT vbufferIdentifiers[AAC_MAX_INPUT_BUF_NUM];
             INT vbufSizes[AAC_MAX_INPUT_BUF_NUM];
@@ -247,7 +254,9 @@ namespace ppbox
                     output_format.format_type = AacFormatType::raw;
                 }
 
-                ec = aacEncOpen(&hAacEncoder_, 1, 0);
+                buf_in_.el_size(input_format.audio_format.sample_size / 8);
+
+                ec = aacEncOpen(&hAacEncoder_, 1, input_format.audio_format.channel_count);
                 aacEncoder_SetParam(hAacEncoder_, AACENC_AOT, AOT_AAC_LC);
                 aacEncoder_SetParam(hAacEncoder_, AACENC_SAMPLERATE, input_format.audio_format.sample_rate);
                 aacEncoder_SetParam(hAacEncoder_, AACENC_CHANNELMODE, input_format.audio_format.channel_count);
@@ -264,6 +273,8 @@ namespace ppbox
                     AACENC_InfoStruct info;
                     aacEncInfo(hAacEncoder_, &info);
                     output_format.format_data.assign(info.confBuf, info.confBuf + info.confSize);
+
+                    arg_in_.numInSamples = info.inputChannels * info.frameLength;
                 }
 
                 return true;
@@ -278,8 +289,6 @@ namespace ppbox
                     buf_in_.bufs[i] = (void *)boost::asio::buffer_cast<void const *>(sample.data[i]);
                     buf_in_.bufSizes[i] = buf_in_.bufElSizes[i] = boost::asio::buffer_size(sample.data[i]);
                 }
-                arg_in_.numAncBytes = 0;
-                arg_in_.numInSamples = 2048;
                 ec = aacEncEncode(hAacEncoder_, &buf_in_, &buf_out_, &arg_in_, &arg_out_);
 
                 return !ec;
