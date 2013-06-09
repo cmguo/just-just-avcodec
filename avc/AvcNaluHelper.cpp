@@ -31,10 +31,11 @@ namespace ppbox
         }
 
         static void continue_find_nalu(
+            NaluBuffer::FindIterator2 & ibeg, // 记录 0001 开始的位置
             NaluBuffer::FindIterator2 & iter, 
             NaluBuffer::FindIterator2 & iend)
         {
-            if (iter == iend) {
+            if (ibeg == iend) {
                 return;
             }
             iter.skip_bytes(2);
@@ -46,6 +47,7 @@ namespace ppbox
                     break;
                 } else {
                     if (++iter != iend) {
+                        ibeg = iter;
                         iter.skip_bytes(2);
                     } else {
                         break;
@@ -59,10 +61,11 @@ namespace ppbox
             buffers_t const & data)
         {
             nalus_.clear();
-            NaluBuffer::FindIterator2 iter(data, boost::asio::buffer("\0\0", 2));
+            NaluBuffer::FindIterator2 ibeg(data, boost::asio::buffer("\0\0", 2));
+            NaluBuffer::FindIterator2 iter = ibeg;
             NaluBuffer::FindIterator2 iend;
-            continue_find_nalu(iter, iend);
-            while (iter != iend) {
+            continue_find_nalu(ibeg, iter, iend);
+            while (ibeg != iend) {
                 NaluBuffer::BuffersPosition cur_pos = *iter;
                 NaluHeader const nalu_header(cur_pos.dereference_byte());
                 if (nalu_header.nal_unit_type == NaluHeader::IDR ||
@@ -71,9 +74,9 @@ namespace ppbox
                         nalus_.push_back(NaluBuffer(size - cur_pos.skipped_bytes(), cur_pos, iter.end_position()));
                         break;
                 }
-                ++iter;
-                continue_find_nalu(iter, iend);
-                nalus_.push_back(NaluBuffer(cur_pos, iter.position()));
+                ibeg = ++iter;
+                continue_find_nalu(ibeg, iter, iend);
+                nalus_.push_back(NaluBuffer(cur_pos, ibeg.position()));
             }
             return true;
         }

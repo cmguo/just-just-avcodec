@@ -4,6 +4,7 @@
 #define _PPBOX_AVCODEC_AVC_AVC_DEBUGER_H_
 
 #include "ppbox/avcodec/Debuger.h"
+#include "ppbox/avcodec/CodecType.h"
 
 namespace ppbox
 {
@@ -22,6 +23,8 @@ namespace ppbox
                 Sample & sample, 
                 boost::system::error_code & ec);
         };
+
+        PPBOX_REGISTER_DEBUGER(VideoSubType::AVC1, AvcDebuger);
 
     } // namespace avcodec
 } // namespace ppbox

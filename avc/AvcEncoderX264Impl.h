@@ -228,10 +228,11 @@ namespace ppbox
                 // get sps pps
                 {
                     x264_encoder_headers(x264, &p_nal, &i_nal);
+                    output_format.format_data.clear();
                     for (int i = 0; i < i_nal; ++i) {
-                        boost::uint8_t start_code[4] = {0, 0, 0, 1};
+                        boost::uint8_t start_code[] = {0, 0, 0, 1};
                         output_format.format_data.insert(output_format.format_data.end(), 
-                            start_code, start_code + 4);
+                            start_code, start_code + sizeof(start_code));
                         output_format.format_data.insert(output_format.format_data.end(), 
                             p_nal[i].p_payload + 4, p_nal[i].p_payload + p_nal[i].i_payload);
                     }

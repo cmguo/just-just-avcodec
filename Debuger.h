@@ -21,13 +21,12 @@ namespace ppbox
             >
         {
         public:
-            Debuger()
-            {
-            }
+            Debuger();
 
-            virtual ~Debuger()
-            {
-            }
+            virtual ~Debuger();
+
+        public:
+            static void init();
 
         public:
             virtual bool reset(
