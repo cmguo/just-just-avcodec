@@ -216,8 +216,8 @@ namespace ppbox
                 param.i_csp = csp->x264_csp;
                 param.i_width = input_format.video_format.width;
                 param.i_height = input_format.video_format.height;
-                param.i_fps_num = input_format.video_format.frame_rate;
-                param.i_fps_den = 1;
+                param.i_fps_num = input_format.video_format.frame_rate_num;
+                param.i_fps_den = input_format.video_format.frame_rate_den;
                 param.b_annexb = (output_format.format_type == AvcFormatType::byte_stream);
 
                 x264 = x264_encoder_open(&param);

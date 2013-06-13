@@ -223,6 +223,7 @@ namespace ppbox
         {
             info.channel_count = data_->channelConfiguration;
             info.sample_rate = get_frequency();
+            info.sample_per_frame = 1024;
         }
 
     } // namespace avcodec

@@ -36,11 +36,12 @@ namespace ppbox
                 } else if (key == "height") {
                     parse2(value, info_.video_format.height);
                 } else if (key == "frame_rate") {
-                    parse2(value, info_.video_format.frame_rate);
+                    parse2(value, info_.video_format.frame_rate_num);
+                    info_.video_format.frame_rate_den = 1;
                 }
             }
-            config_.frame_rate_num = info_.video_format.frame_rate;
-            config_.frame_rate_den = 1;
+            config_.frame_rate_num = info_.video_format.frame_rate_num;
+            config_.frame_rate_den = info_.video_format.frame_rate_den;
             return true;
         }
 
