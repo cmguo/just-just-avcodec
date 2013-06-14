@@ -5,7 +5,10 @@
 #include "ppbox/avcodec/CodecType.h"
 
 #include <framework/string/Parse.h>
+#include <framework/string/Slice.h>
 using namespace framework::string;
+
+#include <iterator>
 
 namespace ppbox
 {
@@ -36,8 +39,13 @@ namespace ppbox
                 } else if (key == "height") {
                     parse2(value, info_.video_format.height);
                 } else if (key == "frame_rate") {
-                    parse2(value, info_.video_format.frame_rate_num);
-                    info_.video_format.frame_rate_den = 1;
+                    std::vector<boost::uint32_t> vec;
+                    slice<boost::uint32_t>(value, std::back_inserter(vec), "/");
+                    if (vec.size() == 1) {
+                        info_.video_format.frame_rate(vec[0]);
+                    } else if (vec.size() == 2) {
+                        info_.video_format.frame_rate(vec[0], vec[1]);
+                    }
                 }
             }
             config_.frame_rate_num = info_.video_format.frame_rate_num;

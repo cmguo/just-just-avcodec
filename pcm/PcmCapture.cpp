@@ -24,7 +24,7 @@ namespace ppbox
             AudioCapture::open(config, ec);
             config_.max_frame_size = (info_.audio_format.sample_size / 8) 
                 * info_.audio_format.channel_count 
-                * config_.frame_rate_den;
+                * info_.audio_format.sample_per_frame;
             buffer_.resize(config_.max_frame_size);
             info_.format_data.assign((boost::uint8_t *)&config_, (boost::uint8_t *)(&config_ + 1));
             index_ = 0;

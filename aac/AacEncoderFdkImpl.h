@@ -1,4 +1,4 @@
-// AacEncoderX264Impl.h
+// AacEncoderFdkImpl.h
 
 #include "ppbox/avcodec/aac/AacConfigHelper.h"
 #include "ppbox/avcodec/aac/AacFormatType.h"
@@ -231,14 +231,20 @@ namespace ppbox
             {
             }
 
-            FRAMEWORK_LOGGER_DECLARE_MODULE_LEVEL("hAacEncoder_impl", framework::logger::Debug);
+            FRAMEWORK_LOGGER_DECLARE_MODULE_LEVEL("fdk_aac_impl", framework::logger::Debug);
 
             bool config(
                 std::map<std::string, std::string> const & config, 
                 boost::system::error_code & ec)
             {
                 if (!ok()) {
+                    LOG_ERROR("[config] api not ok");
                     return false;
+                }
+
+                std::map<std::string, std::string>::const_iterator iter = config.begin();
+                for (; iter != config.end(); ++iter) {
+                    LOG_INFO("[config]" <<  iter->first << ": " << iter->second);
                 }
 
                 return true;

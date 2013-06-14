@@ -174,6 +174,7 @@ namespace ppbox
                 boost::system::error_code & ec)
             {
                 if (!ok()) {
+                    LOG_ERROR("[config] api not ok");
                     return false;
                 }
 
