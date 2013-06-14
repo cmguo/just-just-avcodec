@@ -2,6 +2,7 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/yuv/YuvCapture.h"
+#include "ppbox/avcodec/CodecType.h"
 
 namespace ppbox
 {

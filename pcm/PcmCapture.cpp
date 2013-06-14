@@ -2,6 +2,7 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/pcm/PcmCapture.h"
+#include "ppbox/avcodec/CodecType.h"
 
 namespace ppbox
 {
