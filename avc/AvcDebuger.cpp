@@ -4,6 +4,7 @@
 #include "ppbox/avcodec/avc/AvcDebuger.h"
 #include "ppbox/avcodec/avc/AvcConfig.h"
 #include "ppbox/avcodec/avc/AvcConfigHelper.h"
+#include "ppbox/avcodec/avc/AvcNaluHelper.h"
 #include "ppbox/avcodec/avc/AvcType.h"
 #include "ppbox/avcodec/avc/AvcNaluBuffer.h"
 
@@ -69,17 +70,17 @@ namespace ppbox
             Sample & sample, 
             boost::system::error_code & ec)
         {
-            std::vector<NaluBuffer> & nalus = 
-                *(std::vector<NaluBuffer> *)sample.context;
+            AvcNaluHelper & helper = *(AvcNaluHelper *)sample.context;
+            std::vector<ppbox::avcodec::NaluBuffer> const & nalus = helper.nalus();
 
             std::cout << "Frame: " << " dts: " << sample.dts << ",\t cts: " << sample.dts + sample.cts_delta << std::endl;
             for (boost::uint32_t i = 0; i < nalus.size(); ++i) {
                 NaluBuffer const & nalu = nalus[i];
                 NaluHeader nalu_header(nalu.begin.dereference_byte());
-                std::cout << "Nalu type: " << NaluHeader::nalu_type_str[nalu_header.nal_unit_type] << std::endl;
+                std::cout << "  Nalu type: " << NaluHeader::nalu_type_str[nalu_header.nal_unit_type] << std::endl;
 
                 if (nalu_header.nal_unit_type == NaluHeader::SEI) {
-                    std::cout << "Sei: size = " << nalus[i].size << std::endl;
+                    std::cout << "    Sei: size = " << nalus[i].size << std::endl;
                     util::buffers::CycleBuffers<NaluBuffer::RangeBuffers, boost::uint8_t> buf(nalu.buffers());
                     buf.commit(nalus[i].size);
                     BitsBuffer<boost::uint8_t> bits_buf(buf);
@@ -95,7 +96,7 @@ namespace ppbox
                         BitsIStream<boost::uint8_t> bits_reader(bits_buf);
                         SliceLayerWithoutPartitioningRbsp slice(ppss);
                         bits_reader >> slice;
-                        std::cout << "Slice type: " 
+                        std::cout << "    Slice type: " 
                             << SliceHeader::slice_type_str[slice.slice_header.slice_type] 
                         << std::endl;
                 }
