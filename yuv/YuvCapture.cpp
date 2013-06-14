@@ -11,6 +11,7 @@ namespace ppbox
         YuvCapture::YuvCapture()
             : index_(0)
         {
+            info_.sub_type = VideoSubType::I420;
         }
 
         YuvCapture::~YuvCapture()

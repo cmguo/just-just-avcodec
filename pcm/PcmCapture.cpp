@@ -11,6 +11,7 @@ namespace ppbox
         PcmCapture::PcmCapture()
             : index_(0)
         {
+            info_.sub_type = MAKE_FOURC_TYPE('P', 'C', 'M', '0');
         }
 
         PcmCapture::~PcmCapture()

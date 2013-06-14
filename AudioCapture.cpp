@@ -15,6 +15,10 @@ namespace ppbox
         AudioCapture::AudioCapture()
         {
             info_.type = ppbox::avbase::StreamType::AUDI;
+            info_.audio_format.channel_count = 1;
+            info_.audio_format.sample_size = 8;
+            info_.audio_format.sample_rate = 22050;
+            info_.audio_format.sample_per_frame = 1024;
         }
 
         AudioCapture::~AudioCapture()
@@ -40,9 +44,9 @@ namespace ppbox
                 } else if (key == "sample_per_frame") {
                     parse2(value, info_.audio_format.sample_per_frame);
                 }
-                config_.frame_rate_num = info_.audio_format.sample_rate;
-                config_.frame_rate_den = info_.audio_format.sample_per_frame;
             }
+            config_.frame_rate_num = info_.audio_format.sample_rate;
+            config_.frame_rate_den = info_.audio_format.sample_per_frame;
             return true;
         }
 

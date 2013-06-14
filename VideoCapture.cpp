@@ -18,6 +18,10 @@ namespace ppbox
         VideoCapture::VideoCapture()
         {
             info_.type = ppbox::avbase::StreamType::VIDE;
+            info_.video_format.width = 640;
+            info_.video_format.height = 480;
+            info_.video_format.frame_rate_num = 20;
+            info_.video_format.frame_rate_den = 1;
         }
 
         VideoCapture::~VideoCapture()
