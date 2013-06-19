@@ -16,7 +16,7 @@ namespace ppbox
         class Assembler
             : public ppbox::common::ClassFactory<
                 Assembler, 
-                boost::uint32_t, 
+                boost::uint64_t, 
                 Assembler *()
             >
         {
