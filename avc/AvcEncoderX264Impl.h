@@ -73,7 +73,7 @@ namespace ppbox
         protected:
             int (*x264_picture_alloc)(x264_picture_t *pic, int i_csp, int i_width, int i_height);
             void (*x264_picture_clean)(x264_picture_t *pic);
-            void (*x264_param_default)(x264_param_t *);
+            void (*x264_param_default_preset)(x264_param_t *, const char *preset, const char *tune);
             int (*x264_param_apply_profile)(x264_param_t *, const char *profile);
             int (*x264_param_parse)(x264_param_t *, const char *name, const char *value);
             x264_t * (*x264_encoder_open)(x264_param_t *);
@@ -87,7 +87,7 @@ namespace ppbox
             x264_api()
                 : x264_picture_alloc(NULL)
                 , x264_picture_clean(NULL)
-                , x264_param_default(NULL)
+                , x264_param_default_preset(NULL)
                 , x264_param_apply_profile(NULL)
                 , x264_param_parse(NULL)
                 , x264_encoder_open(NULL)
@@ -104,7 +104,7 @@ namespace ppbox
 #define GET_FUNC(x) get_func(BOOST_PP_STRINGIZE(x), x)
                 GET_FUNC(x264_picture_alloc);
                 GET_FUNC(x264_picture_clean);
-                GET_FUNC(x264_param_default);
+                GET_FUNC(x264_param_default_preset);
                 GET_FUNC(x264_param_apply_profile);
                 GET_FUNC(x264_param_parse);
                 GET_FUNC(x264_encoder_open);
@@ -120,7 +120,7 @@ namespace ppbox
             {
                 return x264_picture_alloc
                     && x264_picture_clean
-                    && x264_param_default
+                    && x264_param_default_preset
                     && x264_param_apply_profile
                     && x264_param_parse
                     && x264_encoder_open
@@ -178,9 +178,18 @@ namespace ppbox
                     return false;
                 }
 
-                x264_param_default(&param);
+                std::map<std::string, std::string>::const_iterator iter;
+                char const * preset = NULL;
+                char const * tune = NULL;
+                if ((iter = config.find("preset")) != config.end()) {
+                    preset = iter->second.c_str();
+                }
+                if ((iter = config.find("tune")) != config.end()) {
+                    tune = iter->second.c_str();
+                }
+                x264_param_default_preset(&param, preset, tune);
                 param.pf_log = log;
-                std::map<std::string, std::string>::const_iterator iter = config.begin();
+                iter = config.begin();
                 for (; iter != config.end(); ++iter) {
                     LOG_INFO("[config]" <<  iter->first << ": " << iter->second);
                     x264_param_parse(&param, iter->first.c_str(), iter->second.c_str());
@@ -282,7 +291,7 @@ namespace ppbox
                     ec = boost::asio::error::eof;
                     return false;
                 }
-                x264_encoder_encode(x264, NULL, NULL, &pic_in, &pic_out);
+                x264_encoder_encode(x264, &p_nal, &i_nal, NULL, &pic_out);
                 return true;
             }
 
