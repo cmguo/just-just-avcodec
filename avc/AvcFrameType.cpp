@@ -165,10 +165,8 @@ namespace ppbox
             NaluHeader header(byte);
             if (header.nal_unit_type == NaluHeader::UNIDR) {
                 offsets_[1] = offset;
-                std::cout << "UNIDR offset = " << offset << std::endl;
                 ++totals_[1];
             } else if (header.nal_unit_type == NaluHeader::IDR) {
-                std::cout << "IDR offset = " << offset << std::endl;
                 offsets_[0] = offset;
                 ++totals_[0];
             } else {
