@@ -18,7 +18,8 @@ namespace ppbox
 
         public:
             bool finish_stream_info(
-                StreamInfo & info);
+                StreamInfo & info, 
+                boost::system::error_code & ec);
         };
 
         PPBOX_REGISTER_CODEC(VideoSubType::AVC1, AvcCodec);

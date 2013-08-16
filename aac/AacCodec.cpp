@@ -25,7 +25,8 @@ namespace ppbox
         }
 
         bool AacCodec::finish_stream_info(
-            StreamInfo & info)
+            StreamInfo & info, 
+            boost::system::error_code & ec)
         {
             AacConfigHelper config;
             if (info.format_type == AacFormatType::raw) {

@@ -2,6 +2,7 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/Capture.h"
+#include "ppbox/avcodec/Error.h"
 
 #include <ppbox/common/ClassRegister.h>
 #include "ppbox/avcodec/yuv/YuvCapture.h"
@@ -17,6 +18,11 @@ namespace ppbox
             , frame_rate_num(0)
             , frame_rate_den(0)
         {
+        }
+
+        boost::system::error_code Capture::error_not_found()
+        {
+            return error::capture_not_support;
         }
 
         Capture::Capture()

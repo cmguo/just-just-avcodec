@@ -2,6 +2,7 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/Debuger.h"
+#include "ppbox/avcodec/Error.h"
 
 #include <ppbox/common/ClassRegister.h>
 #include "ppbox/avcodec/avc/AvcDebuger.h"
@@ -11,15 +12,16 @@ namespace ppbox
     namespace avcodec
     {
 
+        boost::system::error_code Debuger::error_not_found()
+        {
+            return error::debuger_not_support;
+        }
+
         Debuger::Debuger()
         {
         }
 
         Debuger::~Debuger()
-        {
-        }
-
-        void Debuger::init()
         {
         }
 

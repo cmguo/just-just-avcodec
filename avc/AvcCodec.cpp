@@ -15,7 +15,8 @@ namespace ppbox
         }
 
         bool AvcCodec::finish_stream_info(
-            StreamInfo & info)
+            StreamInfo & info, 
+            boost::system::error_code & ec)
         {
             AvcConfigHelper config;
             if (info.format_type == AvcFormatType::packet) {
@@ -23,9 +24,12 @@ namespace ppbox
             } else {
                 config.from_es_data(info.format_data);
             }
-            if (!config.ready())
+            if (!config.ready()) {
+                ec = framework::system::logic_error::item_not_exist;
                 return false;
+            }
             config.get_format(info.video_format);
+            ec.clear();
             return true;
         }
 

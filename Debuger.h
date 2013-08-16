@@ -21,12 +21,12 @@ namespace ppbox
             >
         {
         public:
+            static boost::system::error_code error_not_found();
+
+        public:
             Debuger();
 
             virtual ~Debuger();
-
-        public:
-            static void init();
 
         public:
             virtual bool reset(

@@ -27,11 +27,13 @@ namespace ppbox
 
         public:
             virtual bool finish_stream_info(
-                StreamInfo & info) = 0;
+                StreamInfo & info, 
+                boost::system::error_code & ec) = 0;
 
         public:
             static bool static_finish_stream_info(
-                StreamInfo & info);
+                StreamInfo & info, 
+                boost::system::error_code & ec);
         };
 
     } // namespace avcodec

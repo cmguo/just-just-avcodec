@@ -21,14 +21,17 @@ namespace ppbox
             >
         {
         public:
+            static boost::system::error_code error_not_found();
+
+            static Assembler * create(
+                boost::uint32_t codec_type, 
+                boost::uint32_t format, 
+                boost::system::error_code & ec);
+
+        public:
             Assembler();
 
             virtual ~Assembler();
-
-        public:
-            static Assembler * create(
-                boost::uint32_t codec_type, 
-                boost::uint32_t format);
 
         public:
             virtual bool reset(

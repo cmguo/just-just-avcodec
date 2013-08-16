@@ -23,7 +23,8 @@ namespace ppbox
 
         public:
             virtual bool finish_stream_info(
-                StreamInfo & info);
+                StreamInfo & info, 
+                boost::system::error_code & ec);
 
         public:
             AacConfigHelper const & config_helper() const

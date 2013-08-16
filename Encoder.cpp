@@ -2,6 +2,7 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/Encoder.h"
+#include "ppbox/avcodec/Error.h"
 
 #include <ppbox/common/ClassRegister.h>
 #include "ppbox/avcodec/avc/AvcEncoder.h"
@@ -12,7 +13,10 @@ namespace ppbox
     namespace avcodec
     {
 
-        Encoder::eos_t::eos_t() {} // this can make linker add this cpp
+        boost::system::error_code Encoder::error_not_found()
+        {
+            return error::encoder_not_support;
+        }
 
         Encoder::Encoder()
         {

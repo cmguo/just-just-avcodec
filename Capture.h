@@ -30,6 +30,9 @@ namespace ppbox
             >
         {
         public:
+            static boost::system::error_code error_not_found();
+
+        public:
             Capture();
 
             virtual ~Capture();

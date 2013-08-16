@@ -21,12 +21,14 @@ namespace ppbox
             >
         {
         public:
-            struct eos_t { eos_t(); };
+            struct eos_t { };
 
             static eos_t eos()
             {
                 return eos_t();
             }
+
+            static boost::system::error_code error_not_found();
 
         public:
             Encoder();

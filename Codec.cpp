@@ -21,11 +21,12 @@ namespace ppbox
         }
 
         bool Codec::static_finish_stream_info(
-            StreamInfo & info)
+            StreamInfo & info, 
+            boost::system::error_code & ec)
         {
-            Codec * codec = factory_type::create(info.sub_type);
+            Codec * codec = factory_type::create(info.sub_type, ec);
             if (codec) {
-                codec->finish_stream_info(info);
+                codec->finish_stream_info(info, ec);
                 delete codec;
                 return true;
             }
