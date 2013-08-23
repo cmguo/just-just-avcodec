@@ -104,6 +104,7 @@ namespace ppbox
         void AvcConfigHelper::to_es_data(
             std::vector<boost::uint8_t> & buf) const
         {
+            buf.clear();
             boost::uint8_t vec_0001[] = {0, 0, 0, 1};
             for (size_t i = 0; i < data_->sequenceParameterSetNALUnit.size(); ++i) {
                 buf.insert(buf.end(), vec_0001, vec_0001 + 4);
