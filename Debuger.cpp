@@ -6,6 +6,7 @@
 
 #include <ppbox/common/ClassRegister.h>
 #include "ppbox/avcodec/avc/AvcDebuger.h"
+#include "ppbox/avcodec/aac/AacDebuger.h"
 
 namespace ppbox
 {

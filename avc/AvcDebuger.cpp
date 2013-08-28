@@ -72,8 +72,6 @@ namespace ppbox
         {
             AvcNaluHelper & helper = *(AvcNaluHelper *)sample.context;
             std::vector<ppbox::avcodec::NaluBuffer> const & nalus = helper.nalus();
-
-            std::cout << "Frame: " << " dts: " << sample.dts << ",\t cts: " << sample.dts + sample.cts_delta << std::endl;
             for (boost::uint32_t i = 0; i < nalus.size(); ++i) {
                 NaluBuffer const & nalu = nalus[i];
                 NaluHeader nalu_header(nalu.begin.dereference_byte());
