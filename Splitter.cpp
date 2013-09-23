@@ -4,7 +4,7 @@
 #include "ppbox/avcodec/Splitter.h"
 #include "ppbox/avcodec/Error.h"
 
-#include <ppbox/common/ClassRegister.h>
+#include <util/tools/ClassRegister.h>
 #include "ppbox/avcodec/aac/AacAdtsSplitter.h"
 #include "ppbox/avcodec/avc/AvcPacketSplitter.h"
 #include "ppbox/avcodec/avc/AvcByteStreamSplitter.h"

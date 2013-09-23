@@ -6,7 +6,7 @@
 #include "ppbox/avcodec/CodecType.h"
 #include "ppbox/avcodec/StreamInfo.h"
 
-#include <ppbox/common/ClassFactory.h>
+#include <util/tools/ClassFactory.h>
 
 namespace ppbox
 {
@@ -14,7 +14,7 @@ namespace ppbox
     {
 
         class Codec
-            : public ppbox::common::ClassFactory<
+            : public util::tools::ClassFactory<
                 Codec, 
                 boost::uint32_t, 
                 Codec *()
@@ -39,6 +39,6 @@ namespace ppbox
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_CODEC(key, cls) PPBOX_REGISTER_CLASS(key, cls)
+#define PPBOX_REGISTER_CODEC(key, cls) UTIL_REGISTER_CLASS(key, cls)
 
 #endif // _PPBOX_AVCODEC_CODEC_H_

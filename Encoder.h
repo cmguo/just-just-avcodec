@@ -6,7 +6,7 @@
 #include "ppbox/avcodec/StreamInfo.h"
 #include "ppbox/avcodec/Sample.h"
 
-#include <ppbox/common/ClassFactory.h>
+#include <util/tools/ClassFactory.h>
 
 namespace ppbox
 {
@@ -14,7 +14,7 @@ namespace ppbox
     {
 
         class Encoder
-            : public ppbox::common::ClassFactory<
+            : public util::tools::ClassFactory<
                 Encoder, 
                 boost::uint32_t, 
                 Encoder *()
@@ -67,6 +67,6 @@ namespace ppbox
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_ENCODER(key, cls) PPBOX_REGISTER_CLASS(key, cls)
+#define PPBOX_REGISTER_ENCODER(key, cls) UTIL_REGISTER_CLASS(key, cls)
 
 #endif // _PPBOX_AVCODEC_ENCODER_H_

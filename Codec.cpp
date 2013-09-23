@@ -3,7 +3,7 @@
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/Codec.h"
 
-#include <ppbox/common/ClassRegister.h>
+#include <util/tools/ClassRegister.h>
 #include "ppbox/avcodec/avc/AvcCodec.h"
 #include "ppbox/avcodec/aac/AacCodec.h"
 

@@ -4,7 +4,7 @@
 #include "ppbox/avcodec/Capture.h"
 #include "ppbox/avcodec/Error.h"
 
-#include <ppbox/common/ClassRegister.h>
+#include <util/tools/ClassRegister.h>
 #include "ppbox/avcodec/yuv/YuvCapture.h"
 #include "ppbox/avcodec/pcm/PcmCapture.h"
 

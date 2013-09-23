@@ -6,7 +6,7 @@
 #include "ppbox/avcodec/StreamInfo.h"
 #include "ppbox/avcodec/Sample.h"
 
-#include <ppbox/common/ClassFactory.h>
+#include <util/tools/ClassFactory.h>
 
 namespace ppbox
 {
@@ -23,7 +23,7 @@ namespace ppbox
         };
 
         class Capture
-            : public ppbox::common::ClassFactory<
+            : public util::tools::ClassFactory<
                 Capture, 
                 std::string, 
                 Capture *()
@@ -65,6 +65,6 @@ namespace ppbox
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_CAPTURE(key, cls) PPBOX_REGISTER_CLASS(key, cls)
+#define PPBOX_REGISTER_CAPTURE(key, cls) UTIL_REGISTER_CLASS(key, cls)
 
 #endif // _PPBOX_AVCODEC_CAPTURE_H_

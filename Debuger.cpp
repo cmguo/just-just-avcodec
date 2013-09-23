@@ -4,7 +4,7 @@
 #include "ppbox/avcodec/Debuger.h"
 #include "ppbox/avcodec/Error.h"
 
-#include <ppbox/common/ClassRegister.h>
+#include <util/tools/ClassRegister.h>
 #include "ppbox/avcodec/avc/AvcDebuger.h"
 #include "ppbox/avcodec/aac/AacDebuger.h"
 

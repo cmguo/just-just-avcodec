@@ -6,7 +6,7 @@
 #include "ppbox/avcodec/StreamInfo.h"
 #include "ppbox/avcodec/Sample.h"
 
-#include <ppbox/common/ClassFactory.h>
+#include <util/tools/ClassFactory.h>
 
 namespace ppbox
 {
@@ -14,7 +14,7 @@ namespace ppbox
     {
 
         class Debuger
-            : public ppbox::common::ClassFactory<
+            : public util::tools::ClassFactory<
                 Debuger, 
                 boost::uint32_t, 
                 Debuger *()
@@ -41,6 +41,6 @@ namespace ppbox
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_DEBUGER(key, cls) PPBOX_REGISTER_CLASS(key, cls)
+#define PPBOX_REGISTER_DEBUGER(key, cls) UTIL_REGISTER_CLASS(key, cls)
 
 #endif // _PPBOX_AVCODEC_DEBUGER_H_
