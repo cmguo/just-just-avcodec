@@ -27,9 +27,9 @@ namespace ppbox
         {
             Codec * codec = factory_type::create(info.sub_type, ec);
             if (codec) {
-                codec->finish_stream_info(info, ec);
+                bool b = codec->finish_stream_info(info, ec);
                 delete codec;
-                return true;
+                return b;
             }
             return false;
         }

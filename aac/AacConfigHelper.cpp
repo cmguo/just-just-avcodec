@@ -115,7 +115,7 @@ namespace ppbox
         }
 
         void AacConfigHelper::set_object_type(
-            size_t object_type)
+            boost::uint32_t object_type)
         {
             if (object_type < 31) {
                 data_->audioObjectType = object_type;
@@ -126,7 +126,7 @@ namespace ppbox
         }
 
         void AacConfigHelper::set_frequency(
-            size_t frequency)
+            boost::uint32_t frequency)
         {
             for (size_t i = 0; i < sizeof(frequency_table) / sizeof(frequency_table[0]); ++i) {
                 if (frequency == frequency_table[i]) {
@@ -136,6 +136,12 @@ namespace ppbox
             }
             data_->samplingFrequencyIndex = 15;
             data_->samplingFrequency = frequency;
+        }
+
+        void AacConfigHelper::set_channel_count(
+            boost::uint32_t channel_count)
+        {
+            data_->channelConfiguration = channel_count;
         }
 
         void AacConfigHelper::from_data(
@@ -149,7 +155,7 @@ namespace ppbox
         void AacConfigHelper::to_data(
             std::vector<boost::uint8_t> & buf) const
         {
-            if (data_->audioObjectType == 0) {
+            if (!ready()) {
                 return;
             }
             buf.resize(16);
@@ -194,6 +200,10 @@ namespace ppbox
             boost::uint32_t frame_size, 
             std::vector<boost::uint8_t> & buf) const
         {
+            if (!ready()) {
+                return;
+            }
+
             AacAdts adts;
 
             adts.syncword = 0xfff;
@@ -218,9 +228,17 @@ namespace ppbox
             os << adts;
         }
 
+        bool AacConfigHelper::ready() const
+        {
+            return data_->audioObjectType != 0;
+        }
+
         void AacConfigHelper::get_format(
             AudioInfo & info) const
         {
+            if (!ready()) {
+                return;
+            }
             info.channel_count = data_->channelConfiguration;
             info.sample_rate = get_frequency();
             info.sample_per_frame = 1024;

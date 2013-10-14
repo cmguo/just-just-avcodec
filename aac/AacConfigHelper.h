@@ -66,12 +66,17 @@ namespace ppbox
 
         public:
             void set_object_type(
-                size_t object_type);
+                boost::uint32_t object_type);
 
             void set_frequency(
-                size_t frequency);
+                boost::uint32_t frequency);
+
+            void set_channel_count(
+                boost::uint32_t channel_count);
 
         public:
+            bool ready() const;
+
             void get_format(
                 ppbox::avbase::AudioInfo & info) const;
 

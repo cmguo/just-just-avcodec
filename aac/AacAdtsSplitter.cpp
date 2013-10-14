@@ -27,6 +27,8 @@ namespace ppbox
             StreamInfo & info, 
             boost::system::error_code & ec)
         {
+            config_.from_adts_data(info.format_data);
+            info.context = &config_;
             return true;
         }
 
@@ -43,7 +45,7 @@ namespace ppbox
 
             std::deque<boost::asio::const_buffer> data;
 
-            while (buf.in_avail()) {
+            while (!position.at_end()) {
                 AacAdts adts;
                 bits_is >> adts;
                 size_t adts_size = buf.in_position() - position.skipped_bytes();

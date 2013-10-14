@@ -4,10 +4,6 @@
 #include "ppbox/avcodec/Debuger.h"
 #include "ppbox/avcodec/Error.h"
 
-#include <util/tools/ClassRegister.h>
-#include "ppbox/avcodec/avc/AvcDebuger.h"
-#include "ppbox/avcodec/aac/AacDebuger.h"
-
 namespace ppbox
 {
     namespace avcodec

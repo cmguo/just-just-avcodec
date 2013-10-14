@@ -20,7 +20,6 @@ namespace ppbox
             StreamInfo & info, 
             boost::system::error_code & ec)
         {
-            config_.from_es_data(info.format_data);
             info.context = &config_;
             return true;
         }
@@ -29,6 +28,7 @@ namespace ppbox
             Sample & sample, 
             boost::system::error_code & ec)
         {
+            AvcConfigHelper const & config = *(AvcConfigHelper const *)sample.stream_info->context;
             sample.context = &helper_;
             return helper_.from_stream(sample.size, sample.data);
         }

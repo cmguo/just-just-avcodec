@@ -26,6 +26,7 @@ namespace ppbox
         {
             assert(info.format_type == StreamFormatType::none);
             MpaConfigHelper config;
+            if (!info.format_data.empty())
                 config.from_data(info.format_data);
             config.get_format(info.audio_format);
             return true;

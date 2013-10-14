@@ -124,6 +124,9 @@ namespace ppbox
         void AvcConfigHelper::get_format(
             VideoInfo & info) const
         {
+            if (!ready()) {
+                return;
+            }
             SeqParameterSetRbsp sps;
             util::archive::ArchiveBuffer<boost::uint8_t> abuf(
                 &data_->sequenceParameterSetNALUnit[0].front(), 

@@ -1,7 +1,7 @@
-// AacAdtsAssembler.h
+// AacRawAssembler.h
 
-#ifndef _PPBOX_AVCODEC_AAC_AAC_ADTS_ASSEMBLER_H_
-#define _PPBOX_AVCODEC_AAC_AAC_ADTS_ASSEMBLER_H_
+#ifndef _PPBOX_AVCODEC_AAC_AAC_RAW_ASSEMBLER_H_
+#define _PPBOX_AVCODEC_AAC_AAC_RAW_ASSEMBLER_H_
 
 #include "ppbox/avcodec/Assembler.h"
 #include "ppbox/avcodec/aac/AacFormatType.h"
@@ -11,13 +11,13 @@ namespace ppbox
     namespace avcodec
     {
 
-        class AacAdtsAssembler
+        class AacRawAssembler
             : public Assembler
         {
         public:
-            AacAdtsAssembler();
+            AacRawAssembler();
 
-            virtual ~AacAdtsAssembler();
+            virtual ~AacRawAssembler();
 
         public:
             virtual bool reset(
@@ -27,14 +27,11 @@ namespace ppbox
             virtual bool assemble(
                 Sample & sample, 
                 boost::system::error_code & ec);
-
-        private:
-            std::vector<boost::uint8_t> adts_header_;
         };
 
-        PPBOX_REGISTER_ASSEMBLER(AudioSubType::MP4A, AacFormatType::adts, AacAdtsAssembler);
+        PPBOX_REGISTER_ASSEMBLER(AudioSubType::MP4A, AacFormatType::raw, AacRawAssembler);
 
     } // namespace avcodec
 } // namespace ppbox
 
-#endif // _PPBOX_AVCODEC_AAC_AAC_ADTS_ASSEMBLER_H_
+#endif // _PPBOX_AVCODEC_AAC_AAC_RAW_ASSEMBLER_H_
