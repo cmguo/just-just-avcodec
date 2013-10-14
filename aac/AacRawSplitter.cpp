@@ -20,7 +20,7 @@ namespace ppbox
             StreamInfo & info, 
             boost::system::error_code & ec)
         {
-            config_.from_adts_data(info.format_data);
+            config_.from_data(info.format_data);
             info.context = &config_;
             return true;
         }
