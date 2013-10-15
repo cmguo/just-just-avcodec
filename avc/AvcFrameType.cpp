@@ -75,9 +75,11 @@ namespace ppbox
             data.resize(is.gcount());
             boost::uint32_t skip = 0;
             while (true) {
-                buffers_t datas;
-                datas.push_back(boost::asio::buffer(data) + skip);
-                helper_.from_stream(datas);
+                {
+                    buffers_t datas;
+                    datas.push_back(boost::asio::buffer(data) + skip);
+                    helper_.from_stream(datas);
+                }
                 if (helper_.nalus().size() > 0) {
                     NaluBuffer const & nalu = helper_.nalus().back();
                     if (get_type(nalu.begin.skipped_bytes(), nalu.begin.dereference_byte()))
@@ -86,8 +88,8 @@ namespace ppbox
                 }
                 if (is.eof())
                     return 0;
-                boost::uint32_t old_size = datas.size();
-                datas.resize(old_size + 32);
+                boost::uint32_t old_size = data.size();
+                data.resize(old_size + 32);
                 is.read(&data[old_size], 32);
                 data.resize(old_size + is.gcount());
             }

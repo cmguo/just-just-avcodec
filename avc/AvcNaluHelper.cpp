@@ -65,7 +65,7 @@ namespace ppbox
             NaluBuffer::FindIterator2 iter = ibeg;
             NaluBuffer::FindIterator2 iend;
             continue_find_nalu(ibeg, iter, iend);
-            while (ibeg != iend) {
+            while (iter != iend) {
                 NaluBuffer::BuffersPosition cur_pos = *iter;
                 NaluHeader const nalu_header(cur_pos.dereference_byte());
                 if (nalu_header.nal_unit_type == NaluHeader::IDR ||
