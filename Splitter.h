@@ -16,14 +16,6 @@ namespace ppbox
         class Splitter
         {
         public:
-            static boost::system::error_code error_not_found();
-
-            static Splitter * create(
-                boost::uint32_t codec_type, 
-                boost::uint32_t format, 
-                boost::system::error_code & ec);
-
-        public:
             Splitter();
 
             virtual ~Splitter();
