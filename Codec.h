@@ -14,11 +14,6 @@ namespace ppbox
     {
 
         class Codec
-            : public util::tools::ClassFactory<
-                Codec, 
-                boost::uint32_t, 
-                Codec *()
-            >
         {
         public:
             Codec();
@@ -36,9 +31,20 @@ namespace ppbox
                 boost::system::error_code & ec);
         };
 
+        struct CodecTraits
+            : util::tools::ClassFactoryTraits
+        {
+            typedef boost::uint32_t key_type;
+            typedef Codec * (create_proto)();
+
+            static boost::system::error_code error_not_found();
+        };
+
+        typedef util::tools::ClassFactory<CodecTraits> CodecFactory;
+
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_CODEC(key, cls) UTIL_REGISTER_CLASS(key, cls)
+#define PPBOX_REGISTER_CODEC(key, cls) UTIL_REGISTER_CLASS(ppbox::avcodec::CodecFactory, key, cls)
 
 #endif // _PPBOX_AVCODEC_CODEC_H_

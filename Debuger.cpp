@@ -9,17 +9,17 @@ namespace ppbox
     namespace avcodec
     {
 
-        boost::system::error_code Debuger::error_not_found()
-        {
-            return error::debuger_not_support;
-        }
-
         Debuger::Debuger()
         {
         }
 
         Debuger::~Debuger()
         {
+        }
+
+        boost::system::error_code DebugerTraits::error_not_found()
+        {
+            return error::debuger_not_support;
         }
 
     } // namespace avcodec

@@ -14,11 +14,6 @@ namespace ppbox
     {
 
         class Encoder
-            : public util::tools::ClassFactory<
-                Encoder, 
-                boost::uint32_t, 
-                Encoder *()
-            >
         {
         public:
             struct eos_t { };
@@ -27,8 +22,6 @@ namespace ppbox
             {
                 return eos_t();
             }
-
-            static boost::system::error_code error_not_found();
 
         public:
             Encoder();
@@ -64,9 +57,20 @@ namespace ppbox
                 boost::system::error_code & ec) = 0;
         };
 
+        struct EncoderTraits
+            : util::tools::ClassFactoryTraits
+        {
+            typedef boost::uint32_t key_type;
+            typedef Encoder * (create_proto)();
+
+            static boost::system::error_code error_not_found();
+        };
+
+        typedef util::tools::ClassFactory<EncoderTraits> EncoderFactory;
+
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_ENCODER(key, cls) UTIL_REGISTER_CLASS(key, cls)
+#define PPBOX_REGISTER_ENCODER(key, cls) UTIL_REGISTER_CLASS(ppbox::avcodec::EncoderFactory, key, cls)
 
 #endif // _PPBOX_AVCODEC_ENCODER_H_

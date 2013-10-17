@@ -14,11 +14,6 @@ namespace ppbox
     {
 
         class Splitter
-            : public util::tools::ClassFactory<
-                Splitter, 
-                boost::uint64_t, 
-                Splitter *()
-            >
         {
         public:
             static boost::system::error_code error_not_found();
@@ -43,9 +38,29 @@ namespace ppbox
                 boost::system::error_code & ec) = 0;
         };
 
+        struct SplitterTraits
+            : util::tools::ClassFactoryTraits
+        {
+            typedef boost::uint64_t key_type;
+            typedef Splitter * (create_proto)();
+
+            static boost::system::error_code error_not_found();
+        };
+
+        class SplitterFactory
+            : public util::tools::ClassFactory<SplitterTraits>
+        {
+        public:
+            static Splitter * create(
+                boost::uint32_t codec_type, 
+                boost::uint32_t format, 
+                boost::system::error_code & ec);
+        };
+
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_SPLITTER(codec_type, format, cls) UTIL_REGISTER_CLASS(((boost::uint64_t)codec_type << 32) | format, cls)
+#define PPBOX_REGISTER_SPLITTER(codec_type, format, cls) \
+    UTIL_REGISTER_CLASS(ppbox::avcodec::SplitterFactory, ((boost::uint64_t)codec_type << 32) | format, cls)
 
 #endif // _PPBOX_AVCODEC_SPLITTER_H_

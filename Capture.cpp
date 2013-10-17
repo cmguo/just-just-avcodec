@@ -20,17 +20,17 @@ namespace ppbox
         {
         }
 
-        boost::system::error_code Capture::error_not_found()
-        {
-            return error::capture_not_support;
-        }
-
         Capture::Capture()
         {
         }
 
         Capture::~Capture()
         {
+        }
+
+        boost::system::error_code CaptureTraits::error_not_found()
+        {
+            return error::capture_not_support;
         }
 
     } // namespace avcodec

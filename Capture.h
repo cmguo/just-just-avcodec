@@ -23,15 +23,7 @@ namespace ppbox
         };
 
         class Capture
-            : public util::tools::ClassFactory<
-                Capture, 
-                std::string, 
-                Capture *()
-            >
         {
-        public:
-            static boost::system::error_code error_not_found();
-
         public:
             Capture();
 
@@ -62,9 +54,20 @@ namespace ppbox
                 boost::system::error_code & ec) = 0;
         };
 
+        struct CaptureTraits
+            : util::tools::ClassFactoryTraits
+        {
+            typedef std::string key_type;
+            typedef Capture * (create_proto)();
+
+            static boost::system::error_code error_not_found();
+        };
+
+        typedef util::tools::ClassFactory<CaptureTraits> CaptureFactory;
+
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_CAPTURE(key, cls) UTIL_REGISTER_CLASS(key, cls)
+#define PPBOX_REGISTER_CAPTURE(key, cls) UTIL_REGISTER_CLASS(ppbox::avcodec::CaptureFactory, key, cls)
 
 #endif // _PPBOX_AVCODEC_CAPTURE_H_

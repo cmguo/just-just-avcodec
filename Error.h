@@ -12,7 +12,8 @@ namespace ppbox
 
             enum errors
             {
-                encoder_not_support = 1, 
+                codec_not_support = 1, 
+                encoder_not_support, 
                 deccoder_not_support, 
                 capture_not_support, 
                 assembler_not_support, 
@@ -35,6 +36,8 @@ namespace ppbox
                     {
                         switch (value) 
                         {
+                            case codec_not_support:
+                                return "avcodec: codec not support";
                             case encoder_not_support:
                                 return "avcodec: encoder not support";
                             case deccoder_not_support:

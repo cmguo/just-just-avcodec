@@ -2,6 +2,7 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/Codec.h"
+#include "ppbox/avcodec/Error.h"
 
 #include <util/tools/ClassRegister.h>
 #include "ppbox/avcodec/avc/AvcCodec.h"
@@ -25,13 +26,18 @@ namespace ppbox
             StreamInfo & info, 
             boost::system::error_code & ec)
         {
-            Codec * codec = factory_type::create(info.sub_type, ec);
+            Codec * codec = CodecFactory::create(info.sub_type, ec);
             if (codec) {
                 bool b = codec->finish_stream_info(info, ec);
                 delete codec;
                 return b;
             }
             return false;
+        }
+
+        boost::system::error_code CodecTraits::error_not_found()
+        {
+            return error::codec_not_support;
         }
 
     } // namespace avcodec

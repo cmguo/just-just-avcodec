@@ -14,15 +14,7 @@ namespace ppbox
     {
 
         class Debuger
-            : public util::tools::ClassFactory<
-                Debuger, 
-                boost::uint32_t, 
-                Debuger *()
-            >
         {
-        public:
-            static boost::system::error_code error_not_found();
-
         public:
             Debuger();
 
@@ -38,9 +30,20 @@ namespace ppbox
                 boost::system::error_code & ec) = 0;
         };
 
+        struct DebugerTraits
+            : util::tools::ClassFactoryTraits
+        {
+            typedef boost::uint32_t key_type;
+            typedef Debuger * (create_proto)();
+
+            static boost::system::error_code error_not_found();
+        };
+
+        typedef util::tools::ClassFactory<DebugerTraits> DebugerFactory;
+
     } // namespace avcodec
 } // namespace ppbox
 
-#define PPBOX_REGISTER_DEBUGER(key, cls) UTIL_REGISTER_CLASS(key, cls)
+#define PPBOX_REGISTER_DEBUGER(key, cls) UTIL_REGISTER_CLASS(ppbox::avcodec::DebugerFactory, key, cls)
 
 #endif // _PPBOX_AVCODEC_DEBUGER_H_
