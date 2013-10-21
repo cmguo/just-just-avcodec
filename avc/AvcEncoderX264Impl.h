@@ -39,7 +39,7 @@ namespace ppbox
             {VideoSubType::I420, X264_CSP_I420, NULL},
             {VideoSubType::YV12, X264_CSP_YV12, NULL},
             {VideoSubType::NV12, X264_CSP_NV12, NULL},
-            {VideoSubType::NV21, X264_CSP_NV12, ColorSpace::transfer_nv21_nv12},
+            //{VideoSubType::NV21, X264_CSP_NV12, ColorSpace::transfer_nv21_nv12},
             {VideoSubType::I422, X264_CSP_I422, NULL},
             {VideoSubType::YV16, X264_CSP_YV16, NULL},
             {VideoSubType::NV16, X264_CSP_NV16, NULL},
@@ -79,7 +79,7 @@ namespace ppbox
             x264_t * (*x264_encoder_open)(x264_param_t *);
             void (*x264_encoder_parameters)(x264_t *, x264_param_t *);
             int (*x264_encoder_headers)(x264_t *, x264_nal_t **pp_nal, int *pi_nal);
-            int (*x264_encoder_encode)(x264_t *, x264_nal_t **pp_nal, int *pi_nal, x264_picture_t *pic_in, x264_picture_t *pic_out);
+            int (*x264_encoder_encode)(x264_t *, x264_nal_t **pp_nal, int *pi_nal, x264_picture_t *pic_in_, x264_picture_t *pic_out_);
             int (*x264_encoder_delayed_frames)(x264_t *);
             void (*x264_encoder_intra_refresh)(x264_t *);
             void (*x264_encoder_close)(x264_t *);
@@ -98,7 +98,7 @@ namespace ppbox
                 , x264_encoder_intra_refresh(NULL)
                 , x264_encoder_close(NULL)
             {
-                if (lib_.open("x264")) {
+                if (lib_.open("x264_")) {
                     return;
                 }
 #define GET_FUNC(x) get_func(BOOST_PP_STRINGIZE(x), x)
@@ -149,11 +149,11 @@ namespace ppbox
             : private x264_api
         {
             x264_impl()
-                : x264(NULL)
-                , panel_buffer(NULL)
-                , panel_size(0)
-                , p_nal(NULL)
-                , i_nal(0)
+                : x264_(NULL)
+                , panel_buffer_(NULL)
+                , panel_size_(0)
+                , p_nal_(NULL)
+                , i_nal_(0)
             {
             }
 
@@ -187,15 +187,15 @@ namespace ppbox
                 if ((iter = config.find("tune")) != config.end()) {
                     tune = iter->second.c_str();
                 }
-                x264_param_default_preset(&param, preset, tune);
-                param.pf_log = log;
+                x264_param_default_preset(&param_, preset, tune);
+                param_.pf_log = log;
                 iter = config.begin();
                 for (; iter != config.end(); ++iter) {
                     LOG_INFO("[config]" <<  iter->first << ": " << iter->second);
-                    x264_param_parse(&param, iter->first.c_str(), iter->second.c_str());
+                    x264_param_parse(&param_, iter->first.c_str(), iter->second.c_str());
                 }
                 if ((iter = config.find("profile")) != config.end()) {
-                    x264_param_apply_profile(&param, iter->second.c_str());
+                    x264_param_apply_profile(&param_, iter->second.c_str());
                 }
                 return true;
             }
@@ -214,40 +214,40 @@ namespace ppbox
                 ColorSpace::picture_size(input_format, picture_, ec);
                 transfer_ = csp->transfer;
 
-                x264_picture_alloc(&pic_in, csp->x264_csp, input_format.video_format.width, input_format.video_format.height);
-                panel_buffer = pic_in.img.plane[0];
-                panel_size = picture_.total_size;
+                x264_picture_alloc(&pic_in_, csp->x264_csp, input_format.video_format.width, input_format.video_format.height);
+                panel_buffer_ = pic_in_.img.plane[0];
+                panel_size_ = picture_.total_size;
 
                 assert(output_format.sub_type == VideoSubType::AVC1);
                 if (output_format.format_type != AvcFormatType::byte_stream) {
                     output_format.format_type = AvcFormatType::packet;
                 }
 
-                param.i_csp = csp->x264_csp;
-                param.i_width = input_format.video_format.width;
-                param.i_height = input_format.video_format.height;
-                param.i_fps_num = input_format.video_format.frame_rate_num;
-                param.i_fps_den = input_format.video_format.frame_rate_den;
-                param.b_annexb = (output_format.format_type == AvcFormatType::byte_stream);
+                param_.i_csp = csp->x264_csp;
+                param_.i_width = input_format.video_format.width;
+                param_.i_height = input_format.video_format.height;
+                param_.i_fps_num = input_format.video_format.frame_rate_num;
+                param_.i_fps_den = input_format.video_format.frame_rate_den;
+                param_.b_annexb = (output_format.format_type == AvcFormatType::byte_stream);
 
-                x264 = x264_encoder_open(&param);
-                x264_encoder_parameters(x264, &param);
+                x264_ = x264_encoder_open(&param_);
+                x264_encoder_parameters(x264_, &param_);
 
-                output_format.bitrate = param.rc.i_bitrate;
+                output_format.bitrate = param_.rc.i_bitrate;
                 output_format.video_format = input_format.video_format;
                 // get sps pps
                 {
-                    x264_encoder_headers(x264, &p_nal, &i_nal);
+                    x264_encoder_headers(x264_, &p_nal_, &i_nal_);
                     output_format.format_data.clear();
-                    for (int i = 0; i < i_nal; ++i) {
+                    for (int i = 0; i < i_nal_; ++i) {
                         boost::uint8_t start_code[] = {0, 0, 0, 1};
                         output_format.format_data.insert(output_format.format_data.end(), 
                             start_code, start_code + sizeof(start_code));
                         output_format.format_data.insert(output_format.format_data.end(), 
-                            p_nal[i].p_payload + 4, p_nal[i].p_payload + p_nal[i].i_payload);
+                            p_nal_[i].p_payload + 4, p_nal_[i].p_payload + p_nal_[i].i_payload);
                     }
                     config_.from_es_data(output_format.format_data);
-                    if (param.b_annexb == 0) {
+                    if (param_.b_annexb == 0) {
                         config_.to_data(output_format.format_data);
                     }
                     output_format.context = &config_;
@@ -260,38 +260,38 @@ namespace ppbox
                 Sample const & sample, 
                 boost::system::error_code & ec)
             {
-                assert(sample.size == (size_t)panel_size);
+                assert(sample.size == (size_t)panel_size_);
 
-                pic_in.opaque = (void *)(intptr_t)sample.time;
-                pic_in.i_pts = sample.dts;
+                pic_in_.opaque = (void *)(intptr_t)sample.time;
+                pic_in_.i_pts = sample.dts;
                 boost::uint8_t * data = const_cast<uint8_t *>(boost::asio::buffer_cast<boost::uint8_t const *>(sample.data.front()));
                 if (sample.data.size() > 1) {
                     util::buffers::buffers_copy(
-                        boost::asio::buffer(panel_buffer, panel_size), 
+                        boost::asio::buffer(panel_buffer_, panel_size_), 
                         sample.data);
-                    data = panel_buffer;
+                    data = panel_buffer_;
                 }
                 if (transfer_) {
                     transfer_(picture_, data);
                 }
-                for (int i = 0; i < pic_in.img.i_plane; ++i) {
-                    pic_in.img.plane[i] = data;
+                for (int i = 0; i < pic_in_.img.i_plane; ++i) {
+                    pic_in_.img.plane[i] = data;
                     data += picture_.plane_sizes[i];
                 }
-                x264_encoder_encode(x264, &p_nal, &i_nal, &pic_in, &pic_out);
+                x264_encoder_encode(x264_, &p_nal_, &i_nal_, &pic_in_, &pic_out_);
 
                 return true;
             }
 
             virtual bool push(
-                Encoder::eos_t const & eos, 
+                Transcoder::eos_t const & eos, 
                 boost::system::error_code & ec)
             {
-                if (x264_encoder_delayed_frames(x264) == 0) {
+                if (x264_encoder_delayed_frames(x264_) == 0) {
                     ec = boost::asio::error::eof;
                     return false;
                 }
-                x264_encoder_encode(x264, &p_nal, &i_nal, NULL, &pic_out);
+                x264_encoder_encode(x264_, &p_nal_, &i_nal_, NULL, &pic_out_);
                 return true;
             }
 
@@ -299,28 +299,28 @@ namespace ppbox
                 Sample & sample, 
                 boost::system::error_code & ec)
             {
-                if (p_nal) {
-                    if (pic_out.b_keyframe)
+                if (p_nal_) {
+                    if (pic_out_.b_keyframe)
                         sample.flags |= sample.f_sync;
-                    sample.time = (intptr_t)pic_out.opaque;
-                    sample.dts = pic_out.i_dts;
-                    sample.cts_delta = boost::uint32_t(pic_out.i_pts - pic_out.i_dts);
+                    sample.time = (intptr_t)pic_out_.opaque;
+                    sample.dts = pic_out_.i_dts;
+                    sample.cts_delta = boost::uint32_t(pic_out_.i_pts - pic_out_.i_dts);
                     sample.size = 0;
                     sample.data.clear();
-                    for (int i = 0; i < i_nal; ++i) {
-                        sample.data.push_back(boost::asio::buffer(p_nal[i].p_payload, p_nal[i].i_payload));
-                        sample.size += p_nal[i].i_payload;
+                    for (int i = 0; i < i_nal_; ++i) {
+                        sample.data.push_back(boost::asio::buffer(p_nal_[i].p_payload, p_nal_[i].i_payload));
+                        sample.size += p_nal_[i].i_payload;
                     }
                     std::vector<NaluBuffer> nalus;
-                    for (int i = 0; i < i_nal; ++i) {
+                    for (int i = 0; i < i_nal_; ++i) {
                         nalus.push_back(NaluBuffer(
-                            p_nal[i].i_payload - 4, 
+                            p_nal_[i].i_payload - 4, 
                             NaluBuffer::BuffersPosition(sample.data.begin() + i, sample.data.end(), 4), 
                             NaluBuffer::BuffersPosition(sample.data.begin() + (i + 1))));
                     }
                     nalus_.nalus(nalus);
                     sample.context = &nalus_;
-                    p_nal = NULL;
+                    p_nal_ = NULL;
                     return true;
                 } else {
                     ec = boost::asio::error::would_block;
@@ -331,31 +331,31 @@ namespace ppbox
             bool refresh(
                 boost::system::error_code & ec)
             {
-                x264_encoder_intra_refresh(x264);
+                x264_encoder_intra_refresh(x264_);
                 return true;
             }
 
             bool close(
                 boost::system::error_code & ec)
             {
-                x264_encoder_close(x264);
-                x264 = NULL;
+                x264_encoder_close(x264_);
+                x264_ = NULL;
 
-                pic_in.img.plane[0] = panel_buffer;
-                x264_picture_clean(&pic_in);
+                pic_in_.img.plane[0] = panel_buffer_;
+                x264_picture_clean(&pic_in_);
 
                 return true;
             }
 
         private:
-            x264_t * x264;
-            x264_param_t param;
-            x264_picture_t pic_in;
-            uint8_t * panel_buffer;
-            int panel_size;
-            x264_picture_t pic_out;
-            x264_nal_t * p_nal;
-            int i_nal;
+            x264_t * x264_;
+            x264_param_t param_;
+            x264_picture_t pic_in_;
+            uint8_t * panel_buffer_;
+            int panel_size_;
+            x264_picture_t pic_out_;
+            x264_nal_t * p_nal_;
+            int i_nal_;
 
             ColorSpace::PictureSize picture_;
             ColorSpace::transfer_t transfer_;

@@ -301,7 +301,7 @@ namespace ppbox
             }
 
             virtual bool push(
-                Encoder::eos_t const & eos, 
+                Transcoder::eos_t const & eos, 
                 boost::system::error_code & ec)
             {
                 ec = boost::asio::error::eof;

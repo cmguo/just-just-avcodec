@@ -61,9 +61,17 @@ namespace ppbox
         {
             enum Enum
             {
-                MP4A = MAKE_FOURC_TYPE('M', 'P', '4', 'A'), 
                 MP1A = MAKE_FOURC_TYPE('M', 'P', '1', 'A'), 
+                MP2A = MAKE_FOURC_TYPE('M', 'P', '2', 'A'), 
+                MP4A = MAKE_FOURC_TYPE('M', 'P', '4', 'A'), 
                 WMA2 = MAKE_FOURC_TYPE('W', 'M', 'A', '2'), 
+                AC3  = MAKE_FOURC_TYPE('A', 'C', '3', 0), 
+                DTS  = MAKE_FOURC_TYPE('D', 'T', 'S', 0), 
+                FLAC = MAKE_FOURC_TYPE('F', 'L', 'A', 'C'), 
+                VORB = MAKE_FOURC_TYPE('V', 'O', 'R', 'B'), 
+
+                PCM  = MAKE_FOURC_TYPE('P', 'C', 'M', 0), 
+                FLT  = MAKE_FOURC_TYPE('F', 'L', 'T', 0), 
             };
         };
 

@@ -1,24 +1,26 @@
-// AvcEncoder.h
+// FFMpegAudioDecoder.h
 
-#ifndef _PPBOX_AVCODEC_AVC_AVC_ENCODER_H_
-#define _PPBOX_AVCODEC_AVC_AVC_ENCODER_H_
+#ifndef _PPBOX_AACODEC_FFMPEG_FFMPEG_AUDIO_DECODER_H_
+#define _PPBOX_AACODEC_FFMPEG_FFMPEG_AUDIO_DECODER_H_
 
 #include "ppbox/avcodec/Transcoder2.h"
+
+struct AVCodecContext;
 
 namespace ppbox
 {
     namespace avcodec
     {
 
-        struct x264_impl;
+        struct ffmpeg_audio_decode_context;
 
-        class AvcEncoder
+        class FFMpegAudioDecoder
             : public Transcoder2
         {
         public:
-            AvcEncoder();
+            FFMpegAudioDecoder();
 
-            virtual ~AvcEncoder();
+            virtual ~FFMpegAudioDecoder();
 
         public:
             virtual bool config(
@@ -49,12 +51,12 @@ namespace ppbox
                 boost::system::error_code & ec);
 
         private:
-            x264_impl * impl_;
+            ffmpeg_audio_decode_context * ctx_;
         };
 
-        PPBOX_REGISTER_TRANSCODER("avc-enc", 10, AvcEncoder);
+        PPBOX_REGISTER_TRANSCODER("ffmpeg-audio-dec", 10, FFMpegAudioDecoder);
 
     } // namespace avcodec
 } // namespace ppbox
 
-#endif // _PPBOX_AVCODEC_AVC_AVC_ENCODER_H_
+#endif // _PPBOX_AACODEC_FFMPEG_FFMPEG_AUDIO_DECODER_H_

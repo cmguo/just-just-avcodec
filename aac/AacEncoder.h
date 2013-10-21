@@ -3,8 +3,7 @@
 #ifndef _PPBOX_AACODEC_AAC_AAC_ENCODER_H_
 #define _PPBOX_AACODEC_AAC_AAC_ENCODER_H_
 
-#include "ppbox/avcodec/Encoder.h"
-#include "ppbox/avcodec/CodecType.h"
+#include "ppbox/avcodec/Transcoder2.h"
 
 namespace ppbox
 {
@@ -14,7 +13,7 @@ namespace ppbox
         struct fdk_aac_impl;
 
         class AacEncoder
-            : public Encoder
+            : public Transcoder2
         {
         public:
             AacEncoder();
@@ -53,7 +52,7 @@ namespace ppbox
             fdk_aac_impl * impl_;
         };
 
-        PPBOX_REGISTER_ENCODER(AudioSubType::MP4A, AacEncoder);
+        PPBOX_REGISTER_TRANSCODER("aac-enc", 10, AacEncoder);
 
     } // namespace avcodec
 } // namespace ppbox
