@@ -12,7 +12,7 @@ namespace ppbox
     namespace avcodec
     {
 
-        struct ffmpeg_audio_decode_context;
+        struct FFMpegAudioDecoderImpl;
 
         class FFMpegAudioDecoder
             : public Transcoder2
@@ -51,7 +51,7 @@ namespace ppbox
                 boost::system::error_code & ec);
 
         private:
-            ffmpeg_audio_decode_context * ctx_;
+            FFMpegAudioDecoderImpl * impl_;
         };
 
         PPBOX_REGISTER_TRANSCODER("ffmpeg-audio-dec", 10, FFMpegAudioDecoder);

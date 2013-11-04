@@ -52,8 +52,13 @@ namespace ppbox
                 AYUV = MAKE_FOURC_TYPE('A', 'Y', 'U', 'V'), // 4:4:4    Packed  8 
                 // Compress
                 AVC1 = MAKE_FOURC_TYPE('A', 'V', 'C', '1'), 
-                WMV3 = MAKE_FOURC_TYPE('W', 'M', 'V', '3'), 
                 MP4V = MAKE_FOURC_TYPE('M', 'P', '4', 'V'), 
+                // Microsoft
+                MPG4 = MAKE_FOURC_TYPE('M', 'P', 'G', '4'), 
+                MP41 = MAKE_FOURC_TYPE('M', 'P', '4', '1'), 
+                MP42 = MAKE_FOURC_TYPE('M', 'P', '4', '2'), 
+                MP43 = MAKE_FOURC_TYPE('M', 'P', '4', '3'), 
+                WMV3 = MAKE_FOURC_TYPE('W', 'M', 'V', '3'), 
             };
         };
 
