@@ -4,6 +4,8 @@
 #include "ppbox/avcodec/csp/ColorSpace.h"
 #include "ppbox/avcodec/CodecType.h"
 
+#include <ppbox/avbase/TypeMap.h>
+
 namespace ppbox
 {
     namespace avcodec
@@ -56,8 +58,9 @@ namespace ppbox
             boost::system::error_code & ec)
         {
             assert(info.type == StreamType::VIDE);
-            csp_t const * csp = std::find_if(csp_tab, csp_tab + sizeof(csp_tab) / sizeof(csp_tab[0]), 
-                csp_equal_type(info.sub_type));
+            csp_t const * csp = ppbox::avbase::type_map_find(
+                csp_tab, 
+                &csp_t::type, info.sub_type);
             if (csp == csp_tab + sizeof(csp_tab) / sizeof(csp_tab[0])) {
                 return false;
             }

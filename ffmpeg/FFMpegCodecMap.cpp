@@ -4,6 +4,8 @@
 #include "ppbox/avcodec/ffmpeg/FFMpegCodecMap.h"
 #include "ppbox/avcodec/CodecType.h"
 
+#include <ppbox/avbase/TypeMap.h>
+
 extern "C"
 {
 #include <libavcodec/avcodec.h>
@@ -31,69 +33,25 @@ namespace ppbox
             {StreamType::AUDI, AudioSubType::VORB, AV_CODEC_ID_VORBIS},
         };
 
-        struct ffmpeg_codec_equal_type
-        {
-            ffmpeg_codec_equal_type(
-                boost::uint32_t category, 
-                boost::uint32_t type)
-                : category_(category)
-                , type_(type)
-            {
-            }
-
-            bool operator()(
-                FFMpegCodec const & l)
-            {
-                return l.category == category_ && l.type == type_;
-            }
-
-        private:
-            boost::uint32_t category_;
-            boost::uint32_t type_;
-        };
-
         FFMpegCodec const * FFMpegCodecMap::find_by_type(
             boost::uint32_t category, 
             boost::uint32_t type)
         {
-            FFMpegCodec const * codec = 
-                std::find_if(table_, table_ + count(), ffmpeg_codec_equal_type(category, type));
-            if (codec == table_ + count()) {
-                codec = NULL;
-            }
+            FFMpegCodec const * codec = ppbox::avbase::type_map_find(
+                table_, 
+                &FFMpegCodec::category, category, 
+                &FFMpegCodec::type, type);
             return codec;
         }
-
-        struct ffmpeg_codec_equal_ffmpeg_type
-        {
-            ffmpeg_codec_equal_ffmpeg_type(
-                boost::uint32_t category, 
-                boost::uint32_t ffmpeg_type)
-                : category_(category)
-                , ffmpeg_type_(ffmpeg_type)
-            {
-            }
-
-            bool operator()(
-                FFMpegCodec const & l)
-            {
-                return l.category == category_ && l.ffmpeg_type == ffmpeg_type_;
-            }
-
-        private:
-            boost::uint32_t category_;
-            boost::uint32_t ffmpeg_type_;
-        };
 
         FFMpegCodec const * FFMpegCodecMap::find_by_ffmpeg_type(
             boost::uint32_t category, 
             boost::uint32_t ffmpeg_type)
         {
-            FFMpegCodec const * codec = 
-                std::find_if(table_, table_ + count(), ffmpeg_codec_equal_type(category, ffmpeg_type));
-            if (codec == table_ + count()) {
-                codec = NULL;
-            }
+            FFMpegCodec const * codec = ppbox::avbase::type_map_find(
+                table_, 
+                &FFMpegCodec::category, category, 
+                &FFMpegCodec::ffmpeg_type, ffmpeg_type);
             return codec;
         }
 

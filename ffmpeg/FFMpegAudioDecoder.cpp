@@ -14,9 +14,12 @@ namespace ppbox
             : Transcoder2(StreamType::AUDI)
             , impl_(new FFMpegAudioDecoderImpl())
         {
+            FFMpegCodec const * table = FFMpegCodecMap::table();
             for (size_t i = 0; i < FFMpegCodecMap::count(); ++i) {
-                register_codec(FFMpegCodecMap::table()[i].type, AudioSubType::PCM);
-                register_codec(FFMpegCodecMap::table()[i].type, AudioSubType::FLT);
+                if (table[i].category == StreamType::AUDI) {
+                    register_codec(table[i].type, AudioSubType::PCM);
+                    register_codec(table[i].type, AudioSubType::FLT);
+                }
             }
         }
 
@@ -38,20 +41,6 @@ namespace ppbox
             boost::system::error_code & ec)
         {
             return impl_->open(input_format, output_format, ec);
-        }
-
-        static boost::uint8_t const * copy_sample_data(
-            Sample const & sample)
-        {
-            static std::vector<boost::uint8_t> sample_buffer;
-            if (sample.data.size() == 1) {
-                return boost::asio::buffer_cast<boost::uint8_t const *>(sample.data[0]);
-            } else {
-                if (sample_buffer.size() < sample.size)
-                    sample_buffer.resize(sample.size);
-                util::buffers::buffers_copy(boost::asio::buffer(sample_buffer), sample.data);
-                return sample_buffer.size() ? &sample_buffer.at(0) : NULL;
-            }
         }
 
         bool FFMpegAudioDecoder::push(
