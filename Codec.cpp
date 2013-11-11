@@ -8,7 +8,7 @@
 #include "ppbox/avcodec/avc/AvcCodec.h"
 #include "ppbox/avcodec/mpa/MpaCodec.h"
 #include "ppbox/avcodec/aac/AacCodec.h"
-//#include "ppbox/avcodec/ffmpeg/FFMpegCodec.h"
+#include "ppbox/avcodec/ffmpeg/FFMpegCodec.h"
 
 namespace ppbox
 {

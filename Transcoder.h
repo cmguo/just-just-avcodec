@@ -92,14 +92,31 @@ namespace ppbox
                 boost::uint32_t codec;
                 Transcoder * transcoder;
             };
+
             typedef std::vector<transcoder_t> transcoder_chain_t;
 
             static bool create_transcodes(
                 boost::uint32_t category, // video, audio ...
                 boost::uint32_t input_codec, 
-                boost::uint32_t output_codec, 
+                std::vector<boost::uint32_t> const & output_codecs, 
                 transcoder_chain_t & transcoder_chain, 
+                size_t max_length, 
                 boost::system::error_code & ec);
+
+        private:
+            static bool create_transcodes(
+                boost::uint32_t category, // video, audio ...
+                boost::uint32_t input_codec, 
+                std::vector<boost::uint32_t> const & output_codecs, 
+                transcoder_chain_t & transcoder_chain, 
+                size_t max_length);
+
+            static size_t join_transcoder(
+                boost::uint32_t category, // video, audio ...
+                std::vector<boost::uint32_t> const & input_codecs, 
+                Transcoder * transcoder, 
+                std::vector<boost::uint32_t> & output_codecs);
+
         private:
             typedef std::pair<std::string, ppbox::avcodec::Transcoder *> transcoder_t2;
             typedef std::multimap<boost::uint32_t, transcoder_t2> orders_t;
