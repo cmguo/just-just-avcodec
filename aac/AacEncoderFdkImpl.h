@@ -14,7 +14,7 @@
 
 #define INT FDK_INT
 #define UINT FDK_UINT
-#include <thirdparty/fdk-aac/aacenc_lib.h>
+#include <fdk-aac/aacenc_lib.h>
 
 namespace fdk_aac {
 

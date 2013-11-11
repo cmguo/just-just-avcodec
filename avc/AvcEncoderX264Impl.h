@@ -5,6 +5,8 @@
 #include "ppbox/avcodec/avc/AvcFormatType.h"
 #include "ppbox/avcodec/csp/ColorSpace.h"
 
+#include <ppbox/avbase/TypeMap.h>
+
 #include <util/buffers/BuffersCopy.h>
 
 #include <framework/logger/Logger.h>
@@ -20,7 +22,7 @@
 
 extern "C"
 {
-#include <thirdparty/x264/x264.h>
+#include <x264.h>
 };
 
 namespace ppbox
@@ -205,8 +207,9 @@ namespace ppbox
                 StreamInfo & output_format, 
                 boost::system::error_code & ec)
             {
-                x264_csp_t const * csp = std::find_if(x264_csp_tab, x264_csp_tab + sizeof(x264_csp_tab) / sizeof(x264_csp_tab[0]), 
-                    x264_csp_equal_type(input_format.sub_type));
+                x264_csp_t const * csp = ppbox::avbase::type_map_find(
+                    x264_csp_tab, 
+                    &x264_csp_t::type, input_format.sub_type);
                 if (csp == x264_csp_tab + sizeof(x264_csp_tab) / sizeof(x264_csp_tab[0])) {
                     return false;
                 }
