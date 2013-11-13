@@ -29,6 +29,7 @@ namespace ppbox
             {StreamType::AUDI, AudioSubType::MP2A, AV_CODEC_ID_MP2},
             {StreamType::AUDI, AudioSubType::MP4A, AV_CODEC_ID_AAC},
             {StreamType::AUDI, AudioSubType::AC3,  AV_CODEC_ID_AC3},
+            {StreamType::AUDI, AudioSubType::AC3, AV_CODEC_ID_EAC3},
             {StreamType::AUDI, AudioSubType::FLAC, AV_CODEC_ID_FLAC},
             {StreamType::AUDI, AudioSubType::VORB, AV_CODEC_ID_VORBIS},
         };

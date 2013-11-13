@@ -210,7 +210,7 @@ namespace ppbox
                 x264_csp_t const * csp = ppbox::avbase::type_map_find(
                     x264_csp_tab, 
                     &x264_csp_t::type, input_format.sub_type);
-                if (csp == x264_csp_tab + sizeof(x264_csp_tab) / sizeof(x264_csp_tab[0])) {
+                if (csp == NULL) {
                     return false;
                 }
 

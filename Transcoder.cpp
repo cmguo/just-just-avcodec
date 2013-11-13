@@ -100,7 +100,8 @@ namespace ppbox
                 select_transcoder_t & s1 = select_transcoders[select_transcoders.size() - 2];
 
                 if (++s.index >= transcoders.size()) {
-                    used_transcoders[s1.index] = false;
+                    if (s1.index < transcoders.size())
+                        used_transcoders[s1.index] = false;
                     select_transcoders.pop_back();
                     continue;
                 }

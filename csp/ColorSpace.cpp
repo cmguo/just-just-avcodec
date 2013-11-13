@@ -61,7 +61,7 @@ namespace ppbox
             csp_t const * csp = ppbox::avbase::type_map_find(
                 csp_tab, 
                 &csp_t::type, info.sub_type);
-            if (csp == csp_tab + sizeof(csp_tab) / sizeof(csp_tab[0])) {
+            if (csp == NULL) {
                 return false;
             }
             size.nplane = csp->planes;
