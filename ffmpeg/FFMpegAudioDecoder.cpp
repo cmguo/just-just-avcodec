@@ -54,7 +54,7 @@ namespace ppbox
             eos_t const & eos, 
             boost::system::error_code & ec)
         {
-            return impl_->got_frame > 0;
+            return impl_->push(eos, ec);
         }
 
         bool FFMpegAudioDecoder::pop(

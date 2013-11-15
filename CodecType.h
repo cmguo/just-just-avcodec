@@ -58,7 +58,11 @@ namespace ppbox
                 MP41 = MAKE_FOURC_TYPE('M', 'P', '4', '1'), 
                 MP42 = MAKE_FOURC_TYPE('M', 'P', '4', '2'), 
                 MP43 = MAKE_FOURC_TYPE('M', 'P', '4', '3'), 
+                WMV2 = MAKE_FOURC_TYPE('W', 'M', 'V', '2'), 
                 WMV3 = MAKE_FOURC_TYPE('W', 'M', 'V', '3'), 
+                // RealVideo
+                RV30 = MAKE_FOURC_TYPE('R', 'V', '3', '0'), 
+                RV40 = MAKE_FOURC_TYPE('R', 'V', '4', '0'), 
             };
         };
 
@@ -75,6 +79,7 @@ namespace ppbox
                 DTS  = MAKE_FOURC_TYPE('D', 'T', 'S', 0), 
                 FLAC = MAKE_FOURC_TYPE('F', 'L', 'A', 'C'), 
                 VORB = MAKE_FOURC_TYPE('V', 'O', 'R', 'B'), 
+                COOK = MAKE_FOURC_TYPE('C', 'O', 'O', 'K'), 
 
                 PCM  = MAKE_FOURC_TYPE('P', 'C', 'M', 0), 
                 FLT  = MAKE_FOURC_TYPE('F', 'L', 'T', 0), 

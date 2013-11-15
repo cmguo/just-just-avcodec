@@ -1,12 +1,10 @@
 // FFMpegAudioDecoderImpl.h
 
 #include "ppbox/avcodec/CodecType.h"
-#include "ppbox/avcodec/ffmpeg/FFMpegCodecMap.h"
+#include "ppbox/avcodec/ffmpeg/FFMpegDecoderImpl.h"
 
 extern "C"
 {
-#define UINT64_C(c)   c ## ULL
-#include <libavcodec/avcodec.h>
 #include <libswresample/swresample.h>
 }
 
@@ -16,10 +14,8 @@ namespace ppbox
     {
 
         struct FFMpegAudioDecoderImpl
+            : FFMpegDecoderImpl
         {
-            AVCodecContext * ctx;
-            AVFrame * frame;
-            int got_frame;
             SwrContext *swr_ctx;
             struct AudioParams {
                 int sample_rate;
@@ -33,35 +29,17 @@ namespace ppbox
             unsigned int data_size;
 
             FFMpegAudioDecoderImpl()
-                : ctx(NULL)
-                , frame(NULL)
-                , got_frame(0)
+                : FFMpegDecoderImpl(avcodec_decode_audio4)
                 , swr_ctx(NULL)
                 , buf(NULL)
                 , buf_size(0)
                 , data(NULL)
                 , data_size(0)
             {
-                avcodec_register_all();
-
-                ctx = avcodec_alloc_context3(NULL);
-                frame = avcodec_alloc_frame();
-                ctx->thread_count          = 1;
-                ctx->thread_type           = 0;
-                ctx->err_recognition       = AV_EF_CAREFUL;
             }
 
             ~FFMpegAudioDecoderImpl()
             {
-                avcodec_free_frame(&frame);
-                av_freep(&ctx);
-            }
-
-            bool config(
-                std::map<std::string, std::string> const & config, 
-                boost::system::error_code & ec)
-            {
-                return true;
             }
 
             bool open(
@@ -69,67 +47,29 @@ namespace ppbox
                 StreamInfo & output_format, 
                 boost::system::error_code & ec)
             {
-                FFMpegCodec const * codec_type = FFMpegCodecMap::find_by_type(
-                    StreamType::AUDI, input_format.sub_type);
-                if (codec_type == NULL) {
+                ctx->sample_rate = input_format.audio_format.sample_rate;
+                ctx->channels = input_format.audio_format.channel_count;
+                ctx->block_align = input_format.audio_format.block_align;
+                bool result = FFMpegDecoderImpl::open(input_format, output_format, ec);
+                if (!result) {
                     return false;
                 }
-                ctx->sample_rate           = input_format.audio_format.sample_rate;
-                ctx->channels              = input_format.audio_format.channel_count;
-                if (!input_format.format_data.empty()) {
-                    ctx->extradata = (uint8_t *)av_malloc(input_format.format_data.size());
-                    memcpy(ctx->extradata, &input_format.format_data.at(0), input_format.format_data.size());
-                    ctx->extradata_size = input_format.format_data.size();
-                }
-                AVCodec * codec = avcodec_find_decoder((AVCodecID)codec_type->ffmpeg_type);
-                int result = avcodec_open2(ctx, codec, NULL);
-                if (result == 0) {
-                    pdst.sample_rate = ctx->sample_rate;
-                    pdst.channels = ctx->channels;
-                }
+                pdst.sample_rate = ctx->sample_rate;
+                pdst.channels = ctx->channels;
                 pdst.channel_layout = av_get_default_channel_layout(pdst.channels);
                 if (output_format.sub_type == AudioSubType::PCM) {
                     pdst.sample_fmt = AV_SAMPLE_FMT_S16;
                 } else if (output_format.sub_type == AudioSubType::FLT) {
                     pdst.sample_fmt = AV_SAMPLE_FMT_FLT;
                 }
-                output_format.audio_format.sample_size = av_get_bytes_per_sample(pdst.sample_fmt) * 8;
+                int bytes_per_sample = av_get_bytes_per_sample(pdst.sample_fmt);
+                output_format.audio_format.channel_count = pdst.channels;
+                output_format.audio_format.sample_rate = pdst.sample_rate;
+                output_format.audio_format.sample_size = bytes_per_sample * 8;
+                output_format.audio_format.block_align = bytes_per_sample * pdst.channels;
+                output_format.bitrate = output_format.audio_format.block_align * pdst.sample_rate;
                 psrc = pdst;
-                return make_ec(result, ec);
-            }
-
-            bool push(
-                Sample const & sample, 
-                boost::system::error_code & ec)
-            {
-                AVPacket pkt;
-                av_init_packet(&pkt);
-                pkt.pts = sample.dts + sample.cts_delta;
-                pkt.dts = sample.dts;
-                pkt.duration = sample.duration;
-                avcodec_get_frame_defaults(frame);
-                for (size_t i = 0; i < sample.data.size(); ++i) {
-                    pkt.data = (uint8_t *)boost::asio::buffer_cast<uint8_t const *>(sample.data[i]);
-                    pkt.size = boost::asio::buffer_size(sample.data[i]);
-                    while (pkt.size) {
-                        int used_bytes = avcodec_decode_audio4(ctx, frame, &got_frame, &pkt);
-                        if (used_bytes < 0) {
-                            return make_ec(used_bytes, ec);
-                        } else if(used_bytes == 0 && !got_frame) {
-                            break;
-                        }
-                        pkt.data += used_bytes;
-                        pkt.size -= used_bytes;
-                    }
-                }
                 return true;
-            }
-
-            bool push(
-                Transcoder::eos_t const & eos, 
-                boost::system::error_code & ec)
-            {
-                return false;
             }
 
             bool pop(
@@ -151,31 +91,6 @@ namespace ppbox
                     sample.data.push_back(boost::asio::buffer(data, data_size));
                 }
                 return make_ec(result, ec);
-            }
-
-            bool refresh(
-                boost::system::error_code & ec)
-            {
-                avcodec_flush_buffers(ctx);
-                return true;
-            }
-
-            bool close(
-                boost::system::error_code & ec)
-            {
-                return make_ec(avcodec_close(ctx), ec);
-            }
-
-            bool make_ec(
-                int r, 
-                boost::system::error_code & ec)
-            {
-                if (r < 0) {
-                    ec = boost::system::error_code(-r, 
-                        boost::system::system_category);
-                    return false;
-                }
-                return true;
             }
             
             int convert()

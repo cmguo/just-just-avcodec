@@ -120,13 +120,19 @@ namespace ppbox
                     continue;
                 }
 
-                std::vector<boost::uint32_t>::const_iterator iter = std::find_first_of(
-                    s.output_codecs.begin(), s.output_codecs.end(), 
-                    output_codecs.begin(), output_codecs.end());
-                if (iter != s.output_codecs.end()) {
-                    s.output_index = iter - s.output_codecs.begin();
-                    break;
+                for (size_t i = 0; i < output_codecs.size(); ++i) {
+                    boost::uint32_t codec = output_codecs[i];
+                    for (size_t j = 0; j < s.output_codecs.size(); ++j) {
+                        if (codec == s.output_codecs[j]) {
+                            s.output_index = j;
+                            break;
+                        }
+                    }
+                    if (s.output_index < s.output_codecs.size())
+                        break;
                 }
+                if (s.output_index < s.output_codecs.size())
+                    break;
 
                 if (select_transcoders.size() <= max_length) {
                     used_transcoders[s.index] = true;

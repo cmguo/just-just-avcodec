@@ -20,18 +20,24 @@ namespace ppbox
         FFMpegCodec const FFMpegCodecMap::table_[] = {
             {StreamType::VIDE, VideoSubType::AVC1, AV_CODEC_ID_H264}, 
             {StreamType::VIDE, VideoSubType::MP4V, AV_CODEC_ID_MPEG4}, 
+            {StreamType::VIDE, VideoSubType::WMV2, AV_CODEC_ID_WMV2}, 
+            {StreamType::VIDE, VideoSubType::WMV3, AV_CODEC_ID_WMV3}, 
             {StreamType::VIDE, VideoSubType::MP41, AV_CODEC_ID_MSMPEG4V1}, 
             {StreamType::VIDE, VideoSubType::MP42, AV_CODEC_ID_MSMPEG4V2}, 
             {StreamType::VIDE, VideoSubType::MP43, AV_CODEC_ID_MSMPEG4V3}, 
+            {StreamType::VIDE, VideoSubType::RV30, AV_CODEC_ID_RV30}, 
+            {StreamType::VIDE, VideoSubType::RV40, AV_CODEC_ID_RV40}, 
 
             {StreamType::AUDI, AudioSubType::MP1A, AV_CODEC_ID_MP3},
             {StreamType::AUDI, AudioSubType::MP1A, AV_CODEC_ID_MP1},
             {StreamType::AUDI, AudioSubType::MP2A, AV_CODEC_ID_MP2},
             {StreamType::AUDI, AudioSubType::MP4A, AV_CODEC_ID_AAC},
+            {StreamType::AUDI, AudioSubType::WMA2, AV_CODEC_ID_WMAV2},
             {StreamType::AUDI, AudioSubType::AC3,  AV_CODEC_ID_AC3},
-            {StreamType::AUDI, AudioSubType::AC3, AV_CODEC_ID_EAC3},
+            {StreamType::AUDI, AudioSubType::EAC3, AV_CODEC_ID_EAC3},
             {StreamType::AUDI, AudioSubType::FLAC, AV_CODEC_ID_FLAC},
             {StreamType::AUDI, AudioSubType::VORB, AV_CODEC_ID_VORBIS},
+            {StreamType::AUDI, AudioSubType::COOK, AV_CODEC_ID_COOK},
         };
 
         FFMpegCodec const * FFMpegCodecMap::find_by_type(
