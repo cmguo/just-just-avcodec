@@ -42,6 +42,9 @@ namespace ppbox
         };
 
         PPBOX_REGISTER_CODEC(AudioSubType::MP1A, MpaCodec);
+        PPBOX_REGISTER_CODEC(AudioSubType::MP2A, MpaCodec);
+        PPBOX_REGISTER_CODEC(AudioSubType::MP2, MpaCodec);
+        PPBOX_REGISTER_CODEC(AudioSubType::MP3, MpaCodec);
 
     } // namespace avcodec
 } // namespace ppbox

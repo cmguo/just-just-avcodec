@@ -28,6 +28,14 @@ namespace ppbox
             MpaConfigHelper config;
             if (!info.format_data.empty())
                 config.from_data(info.format_data);
+            if (!config.ready()) {
+                ec = framework::system::logic_error::item_not_exist;
+                return false;
+            }
+            if (config.get_layer() == MpaConfigHelper::l3)
+                info.sub_type = AudioSubType::MP3;
+            else if (config.get_layer() == MpaConfigHelper::l2)
+                info.sub_type = AudioSubType::MP2;
             config.get_format(info.audio_format);
             return true;
         }

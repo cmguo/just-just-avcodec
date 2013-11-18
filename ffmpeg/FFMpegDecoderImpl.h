@@ -6,6 +6,8 @@
 
 #include <ppbox/avbase/TypeMap.h>
 
+#include <util/buffers/BuffersCopy.h>
+
 extern "C"
 {
 #define UINT64_C(c)   c ## ULL
@@ -30,6 +32,7 @@ namespace ppbox
             AVFrame * frame;
             int got_frame;
             decoder_t decoder;
+            std::vector<uint8_t> sample_buffer;
 
             FFMpegDecoderImpl(
                 decoder_t decoder)
@@ -91,19 +94,17 @@ namespace ppbox
                 pkt.pts = sample.dts + sample.cts_delta;
                 pkt.dts = sample.dts;
                 pkt.duration = sample.duration;
-                for (size_t i = 0; i < sample.data.size(); ++i) {
-                    pkt.data = (uint8_t *)boost::asio::buffer_cast<uint8_t const *>(sample.data[i]);
-                    pkt.size = boost::asio::buffer_size(sample.data[i]);
-                    while (pkt.size) {
-                        int used_bytes = decoder(ctx, frame, &got_frame, &pkt);
-                        if (used_bytes < 0) {
-                            return make_ec(used_bytes, ec);
-                        } else if(used_bytes == 0 && !got_frame) {
-                            break;
-                        }
-                        pkt.data += used_bytes;
-                        pkt.size -= used_bytes;
+                pkt.data = (uint8_t *)copy_sample_data(sample);
+                pkt.size = sample.size;
+                while (pkt.size) {
+                    int used_bytes = decoder(ctx, frame, &got_frame, &pkt);
+                    if (used_bytes < 0) {
+                        return make_ec(used_bytes, ec);
+                    } else if(used_bytes == 0 && !got_frame) {
+                        break;
                     }
+                    pkt.data += used_bytes;
+                    pkt.size -= used_bytes;
                 }
                 return true;
             }
@@ -134,6 +135,22 @@ namespace ppbox
             }
 
         protected:
+            uint8_t const * copy_sample_data(
+                Sample const & sample)
+            {
+                if (sample.data.size() == 1) {
+                    return boost::asio::buffer_cast<uint8_t const *>(sample.data.front());
+                } else {
+                    if (sample_buffer.size() < sample.size) {
+                        sample_buffer.resize(sample.size, 0);
+                    }
+                    util::buffers::buffers_copy(
+                        boost::asio::buffer(sample_buffer), 
+                        sample.data);
+                    return &sample_buffer.at(0);
+                }
+            }
+
             bool make_ec(
                 int r, 
                 boost::system::error_code & ec)

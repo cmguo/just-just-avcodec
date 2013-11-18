@@ -3,8 +3,6 @@
 #include "ppbox/avcodec/CodecType.h"
 #include "ppbox/avcodec/ffmpeg/FFMpegDecoderImpl.h"
 
-#include <util/buffers/BuffersCopy.h>
-
 extern "C"
 {
 #include <libswresample/swresample.h>
