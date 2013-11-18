@@ -175,9 +175,17 @@ namespace ppbox
             buf.resize(abuf.size());
         }
 
+        bool MpaConfigHelper::ready() const
+        {
+            return data_->layer != 0;
+        }
+
         void MpaConfigHelper::get_format(
             AudioInfo & info) const
         {
+            if (!ready()) {
+                return;
+            }
             info.channel_count = get_channel_count();
             info.sample_rate = get_frequency();
             info.sample_per_frame = get_sample_per_frame();

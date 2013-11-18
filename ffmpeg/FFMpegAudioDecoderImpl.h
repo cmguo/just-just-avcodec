@@ -67,7 +67,7 @@ namespace ppbox
                 output_format.audio_format.sample_rate = pdst.sample_rate;
                 output_format.audio_format.sample_size = bytes_per_sample * 8;
                 output_format.audio_format.block_align = bytes_per_sample * pdst.channels;
-                output_format.bitrate = output_format.audio_format.block_align * pdst.sample_rate;
+                output_format.bitrate = bytes_per_sample * 8 * pdst.channels * pdst.sample_rate;
                 psrc = pdst;
                 return true;
             }

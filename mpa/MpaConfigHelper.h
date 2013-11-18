@@ -101,6 +101,8 @@ namespace ppbox
                 size_t frequency);
 
         public:
+            bool ready() const;
+
             void get_format(
                 ppbox::avbase::AudioInfo & info) const;
 
