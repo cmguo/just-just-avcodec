@@ -67,14 +67,15 @@ namespace fdk_aac {
         return instance;
     }
 
-    inline boost::system::error_code make_error_code(
-        errors e)
-    {
-        return boost::system::error_code(
-            static_cast<int>(e), get_category());
-    }
 
 } // namespace fdk_aac
+
+inline boost::system::error_code make_error_code(
+    AACENC_ERROR e)
+{
+    return boost::system::error_code(
+        static_cast<int>(e), fdk_aac::get_category());
+}
 
 namespace boost
 {
@@ -86,8 +87,6 @@ namespace boost
         {
             BOOST_STATIC_CONSTANT(bool, value = true);
         };
-
-        using fdk_aac::make_error_code;
 
     }
 }

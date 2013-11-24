@@ -8,6 +8,7 @@
 
 extern "C"
 {
+#define UINT64_C(c)   c ## ULL
 #include <libavcodec/avcodec.h>
 }
 
