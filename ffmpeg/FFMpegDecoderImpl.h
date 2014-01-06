@@ -99,7 +99,8 @@ namespace ppbox
                 while (pkt.size) {
                     int used_bytes = decoder(ctx, frame, &got_frame, &pkt);
                     if (used_bytes < 0) {
-                        return make_ec(used_bytes, ec);
+                        //return make_ec(used_bytes, ec);
+                        return true; // on error,  just skip it
                     } else if(used_bytes == 0 && !got_frame) {
                         break;
                     }
@@ -156,9 +157,10 @@ namespace ppbox
                 boost::system::error_code & ec)
             {
                 if (r < 0) {
-                    ec = boost::system::error_code(-r, 
-                        boost::system::system_category);
-                    return false;
+                    //ec = boost::system::error_code(-r, 
+                    //    boost::system::system_category);
+                    //return false;
+                    return true;
                 }
                 return true;
             }
