@@ -63,6 +63,8 @@ namespace ppbox
                 // RealVideo
                 RV30 = MAKE_FOURC_TYPE('R', 'V', '3', '0'), 
                 RV40 = MAKE_FOURC_TYPE('R', 'V', '4', '0'), 
+				// H.265
+				HEVC = MAKE_FOURC_TYPE('H', 'E', 'V', 'C'),
             };
         };
 

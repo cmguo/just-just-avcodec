@@ -28,6 +28,7 @@ namespace ppbox
             {StreamType::VIDE, VideoSubType::MP43, AV_CODEC_ID_MSMPEG4V3}, 
             {StreamType::VIDE, VideoSubType::RV30, AV_CODEC_ID_RV30}, 
             {StreamType::VIDE, VideoSubType::RV40, AV_CODEC_ID_RV40}, 
+			{StreamType::VIDE, VideoSubType::HEVC, AV_CODEC_ID_HEVC },
 
             {StreamType::AUDI, AudioSubType::MP3,  AV_CODEC_ID_MP3},
             {StreamType::AUDI, AudioSubType::MP2,  AV_CODEC_ID_MP2},
