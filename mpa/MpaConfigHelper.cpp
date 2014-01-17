@@ -44,13 +44,15 @@ namespace ppbox
             {44100, 48000, 32000, 0}, // mpeg 1
         };
 
-        boost::uint32_t const MpaConfigHelper::channel_count_table[2][4] = // sample_per_frame_table[version][layer]
+		/* Channel Mode
+		 * 00 - Stereo
+		 * 01 - Joint stereo (Stereo)
+		 * 10 - Dual channel (Stereo)
+		 * 11 - Single channel (Mono)
+		 */
+        boost::uint32_t const MpaConfigHelper::channel_count_table[4] = // sample_per_frame_table[version][mode]
         {
-            // reserved layer3 layer 2 layer 1
-            //{0, 576, 1152, 384}, // mpeg 2.5
-            //{}, // reserved
-            {2, 2, 2, 1}, // mpeg 2
-            {2, 2, 2, 1}, // mpeg 1
+			2, 2, 2, 1, 
         };
 
         boost::uint32_t const MpaConfigHelper::sample_per_frame_table[2][4] = // sample_per_frame_table[version][layer]
@@ -110,7 +112,7 @@ namespace ppbox
 
         boost::uint32_t MpaConfigHelper::get_channel_count() const
         {
-            return channel_count_table[data_->version][data_->channel_mode];
+            return channel_count_table[data_->channel_mode];
         }
 
         boost::uint32_t MpaConfigHelper::get_sample_per_frame() const
@@ -131,7 +133,7 @@ namespace ppbox
         }
 
         void MpaConfigHelper::set_bitrate(
-            size_t bitrate)
+            boost::uint32_t bitrate)
         {
             boost::uint32_t const (&bitrates)[16] = bitrate_table[data_->version][data_->layer];
             bitrate /= 1000;
@@ -144,7 +146,7 @@ namespace ppbox
         }
 
         void MpaConfigHelper::set_frequency(
-            size_t frequency)
+            boost::uint32_t frequency)
         {
             boost::uint32_t const (&frequencys)[4] = frequency_table[data_->version];
             for (size_t i = 0; i < sizeof(frequencys) / sizeof(frequencys[0]); ++i) {
@@ -153,6 +155,12 @@ namespace ppbox
                     return;
                 }
             }
+        }
+
+        void MpaConfigHelper::set_channel_count(
+            boost::uint32_t channel_count)
+        {
+			data_->channel_mode = channel_count == 1 ? 3 : 0;
         }
 
         void MpaConfigHelper::from_data(
@@ -178,6 +186,16 @@ namespace ppbox
         bool MpaConfigHelper::ready() const
         {
             return data_->layer != 0;
+        }
+
+        void MpaConfigHelper::set_format(
+            AudioInfo const & info)
+        {
+            if (!ready()) {
+                return;
+            }
+            set_channel_count(info.channel_count);
+            set_frequency(info.sample_rate);
         }
 
         void MpaConfigHelper::get_format(

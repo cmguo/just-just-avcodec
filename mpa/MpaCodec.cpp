@@ -20,14 +20,31 @@ namespace ppbox
             config_helper_.from_data(config);
         }
 
+		/* How to calculate frame length
+		 * For Layer I files us this formula:
+		 *   FrameLengthInBytes = (12 * BitRate / SampleRate + Padding) * 4
+		 * For Layer II & III files use this formula:
+		 *   FrameLengthInBytes = 144 * BitRate / SampleRate + Padding
+		 */
+
         bool MpaCodec::finish_stream_info(
             StreamInfo & info, 
             boost::system::error_code & ec)
         {
             assert(info.format_type == StreamFormatType::none);
             MpaConfigHelper config;
-            if (!info.format_data.empty())
+            if (!info.format_data.empty()) {
                 config.from_data(info.format_data);
+			} else if (info.sub_type == AudioSubType::MP1A 
+				|| info.sub_type == AudioSubType::MP2A) {
+					config.set_version(info.sub_type == AudioSubType::MP1A
+						? MpaConfigHelper::v1
+						: MpaConfigHelper::v2);
+					if (info.audio_format.sample_rate > 0) {
+						config.set_format(info.audio_format);
+						return true;
+					}
+			}
             if (!config.ready()) {
                 ec = framework::system::logic_error::item_not_exist;
                 return false;

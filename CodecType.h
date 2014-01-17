@@ -72,10 +72,11 @@ namespace ppbox
         {
             enum Enum
             {
-                MP1A = MAKE_FOURC_TYPE('M', 'P', '1', 'A'), 
-                MP2A = MAKE_FOURC_TYPE('M', 'P', '2', 'A'), 
+                MP1  = MAKE_FOURC_TYPE('M', 'P', '1', 0), // MPEG-1 or MPEG-2 Audio Layer I
                 MP2  = MAKE_FOURC_TYPE('M', 'P', '2', 0), // MPEG-1 or MPEG-2 Audio Layer II
                 MP3  = MAKE_FOURC_TYPE('M', 'P', '3', 0), // MPEG-1 or MPEG-2 Audio Layer III
+                MP1A = MAKE_FOURC_TYPE('M', 'P', '1', 'A'), 
+                MP2A = MAKE_FOURC_TYPE('M', 'P', '2', 'A'), 
                 MP4A = MAKE_FOURC_TYPE('M', 'P', '4', 'A'), 
                 WMA2 = MAKE_FOURC_TYPE('W', 'M', 'A', '2'), 
                 AC3  = MAKE_FOURC_TYPE('A', 'C', '3', 0), 

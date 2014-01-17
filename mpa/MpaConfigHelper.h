@@ -95,13 +95,19 @@ namespace ppbox
                 LayerEnum layer);
 
             void set_bitrate(
-                size_t bitrate);
+                boost::uint32_t bitrate);
 
             void set_frequency(
-                size_t frequency);
+                boost::uint32_t frequency);
+
+            void set_channel_count(
+                boost::uint32_t channel_count);
 
         public:
             bool ready() const;
+
+            void set_format(
+                ppbox::avbase::AudioInfo const & info);
 
             void get_format(
                 ppbox::avbase::AudioInfo & info) const;
@@ -116,7 +122,7 @@ namespace ppbox
 
             static boost::uint32_t const frequency_table[2][4];
 
-            static boost::uint32_t const channel_count_table[2][4];
+            static boost::uint32_t const channel_count_table[4];
 
             static boost::uint32_t const sample_per_frame_table[2][4];
         };
