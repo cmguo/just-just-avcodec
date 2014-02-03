@@ -37,7 +37,7 @@ namespace ppbox
                 std::string const & key = iter->first;
                 std::string const & value = iter->second;
                 if (key == "type") {
-                    info_.sub_type = StreamType::from_string(value);
+                    info_.sub_type = ppbox::avbase::FourCC::from_string(value);
                 } else if (key == "width") {
                     parse2(value, info_.video_format.width);
                 } else if (key == "height") {
