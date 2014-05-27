@@ -2,7 +2,6 @@
 
 #include "ppbox/avcodec/avc/AvcConfigHelper.h"
 #include "ppbox/avcodec/avc/AvcNaluHelper.h"
-#include "ppbox/avcodec/avc/AvcFormatType.h"
 #include "ppbox/avcodec/csp/ColorSpace.h"
 
 #include <ppbox/avbase/TypeMap.h>

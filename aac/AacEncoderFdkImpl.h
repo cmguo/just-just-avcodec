@@ -1,7 +1,6 @@
 // AacEncoderFdkImpl.h
 
 #include "ppbox/avcodec/aac/AacConfigHelper.h"
-#include "ppbox/avcodec/aac/AacFormatType.h"
 
 #include <util/buffers/BuffersCopy.h>
 

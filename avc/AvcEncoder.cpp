@@ -2,12 +2,21 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/avc/AvcEncoder.h"
-#include "ppbox/avcodec/avc/AvcEncoderX264Impl.h"
+#include "ppbox/avcodec/avc/AvcFormatType.h"
+#ifndef PPBOX_DISABLE_X264
+#  include "ppbox/avcodec/avc/AvcEncoderX264Impl.h"
+#else
+#  include "ppbox/avcodec/FakeTranscoder.h"
+#endif
 
 namespace ppbox
 {
     namespace avcodec
     {
+
+#ifdef PPBOX_DISABLE_X264
+        struct x264_impl : FakeTranscoder {};
+#endif
 
         AvcEncoder::AvcEncoder()
             : Transcoder2(StreamType::VIDE)

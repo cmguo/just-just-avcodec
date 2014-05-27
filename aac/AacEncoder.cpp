@@ -2,12 +2,21 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/aac/AacEncoder.h"
-#include "ppbox/avcodec/aac/AacEncoderFdkImpl.h"
+#include "ppbox/avcodec/aac/AacFormatType.h"
+#ifndef PPBOX_DISABLE_FDK_AAC
+#  include "ppbox/avcodec/aac/AacEncoderFdkImpl.h"
+#else
+#  include "ppbox/avcodec/FakeTranscoder.h"
+#endif
 
 namespace ppbox
 {
     namespace avcodec
     {
+
+#ifdef PPBOX_DISABLE_FDK_AAC
+        struct fdk_aac_impl : FakeTranscoder {};
+#endif
 
         AacEncoder::AacEncoder()
             : Transcoder2(StreamType::AUDI)
