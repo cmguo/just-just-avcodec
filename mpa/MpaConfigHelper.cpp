@@ -44,15 +44,15 @@ namespace ppbox
             {44100, 48000, 32000, 0}, // mpeg 1
         };
 
-		/* Channel Mode
-		 * 00 - Stereo
-		 * 01 - Joint stereo (Stereo)
-		 * 10 - Dual channel (Stereo)
-		 * 11 - Single channel (Mono)
-		 */
+        /* Channel Mode
+         * 00 - Stereo
+         * 01 - Joint stereo (Stereo)
+         * 10 - Dual channel (Stereo)
+         * 11 - Single channel (Mono)
+         */
         boost::uint32_t const MpaConfigHelper::channel_count_table[4] = // sample_per_frame_table[version][mode]
         {
-			2, 2, 2, 1, 
+            2, 2, 2, 1, 
         };
 
         boost::uint32_t const MpaConfigHelper::sample_per_frame_table[2][4] = // sample_per_frame_table[version][layer]
@@ -102,7 +102,7 @@ namespace ppbox
 
         boost::uint32_t MpaConfigHelper::get_bitrate() const
         {
-            return bitrate_table[data_->version][data_->layer][data_->bitrate_index];
+            return bitrate_table[data_->version][data_->layer][data_->bitrate_index] * 1000;
         }
 
         boost::uint32_t MpaConfigHelper::get_frequency() const
@@ -118,6 +118,24 @@ namespace ppbox
         boost::uint32_t MpaConfigHelper::get_sample_per_frame() const
         {
             return sample_per_frame_table[data_->version][data_->layer];
+        }
+
+        /* How to calculate frame length
+         * For Layer I files us this formula:
+         *   FrameLengthInBytes = (12 * BitRate / SampleRate + Padding) * 4
+         * For Layer II & III files use this formula:
+         *   FrameLengthInBytes = 144 * BitRate / SampleRate + Padding
+         */
+
+        static boost::uint32_t slot_size_table[] = {
+            // reserved layer3 layer 2 layer 1
+            0, 1, 1, 4
+        };
+
+        boost::uint32_t MpaConfigHelper::get_frame_size() const
+        {
+            return (boost::uint32_t)((boost::uint64_t)get_bitrate() * get_sample_per_frame() / get_frequency() / 8)
+                + (data_->padding_bit ? slot_size_table[get_layer()] : 0);
         }
 
         void MpaConfigHelper::set_version(
@@ -160,7 +178,7 @@ namespace ppbox
         void MpaConfigHelper::set_channel_count(
             boost::uint32_t channel_count)
         {
-			data_->channel_mode = channel_count == 1 ? 3 : 0;
+            data_->channel_mode = channel_count == 1 ? 3 : 0;
         }
 
         void MpaConfigHelper::from_data(

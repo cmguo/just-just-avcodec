@@ -87,6 +87,8 @@ namespace ppbox
 
             boost::uint32_t get_sample_per_frame() const;
 
+            boost::uint32_t get_frame_size() const;
+
         public:
             void set_version(
                 VersionEnum version);
