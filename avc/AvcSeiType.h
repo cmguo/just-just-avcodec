@@ -3,8 +3,8 @@
 #ifndef _PPBOX_AVCODEC_AVC_AVC_SEI_TYPE_H_
 #define _PPBOX_AVCODEC_AVC_AVC_SEI_TYPE_H_
 
-#include "ppbox/avcodec/avc/AvcNalu.h"
 #include "ppbox/avcodec/avc/AvcSpsPpsType.h"
+#include "ppbox/avcodec/avc/AvcNaluHeader.h"
 
 namespace ppbox
 {
@@ -1159,7 +1159,7 @@ namespace ppbox
         };
 
         struct RawSeiRbsp
-            : NaluHeader
+            : AvcNaluHeader
         {
             RawSeiRbsp(
                 std::map<boost::uint32_t, SeqParameterSetRbsp> const & spss, 
@@ -1176,7 +1176,7 @@ namespace ppbox
             void load(
                 Archive & ar)
             {
-                NaluHeader::serialize(ar);
+                AvcNaluHeader::serialize(ar);
 
                 do {
                     RawSeiMessage sei_message(context_);
@@ -1191,8 +1191,8 @@ namespace ppbox
             void save(
                 Archive & ar) const
             {
-                //NaluHeader::serialize(ar);
-                ar << (NaluHeader const &)(*this);
+                //AvcNaluHeader::serialize(ar);
+                ar << (AvcNaluHeader const &)(*this);
 
                 for (size_t i = 0; i < sei_messages_.size(); ++i) {
                     ar << sei_messages_[i];
@@ -1236,7 +1236,7 @@ namespace ppbox
         };
 
         struct SeiRbsp
-            : NaluHeader
+            : AvcNaluHeader
         {
             SeiRbsp(
                 std::map<boost::uint32_t, SeqParameterSetRbsp> const & spss, 
@@ -1253,7 +1253,7 @@ namespace ppbox
             void load(
                 Archive & ar)
             {
-                NaluHeader::serialize(ar);
+                AvcNaluHeader::serialize(ar);
 
                 do {
                     SeiMessage sei_message(context_);
@@ -1268,8 +1268,8 @@ namespace ppbox
             void save(
                 Archive & ar) const
             {
-                //NaluHeader::serialize(ar);
-                ar << (NaluHeader const &)(*this);
+                //AvcNaluHeader::serialize(ar);
+                ar << (AvcNaluHeader const &)(*this);
 
                 for (size_t i = 0; i < sei_messages_.size(); ++i) {
                     ar << sei_messages_[i];

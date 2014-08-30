@@ -2,9 +2,10 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/avc/AvcByteStreamAssembler.h"
-#include "ppbox/avcodec/avc/AvcNalu.h"
+#include "ppbox/avcodec/avc/AvcEnum.h"
 #include "ppbox/avcodec/avc/AvcConfigHelper.h"
-#include "ppbox/avcodec/avc/AvcNaluHelper.h"
+#include "ppbox/avcodec/avc/AvcNaluHeader.h"
+#include "ppbox/avcodec/nalu/NaluHelper.h"
 
 namespace ppbox
 {
@@ -30,7 +31,7 @@ namespace ppbox
             // access unit delimiter
             boost::uint8_t nalu_start_code[] = {0, 0, 0, 1};
             access_unit_delimiter_.assign(nalu_start_code, nalu_start_code + 4);
-            access_unit_delimiter_.push_back(9);
+            access_unit_delimiter_.push_back(AvcNaluType::AccessUnitDelimiter);
             access_unit_delimiter_.push_back(0xF0);
             // sps
             sps_pps_ = info.format_data;
@@ -44,7 +45,7 @@ namespace ppbox
             Sample & sample, 
             boost::system::error_code & ec)
         {
-            AvcNaluHelper & helper = *(AvcNaluHelper *)sample.context;
+            NaluHelper & helper = *(NaluHelper *)sample.context;
 
             if (!init_) {
                 init_ = true;
@@ -53,11 +54,11 @@ namespace ppbox
                 std::vector<ppbox::avcodec::NaluBuffer> const & nalus = helper.nalus();
                 for (boost::uint32_t i = 0; i < nalus.size(); ++i) {
                     NaluBuffer const & nalu = nalus[i];
-                    NaluHeader nalu_header(nalu.begin.dereference_byte());
-                    if (nalu_header.nal_unit_type == NaluHeader::AccessUnitDelimiter) {
+                    AvcNaluHeader nalu_header(nalu.begin.dereference_byte());
+                    if (nalu_header.nal_unit_type == AvcNaluType::AccessUnitDelimiter) {
                         need_aud = false;
                     }
-                    if (nalu_header.nal_unit_type == NaluHeader::SPS) {
+                    if (nalu_header.nal_unit_type == AvcNaluType::SPS) {
                         need_sps_pps = false;
                     }
                 }

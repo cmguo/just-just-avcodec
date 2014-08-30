@@ -4,9 +4,10 @@
 #include "ppbox/avcodec/avc/AvcDebuger.h"
 #include "ppbox/avcodec/avc/AvcConfig.h"
 #include "ppbox/avcodec/avc/AvcConfigHelper.h"
-#include "ppbox/avcodec/avc/AvcNaluHelper.h"
 #include "ppbox/avcodec/avc/AvcType.h"
-#include "ppbox/avcodec/avc/AvcNaluBuffer.h"
+#include "ppbox/avcodec/avc/AvcEnum.h"
+#include "ppbox/avcodec/nalu/NaluHelper.h"
+#include "ppbox/avcodec/nalu/NaluBuffer.h"
 
 #include <ppbox/avbase/stream/BitsOStream.h>
 #include <ppbox/avbase/stream/BitsIStream.h>
@@ -29,10 +30,13 @@ namespace ppbox
             StreamInfo & info, 
             boost::system::error_code & ec)
         {
-            AvcConfig const & avc_config = 
+            AvcConfig const & config = 
                 ((AvcConfigHelper const *)info.context)->data();
-            for (boost::uint32_t i = 0; i < avc_config.sequenceParameterSetNALUnit.size(); i++) {
-                std::vector<boost::uint8_t> sps_vec = avc_config.sequenceParameterSetNALUnit[i];
+            std::cout << "[Avc Config] profile: " << config.AVCProfileIndication
+                << " level: " << config.AVCLevelIndication << std::endl;
+            for (boost::uint32_t i = 0; i < config.sequenceParameterSetNALUnit.size(); i++) {
+                std::cout << "  [SPS] size: " << config.sequenceParameterSetNALUnit[i].size() << std::endl;
+                std::vector<boost::uint8_t> sps_vec = config.sequenceParameterSetNALUnit[i];
                 FormatBuffer buf((boost::uint8_t *)&sps_vec[0], sps_vec.size(), sps_vec.size());
                 BitsBuffer<boost::uint8_t> bits_buf(buf);
                 BitsIStream<boost::uint8_t> bits_reader(bits_buf);
@@ -53,8 +57,9 @@ namespace ppbox
                 spss.insert(std::make_pair(sps.sps_seq_parameter_set_id, sps));
             }
             // pps
-            for (boost::uint32_t i = 0; i < avc_config.pictureParameterSetNALUnit.size(); i++) {
-                std::vector<boost::uint8_t> const & pps_vec = avc_config.pictureParameterSetNALUnit[i];
+            for (boost::uint32_t i = 0; i < config.pictureParameterSetNALUnit.size(); i++) {
+                std::cout << "  [PPS] size: " << config.pictureParameterSetNALUnit[i].size() << std::endl;
+                std::vector<boost::uint8_t> const & pps_vec = config.pictureParameterSetNALUnit[i];
                 FormatBuffer buf((boost::uint8_t *)&pps_vec[0], pps_vec.size(), pps_vec.size());
                 BitsBuffer<boost::uint8_t> bits_buf(buf);
                 BitsIStream<boost::uint8_t> bits_reader(bits_buf);
@@ -70,15 +75,15 @@ namespace ppbox
             Sample & sample, 
             boost::system::error_code & ec)
         {
-            AvcNaluHelper & helper = *(AvcNaluHelper *)sample.context;
+            NaluHelper & helper = *(NaluHelper *)sample.context;
             std::vector<ppbox::avcodec::NaluBuffer> const & nalus = helper.nalus();
             for (boost::uint32_t i = 0; i < nalus.size(); ++i) {
                 NaluBuffer const & nalu = nalus[i];
-                NaluHeader nalu_header(nalu.begin.dereference_byte());
-                std::cout << "  Nalu type: " << NaluHeader::nalu_type_str[nalu_header.nal_unit_type] << std::endl;
+                AvcNaluHeader nalu_header(nalu.begin.dereference_byte());
+                std::cout << "  [Nalu] type: " << AvcNaluType::type_str[nalu_header.nal_unit_type] << std::endl;
 
-                if (nalu_header.nal_unit_type == NaluHeader::SEI) {
-                    std::cout << "    Sei: size = " << nalus[i].size << std::endl;
+                if (nalu_header.nal_unit_type == AvcNaluType::SEI) {
+                    std::cout << "    [Sei]: size = " << nalus[i].size << std::endl;
                     util::buffers::CycleBuffers<NaluBuffer::RangeBuffers, boost::uint8_t> buf(nalu.buffers());
                     buf.commit(nalus[i].size);
                     BitsBuffer<boost::uint8_t> bits_buf(buf);
@@ -86,16 +91,16 @@ namespace ppbox
                     SeiRbsp sei(spss, ppss);
                     bits_reader >> sei;
                 }
-                if (nalu_header.nal_unit_type == NaluHeader::UNIDR
-                    || nalu_header.nal_unit_type == NaluHeader::IDR) {
+                if (nalu_header.nal_unit_type == AvcNaluType::UNIDR
+                    || nalu_header.nal_unit_type == AvcNaluType::IDR) {
                         util::buffers::CycleBuffers<NaluBuffer::RangeBuffers, boost::uint8_t> buf(nalu.buffers());
                         buf.commit(nalus[i].size);
                         BitsBuffer<boost::uint8_t> bits_buf(buf);
                         BitsIStream<boost::uint8_t> bits_reader(bits_buf);
                         SliceLayerWithoutPartitioningRbsp slice(ppss);
                         bits_reader >> slice;
-                        std::cout << "    Slice type: " 
-                            << SliceHeader::slice_type_str[slice.slice_header.slice_type] 
+                        std::cout << "    [Slice] type: " 
+                            << AvcSliceType::type_str[slice.slice_header.slice_type] 
                         << std::endl;
                 }
             }

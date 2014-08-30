@@ -3,8 +3,8 @@
 #ifndef _PPBOX_AVCODEC_AVC_AVC_SLICE_TYPE_H_
 #define _PPBOX_AVCODEC_AVC_AVC_SLICE_TYPE_H_
 
-#include "ppbox/avcodec/avc/AvcNalu.h"
 #include "ppbox/avcodec/avc/AvcSpsPpsType.h"
+#include "ppbox/avcodec/avc/AvcNaluHeader.h"
 
 namespace ppbox
 {
@@ -14,7 +14,7 @@ namespace ppbox
        struct SliceHeader
        {
        private:
-           NaluHeader const & header_;
+           AvcNaluHeader const & header_;
            std::map<boost::uint32_t, PicParameterSetRbsp> const & ppss_;
 
        public:
@@ -36,7 +36,7 @@ namespace ppbox
            // }
 
            SliceHeader(
-               NaluHeader const & header, 
+               AvcNaluHeader const & header, 
                std::map<boost::uint32_t, PicParameterSetRbsp> const & ppss)
                : header_(header)
                , ppss_(ppss)
@@ -104,8 +104,6 @@ namespace ppbox
            {
                return (*ppss_.find(pic_parameter_set_id)).second;
            }
-
-           static char const * const slice_type_str[10];
        };
 
        struct SliceData {};
@@ -117,7 +115,7 @@ namespace ppbox
        // nal_unit_type == 5
        // Coded slice of a IDR picture
        struct SliceLayerWithoutPartitioningRbsp
-           : NaluHeader
+           : AvcNaluHeader
        {
            SliceHeader slice_header;
            SliceData slice_data; /* all categories of slice_data( ) syntax */
@@ -135,7 +133,7 @@ namespace ppbox
            void serialize(
                Archive & ar)
            {
-               NaluHeader::serialize(ar);
+               AvcNaluHeader::serialize(ar);
 
                ar & slice_header;
            }
@@ -144,7 +142,7 @@ namespace ppbox
        // nal_unit_type == 2
        // Coded slice data partition A
        struct SliceDataPartitioningALayerRbsp
-           : NaluHeader
+           : AvcNaluHeader
        {
            SliceHeader slice_header;
            UE slice_id;
@@ -163,7 +161,7 @@ namespace ppbox
            void serialize(
                Archive & ar)
            {
-               NaluHeader::serialize(ar);
+               AvcNaluHeader::serialize(ar);
 
                ar & slice_header;
                    & slice_id;
@@ -173,7 +171,7 @@ namespace ppbox
        // nal_unit_type == 3
        // Coded slice data partition B
        struct SliceDataPartitioningBLayerRbsp
-           : NaluHeader
+           : AvcNaluHeader
        {
            UE slice_id;
            // if (redundant_pic_cnt_present_flag)
@@ -187,7 +185,7 @@ namespace ppbox
            void serialize(
                Archive & ar)
            {
-               NaluHeader::serialize(ar);
+               AvcNaluHeader::serialize(ar);
 
                ar & slice_id;
            }
@@ -196,7 +194,7 @@ namespace ppbox
        // nal_unit_type == 4
        // Coded slice data partition C
        struct SliceDataPartitioningCLayerRbsp
-           : NaluHeader
+           : AvcNaluHeader
        {
            UE slice_id;
            // if (redundant_pic_cnt_present_flag)
@@ -210,7 +208,7 @@ namespace ppbox
            void serialize(
                Archive & ar)
            {
-               NaluHeader::serialize(ar);
+               AvcNaluHeader::serialize(ar);
 
                ar & slice_id;
            }

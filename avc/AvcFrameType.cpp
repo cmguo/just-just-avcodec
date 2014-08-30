@@ -2,7 +2,8 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/avc/AvcFrameType.h"
-#include "ppbox/avcodec/avc/AvcNalu.h"
+#include "ppbox/avcodec/avc/AvcEnum.h"
+#include "ppbox/avcodec/avc/AvcNaluHeader.h"
 
 #include <util/buffers/BuffersSize.h>
 #include <util/buffers/BuffersCopy.h>
@@ -15,7 +16,8 @@ namespace ppbox
     {
 
         AvcFrameType::AvcFrameType()
-            : type_(0)
+            : helper_(AvcNaluType::is_access_end)
+            , type_(0)
         {
             offsets_[0] = offsets_[1] = 0;
             totals_[0] = totals_[1] = 0;
@@ -97,7 +99,7 @@ namespace ppbox
 
         bool AvcFrameType::is_sync_frame() const
         {
-            return type_ == NaluHeader::IDR;
+            return type_ == AvcNaluType::IDR;
         }
 
         boost::uint32_t AvcFrameType::check_offset(
@@ -164,11 +166,11 @@ namespace ppbox
             boost::uint32_t offset, 
             boost::uint8_t byte)
         {
-            NaluHeader header(byte);
-            if (header.nal_unit_type == NaluHeader::UNIDR) {
+            AvcNaluHeader header(byte);
+            if (header.nal_unit_type == AvcNaluType::UNIDR) {
                 offsets_[1] = offset;
                 ++totals_[1];
-            } else if (header.nal_unit_type == NaluHeader::IDR) {
+            } else if (header.nal_unit_type == AvcNaluType::IDR) {
                 offsets_[0] = offset;
                 ++totals_[0];
             } else {

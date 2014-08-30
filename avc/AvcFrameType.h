@@ -3,7 +3,7 @@
 #ifndef _PPBOX_AVCODEC_AVC_AVC_FRAME_TYPE_H_
 #define _PPBOX_AVCODEC_AVC_AVC_FRAME_TYPE_H_
 
-#include "ppbox/avcodec/avc/AvcNaluHelper.h"
+#include "ppbox/avcodec/nalu/NaluHelper.h"
 
 #include <istream>
 
@@ -50,7 +50,7 @@ namespace ppbox
                 boost::uint8_t byte);
 
         private:
-            AvcNaluHelper helper_;
+            NaluHelper helper_;
             boost::uint32_t offsets_[2];
             boost::uint32_t totals_[2];
             boost::uint32_t hits_[2];

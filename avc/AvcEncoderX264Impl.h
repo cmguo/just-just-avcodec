@@ -1,7 +1,7 @@
 // AvcEncoderX264Impl.h
 
 #include "ppbox/avcodec/avc/AvcConfigHelper.h"
-#include "ppbox/avcodec/avc/AvcNaluHelper.h"
+#include "ppbox/avcodec/nalu/NaluHelper.h"
 #include "ppbox/avcodec/csp/ColorSpace.h"
 
 #include <ppbox/avbase/TypeMap.h>
@@ -220,7 +220,7 @@ namespace ppbox
                 panel_buffer_ = pic_in_.img.plane[0];
                 panel_size_ = picture_.total_size;
 
-                assert(output_format.sub_type == VideoSubType::AVC1);
+                assert(output_format.sub_type == VideoSubType::AVC);
                 if (output_format.format_type != AvcFormatType::byte_stream) {
                     output_format.format_type = AvcFormatType::packet;
                 }
@@ -362,7 +362,7 @@ namespace ppbox
             ColorSpace::PictureSize picture_;
             ColorSpace::transfer_t transfer_;
             AvcConfigHelper config_;
-            AvcNaluHelper nalus_;
+            NaluHelper nalus_;
         };
 
     } // namespace avcodec

@@ -6,6 +6,7 @@
 
 #include <util/tools/ClassRegister.h>
 #include "ppbox/avcodec/avc/AvcCodec.h"
+#include "ppbox/avcodec/hevc/HevcCodec.h"
 #include "ppbox/avcodec/mpa/MpaCodec.h"
 #include "ppbox/avcodec/aac/AacCodec.h"
 #ifndef PPBOX_DISABLE_FFMPEG

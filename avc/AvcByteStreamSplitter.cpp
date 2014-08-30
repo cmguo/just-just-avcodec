@@ -2,6 +2,7 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/avc/AvcByteStreamSplitter.h"
+#include "ppbox/avcodec/avc/AvcEnum.h"
 
 namespace ppbox
 {
@@ -9,6 +10,7 @@ namespace ppbox
     {
 
         AvcByteStreamSplitter::AvcByteStreamSplitter()
+            : helper_(AvcNaluType::is_access_end)
         {
         }
 

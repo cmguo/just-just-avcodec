@@ -5,8 +5,8 @@
 
 #include "ppbox/avcodec/Splitter.h"
 #include "ppbox/avcodec/avc/AvcConfigHelper.h"
-#include "ppbox/avcodec/avc/AvcNaluHelper.h"
 #include "ppbox/avcodec/avc/AvcFormatType.h"
+#include "ppbox/avcodec/nalu/NaluHelper.h"
 
 namespace ppbox
 {
@@ -32,10 +32,10 @@ namespace ppbox
 
         private:
             ppbox::avcodec::AvcConfigHelper config_;
-            ppbox::avcodec::AvcNaluHelper helper_;
+            ppbox::avcodec::NaluHelper helper_;
         };
 
-        PPBOX_REGISTER_SPLITTER(VideoSubType::AVC1, AvcFormatType::packet, AvcPacketSplitter);
+        PPBOX_REGISTER_SPLITTER(VideoSubType::AVC, AvcFormatType::packet, AvcPacketSplitter);
 
     } // namespace avcodec
 } // namespace ppbox

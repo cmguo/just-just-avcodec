@@ -3,8 +3,9 @@
 #ifndef _PPBOX_AVCODEC_AVC_AVC_SPS_PPS_TYPE_H_
 #define _PPBOX_AVCODEC_AVC_AVC_SPS_PPS_TYPE_H_
 
-#include "ppbox/avcodec/avc/AvcNalu.h"
+#include "ppbox/avcodec/avc/AvcAgorithm.h"
 #include "ppbox/avcodec/avc/AvcVuiType.h"
+#include "ppbox/avcodec/avc/AvcNaluHeader.h"
 
 namespace ppbox
 {
@@ -74,7 +75,7 @@ namespace ppbox
         typedef ScalingList<64> ScalingList8x8;
 
         struct SeqParameterSetRbsp
-            : NaluHeader
+            : AvcNaluHeader
         {
             U<8> profile_idc;
             U<1> constraint_set0_flag;
@@ -132,7 +133,7 @@ namespace ppbox
             void serialize(
                 Archive & ar)
             {
-                NaluHeader::serialize(ar);
+                AvcNaluHeader::serialize(ar);
 
                 ar & profile_idc
                     & constraint_set0_flag
@@ -199,7 +200,7 @@ namespace ppbox
        };
 
        struct PicParameterSetRbsp
-           : NaluHeader
+           : AvcNaluHeader
        {
        private:
            std::map<boost::uint32_t, SeqParameterSetRbsp> const & spss_;
@@ -262,7 +263,7 @@ namespace ppbox
            void serialize(
                Archive & ar)
            {
-               NaluHeader::serialize(ar);
+               AvcNaluHeader::serialize(ar);
 
                ar & pps_pic_parameter_set_id
                    & pps_seq_parameter_set_id

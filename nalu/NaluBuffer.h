@@ -1,7 +1,7 @@
-// AvcNaluBuffer.h
+// NaluBuffer.h
 
-#ifndef _PPBOX_AVCODEC_AVC_AVC_NALU_BUFFER_H_
-#define _PPBOX_AVCODEC_AVC_AVC_NALU_BUFFER_H_
+#ifndef _PPBOX_AVCODEC_NALU_NALU_BUFFER_H_
+#define _PPBOX_AVCODEC_NALU_NALU_BUFFER_H_
 
 #include <ppbox/avbase/stream/SampleBuffers.h>
 
@@ -70,4 +70,4 @@ namespace ppbox
     } // namespace avcodec
 } // namespace ppbox
 
-#endif // _PPBOX_AVCODEC_AVC_AVC_NALU_BUFFER_H_
+#endif // _PPBOX_AVCODEC_NALU_NALU_BUFFER_H_

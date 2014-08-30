@@ -1,22 +1,23 @@
-// AvcNaluHelper.h
+// NaluHelper.h
 
-#ifndef _PPBOX_AVCODEC_AVC_AVC_NALU_HELPER_H_
-#define _PPBOX_AVCODEC_AVC_AVC_NALU_HELPER_H_
+#ifndef _PPBOX_AVCODEC_NALU_NALU_HELPER_H_
+#define _PPBOX_AVCODEC_NALU_NALU_HELPER_H_
 
-#include "ppbox/avcodec/avc/AvcNaluBuffer.h"
+#include "ppbox/avcodec/nalu/NaluBuffer.h"
 
 namespace ppbox
 {
     namespace avcodec
     {
 
-        class AvcNaluHelper
+        class NaluHelper
         {
         public:
             typedef NaluBuffer::ConstBuffers buffers_t;
 
         public:
-            AvcNaluHelper(
+            NaluHelper(
+                bool (*is_access_end)(boost::uint8_t) = 0, 
                 boost::uint8_t nalu_length_size = 4);
 
         public:
@@ -70,6 +71,7 @@ namespace ppbox
                 buffers_t & data);
 
         private:
+            bool (*is_access_end_)(boost::uint8_t);
             boost::uint8_t nalu_length_size_;
             union {
                 boost::uint32_t nalu_length_[3];
@@ -81,4 +83,4 @@ namespace ppbox
     } // namespace avcodec
 } // namespace ppbox
 
-#endif // _PPBOX_AVCODEC_AVC_AVC_NALU_HELPER_H_
+#endif // _PPBOX_AVCODEC_NALU_NALU_HELPER_H_

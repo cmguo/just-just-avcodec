@@ -19,7 +19,7 @@ namespace ppbox
 
 
         FFMpegCodec const FFMpegCodecMap::table_[] = {
-            {StreamType::VIDE, VideoSubType::AVC1, AV_CODEC_ID_H264}, 
+            {StreamType::VIDE, VideoSubType::AVC,  AV_CODEC_ID_H264}, 
             {StreamType::VIDE, VideoSubType::MP4V, AV_CODEC_ID_MPEG4}, 
             {StreamType::VIDE, VideoSubType::WMV2, AV_CODEC_ID_WMV2}, 
             {StreamType::VIDE, VideoSubType::WMV3, AV_CODEC_ID_WMV3}, 

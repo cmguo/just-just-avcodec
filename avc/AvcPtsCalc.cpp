@@ -3,7 +3,8 @@
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/avc/AvcPtsCalc.h"
 #include "ppbox/avcodec/avc/AvcSliceType.h"
-#include "ppbox/avcodec/avc/AvcNaluBuffer.h"
+#include "ppbox/avcodec/avc/AvcEnum.h"
+#include "ppbox/avcodec/nalu/NaluBuffer.h"
 
 #include <ppbox/avbase/stream/BitsIStream.h>
 #include <ppbox/avbase/stream/BitsOStream.h>
@@ -58,17 +59,17 @@ namespace ppbox
             }
             for (size_t i = 0; i < nalus.size(); ++i) {
                 NaluBuffer const & nalu = nalus[i];
-                NaluHeader nalu_header(nalu.begin.dereference_byte());
-                if (NaluHeader::SPS == nalu_header.nal_unit_type) {
+                AvcNaluHeader nalu_header(nalu.begin.dereference_byte());
+                if (AvcNaluType::SPS == nalu_header.nal_unit_type) {
                     SeqParameterSetRbsp sps;
                     parse(sps, sample, nalu);
                     spss_.insert(std::make_pair(sps.sps_seq_parameter_set_id, sps));
-                } else if (NaluHeader::PPS == nalu_header.nal_unit_type) {
+                } else if (AvcNaluType::PPS == nalu_header.nal_unit_type) {
                     PicParameterSetRbsp pps(spss_);
                     parse(pps, sample, nalu);
                     ppss_.insert(std::make_pair(pps.pps_pic_parameter_set_id, pps));
-                } else if (NaluHeader::UNIDR == nalu_header.nal_unit_type
-                    || NaluHeader::IDR == nalu_header.nal_unit_type) {
+                } else if (AvcNaluType::UNIDR == nalu_header.nal_unit_type
+                    || AvcNaluType::IDR == nalu_header.nal_unit_type) {
                     SliceLayerWithoutPartitioningRbsp slice(ppss_);
                     parse(slice, sample, nalu);
                     sample.cts_delta = (boost::uint32_t)(idr_dts_ + frame_scale_ * slice.slice_header.pic_order_cnt_lsb / 2 - sample.dts);

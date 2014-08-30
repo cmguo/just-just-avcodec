@@ -3,10 +3,11 @@
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/avc/AvcConfigHelper.h"
 #include "ppbox/avcodec/avc/AvcConfig.h"
-#include "ppbox/avcodec/avc/AvcNaluHelper.h"
-#include <ppbox/avcodec/avc/AvcNalu.h>
-#include <ppbox/avcodec/avc/AvcNaluBuffer.h>
-#include <ppbox/avcodec/avc/AvcSpsPpsType.h>
+#include "ppbox/avcodec/avc/AvcSpsPpsType.h"
+#include "ppbox/avcodec/avc/AvcEnum.h"
+#include "ppbox/avcodec/avc/AvcNaluHeader.h"
+#include "ppbox/avcodec/nalu/NaluHelper.h"
+#include "ppbox/avcodec/nalu/NaluBuffer.h"
 
 #include <ppbox/avbase/stream/BitsIStream.h>
 #include <ppbox/avbase/stream/BitsOStream.h>
@@ -67,9 +68,9 @@ namespace ppbox
         void AvcConfigHelper::from_es_data(
             std::vector<boost::uint8_t> const & buf)
         {
-            AvcNaluHelper::buffers_t buffers;
+            NaluHelper::buffers_t buffers;
             buffers.push_back(boost::asio::buffer(buf));
-            AvcNaluHelper helper;
+            NaluHelper helper(AvcNaluType::is_access_end);
             helper.from_stream(buf.size(), buffers);
             std::vector<NaluBuffer> const & nalus = helper.nalus();
             data_->sequenceParameterSetLength.clear();
@@ -78,12 +79,12 @@ namespace ppbox
             data_->pictureParameterSetNALUnit.clear();
             for (size_t i = 0; i < nalus.size(); ++i) {
                 NaluBuffer const & nalu = nalus[i];
-                NaluHeader const nalu_header(nalu.begin.dereference_byte());
+                AvcNaluHeader const nalu_header(nalu.begin.dereference_byte());
                 std::vector<boost::uint8_t> nalu_bytes(nalu.bytes_begin(), nalu.bytes_end());
-                if (nalu_header.nal_unit_type == avcodec::NaluHeader::SPS) {
+                if (nalu_header.nal_unit_type == AvcNaluType::SPS) {
                     data_->sequenceParameterSetLength.push_back(nalu_bytes.size());
                     data_->sequenceParameterSetNALUnit.push_back(nalu_bytes);
-                } else if (nalu_header.nal_unit_type == avcodec::NaluHeader::PPS) {
+                } else if (nalu_header.nal_unit_type == AvcNaluType::PPS) {
                     data_->pictureParameterSetLength.push_back(nalu_bytes.size());
                     data_->pictureParameterSetNALUnit.push_back(nalu_bytes);
                 }

@@ -1,8 +1,7 @@
-// AvcNaluHelper.cpp
+// NaluHelper.cpp
 
 #include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/avc/AvcNaluHelper.h"
-#include "ppbox/avcodec/avc/AvcNalu.h"
+#include "ppbox/avcodec/nalu/NaluHelper.h"
 
 #include <util/buffers/BuffersSize.h>
 #include <util/buffers/BuffersCopy.h>
@@ -14,9 +13,11 @@ namespace ppbox
     namespace avcodec
     {
 
-        AvcNaluHelper::AvcNaluHelper(
+        NaluHelper::NaluHelper(
+            bool (*is_access_end)(boost::uint8_t), 
             boost::uint8_t nalu_length_size)
-            : nalu_length_size_(nalu_length_size)
+            : is_access_end_(is_access_end)
+            , nalu_length_size_(nalu_length_size)
         {
             nalu_start_code_[0] = 0;
             nalu_start_code_[1] = 0;
@@ -24,7 +25,7 @@ namespace ppbox
             nalu_start_code_[3] = 1;
         }
 
-        void AvcNaluHelper::nalus(
+        void NaluHelper::nalus(
             std::vector<NaluBuffer> & nalus)
         {
             return nalus.swap(nalus_);
@@ -56,7 +57,7 @@ namespace ppbox
             }
         }
 
-        bool AvcNaluHelper::from_stream(
+        bool NaluHelper::from_stream(
             boost::uint32_t size, 
             buffers_t const & data)
         {
@@ -67,12 +68,10 @@ namespace ppbox
             continue_find_nalu(ibeg, iter, iend);
             while (iter != iend) {
                 NaluBuffer::BuffersPosition cur_pos = *iter;
-                NaluHeader const nalu_header(cur_pos.dereference_byte());
-                if (nalu_header.nal_unit_type == NaluHeader::IDR ||
-                    nalu_header.nal_unit_type == NaluHeader::UNIDR) {
-                        // 假定 IDR，UNIDR 是最后一个Nalu，不继续搜索，以提高效率
-                        nalus_.push_back(NaluBuffer(size - cur_pos.skipped_bytes(), cur_pos, iter.end_position()));
-                        break;
+                if (is_access_end_ && is_access_end_(cur_pos.dereference_byte())) {
+                    // 假定 IDR，UNIDR 是最后一个Nalu，不继续搜索，以提高效率
+                    nalus_.push_back(NaluBuffer(size - cur_pos.skipped_bytes(), cur_pos, iter.end_position()));
+                    break;
                 }
                 ibeg = ++iter;
                 continue_find_nalu(ibeg, iter, iend);
@@ -81,7 +80,7 @@ namespace ppbox
             return true;
         }
 
-        bool AvcNaluHelper::from_packet(
+        bool NaluHelper::from_packet(
             boost::uint32_t size, 
             buffers_t const & data)
         {
@@ -102,25 +101,24 @@ namespace ppbox
             return true;
         }
 
-        bool AvcNaluHelper::from_stream(
+        bool NaluHelper::from_stream(
             buffers_t const & datas)
         {
             return from_stream(util::buffers::buffers_size(datas), datas);
         }
 
-        bool AvcNaluHelper::from_packet(
+        bool NaluHelper::from_packet(
             buffers_t const & datas)
         {
             return from_packet(0, datas);
         }
 
-        bool AvcNaluHelper::to_stream(
+        bool NaluHelper::to_stream(
             boost::uint32_t & size, 
             buffers_t & datas)
         {
             for (boost::uint32_t i = 0; i < nalus_.size(); ++i) {
                 NaluBuffer const & nalu = nalus_[i];
-                NaluHeader nalu_header(nalu.begin.dereference_byte());
                 datas.push_back(boost::asio::buffer(nalu_start_code_));
                 datas.insert(datas.end(), nalu.buffers_begin(), nalu.buffers_end());
                 size += nalu.size + 4;
@@ -128,36 +126,31 @@ namespace ppbox
             return true;
         }
 
-        bool AvcNaluHelper::to_packet(
+        bool NaluHelper::to_packet(
             boost::uint32_t & size, 
             buffers_t & datas)
         {
             size_t n = 0;
             for (boost::uint32_t i = 0; i < nalus_.size(); ++i) {
                 NaluBuffer const & nalu = nalus_[i];
-                NaluHeader const nalu_header(nalu.begin.dereference_byte());
-                if (nalu_header.nal_unit_type == NaluHeader::UNIDR 
-                    || nalu_header.nal_unit_type == NaluHeader::IDR
-                    || nalu_header.nal_unit_type == NaluHeader::SEI) {
-                        assert(n < sizeof(nalu_length_) / sizeof(nalu_length_[0]));
-                        size += nalu.size + nalu_length_size_;
-                        nalu_length_[n] = framework::system::BytesOrder::host_to_big_endian_long(nalu.size);
-                        datas.push_back(boost::asio::buffer((boost::uint8_t*)&(nalu_length_[n]) + 4 - nalu_length_size_, nalu_length_size_));
-                        datas.insert(datas.end(), nalu.buffers_begin(), nalu.buffers_end());
-                        ++n;
-                }
+                assert(n < sizeof(nalu_length_) / sizeof(nalu_length_[0]));
+                size += nalu.size + nalu_length_size_;
+                nalu_length_[n] = framework::system::BytesOrder::host_to_big_endian_long(nalu.size);
+                datas.push_back(boost::asio::buffer((boost::uint8_t*)&(nalu_length_[n]) + 4 - nalu_length_size_, nalu_length_size_));
+                datas.insert(datas.end(), nalu.buffers_begin(), nalu.buffers_end());
+                ++n;
             }
             return true;
         }
 
-        bool AvcNaluHelper::to_stream(
+        bool NaluHelper::to_stream(
             buffers_t & data)
         {
             boost::uint32_t size = 0;
             return to_stream(size, data);
         }
 
-        bool AvcNaluHelper::to_packet(
+        bool NaluHelper::to_packet(
             buffers_t & data)
         {
             boost::uint32_t size = 0;
