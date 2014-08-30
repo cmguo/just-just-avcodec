@@ -33,7 +33,7 @@ namespace ppbox
             AacConfigHelper config_;
         };
 
-        PPBOX_REGISTER_SPLITTER(AudioSubType::MP4A, AacFormatType::raw, AacRawSplitter);
+        PPBOX_REGISTER_SPLITTER(AudioSubType::AAC,  AacFormatType::raw, AacRawSplitter);
 
     } // namespace avcodec
 } // namespace ppbox

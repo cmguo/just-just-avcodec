@@ -24,7 +24,7 @@ namespace ppbox
                 boost::system::error_code & ec);
         };
 
-        PPBOX_REGISTER_DEBUGER(AudioSubType::MP4A, AacDebuger);
+        PPBOX_REGISTER_DEBUGER(AudioSubType::AAC,  AacDebuger);
 
     } // namespace avcodec
 } // namespace ppbox

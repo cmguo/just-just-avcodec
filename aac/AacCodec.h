@@ -41,7 +41,7 @@ namespace ppbox
             AacConfigHelper config_helper_;
         };
 
-        PPBOX_REGISTER_CODEC(AudioSubType::MP4A, AacCodec);
+        PPBOX_REGISTER_CODEC(AudioSubType::AAC,  AacCodec);
 
     } // namespace avcodec
 } // namespace ppbox
