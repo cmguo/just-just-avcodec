@@ -118,10 +118,10 @@ namespace ppbox
                     fprintf(stderr, "Cannot initialize the conversion context\n");
                     exit(1);
                 }
-                sws_scale(sws_ctx, frame->data, frame->linesize,
+                result = sws_scale(sws_ctx, frame->data, frame->linesize,
                           0, pdst.height, pic.data, pic.linesize);
 
-                return 0;
+                return result;
             }
         };
 

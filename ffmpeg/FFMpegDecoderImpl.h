@@ -119,6 +119,7 @@ namespace ppbox
                 pkt.data = NULL;
                 pkt.size = 0;
                 int result = decoder(ctx, frame, &got_frame, &pkt);
+                (void)result;
                 return got_frame > 0;
             }
 
