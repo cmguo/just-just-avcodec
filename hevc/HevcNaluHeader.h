@@ -70,6 +70,10 @@ namespace ppbox
                     & nuh_layer_id
                     & nuh_temporal_id_plus1;
             }
+
+        private:
+            HevcNaluHeader(
+                boost::uint8_t b); // disable unexpecttly convert to boost::uint16_t
         };
 
     } // namespace avcodec

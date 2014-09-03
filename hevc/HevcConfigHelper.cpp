@@ -122,7 +122,7 @@ namespace ppbox
             }
         }
 
-        HevcConfigHelper::param_set_t HevcConfigHelper::param_set(
+        HevcConfigHelper::param_set_t const & HevcConfigHelper::param_set(
             boost::uint8_t type) const
         {
             for (size_t i = 0; i < data_->arrays.size(); ++i) {
@@ -130,20 +130,21 @@ namespace ppbox
                 if (array.NAL_unit_type == type)
                     return array.nalUnit;
             }
-            return param_set_t();
+            static param_set_t empty;
+            return empty;
         }
 
-        HevcConfigHelper::param_set_t HevcConfigHelper::vps() const
+        HevcConfigHelper::param_set_t const & HevcConfigHelper::vps() const
         {
             return param_set(HevcNaluType::VPS_NUT);
         }
 
-        HevcConfigHelper::param_set_t HevcConfigHelper::sps() const
+        HevcConfigHelper::param_set_t const & HevcConfigHelper::sps() const
         {
             return param_set(HevcNaluType::SPS_NUT);
         }
 
-        HevcConfigHelper::param_set_t HevcConfigHelper::pps() const
+        HevcConfigHelper::param_set_t const & HevcConfigHelper::pps() const
         {
             return param_set(HevcNaluType::PPS_NUT);
         }

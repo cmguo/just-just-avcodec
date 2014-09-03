@@ -59,7 +59,7 @@ namespace ppbox
                 std::vector<ppbox::avcodec::NaluBuffer> const & nalus = helper.nalus();
                 for (boost::uint32_t i = 0; i < nalus.size(); ++i) {
                     NaluBuffer const & nalu = nalus[i];
-                    HevcNaluHeader nalu_header(nalu.begin.dereference_byte());
+                    HevcNaluHeader nalu_header(nalu.begin.dereference_byte(), 0);
                     if (nalu_header.nal_unit_type == HevcNaluType::AUD_NUT) {
                         need_aud = false;
                     }

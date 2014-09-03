@@ -52,14 +52,14 @@ namespace ppbox
         public:
             typedef std::vector<std::vector<boost::uint8_t> > param_set_t;
 
-            param_set_t param_set(
+            param_set_t const & param_set(
                 boost::uint8_t type) const;
 
-            param_set_t vps() const;
+            param_set_t const & vps() const;
 
-            param_set_t sps() const;
+            param_set_t const & sps() const;
 
-            param_set_t pps() const;
+            param_set_t const & pps() const;
 
         public:
             bool ready() const;
