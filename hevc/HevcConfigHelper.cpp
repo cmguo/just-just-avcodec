@@ -79,7 +79,7 @@ namespace ppbox
                 NaluBuffer const & nalu = nalus[i];
                 HevcNaluHeader const nalu_header(nalu.begin.dereference_byte(), 0);
                 std::vector<boost::uint8_t> nalu_bytes(nalu.bytes_begin(), nalu.bytes_end());
-                if (nalu_header.nal_unit_type >= avcodec::HevcNaluType::VPS_NUT 
+                if (nalu_header.nal_unit_type >= HevcNaluType::VPS_NUT 
                     && nalu_header.nal_unit_type <= HevcNaluType::PPS_NUT) {
                         HevcConfig::ArrayElem & array = data_->arrays[nalu_header.nal_unit_type - HevcNaluType::VPS_NUT];
                         array.nalUnitLength.push_back(nalu_bytes.size());
@@ -120,6 +120,32 @@ namespace ppbox
                     buf.insert(buf.end(), array.nalUnit[j].begin(), array.nalUnit[j].end());
                 }
             }
+        }
+
+        HevcConfigHelper::param_set_t HevcConfigHelper::param_set(
+            boost::uint8_t type) const
+        {
+            for (size_t i = 0; i < data_->arrays.size(); ++i) {
+                HevcConfig::ArrayElem const & array = data_->arrays[i];
+                if (array.NAL_unit_type == type)
+                    return array.nalUnit;
+            }
+            return param_set_t();
+        }
+
+        HevcConfigHelper::param_set_t HevcConfigHelper::vps() const
+        {
+            return param_set(HevcNaluType::VPS_NUT);
+        }
+
+        HevcConfigHelper::param_set_t HevcConfigHelper::sps() const
+        {
+            return param_set(HevcNaluType::SPS_NUT);
+        }
+
+        HevcConfigHelper::param_set_t HevcConfigHelper::pps() const
+        {
+            return param_set(HevcNaluType::PPS_NUT);
         }
 
         bool HevcConfigHelper::ready() const

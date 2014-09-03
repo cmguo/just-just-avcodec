@@ -50,6 +50,18 @@ namespace ppbox
                 std::vector<boost::uint8_t> & buf) const;
 
         public:
+            typedef std::vector<std::vector<boost::uint8_t> > param_set_t;
+
+            param_set_t param_set(
+                boost::uint8_t type) const;
+
+            param_set_t vps() const;
+
+            param_set_t sps() const;
+
+            param_set_t pps() const;
+
+        public:
             bool ready() const;
 
             void get_format(
