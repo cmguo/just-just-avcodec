@@ -22,16 +22,6 @@ namespace ppbox
             return error::encoder_not_support;
         }
 
-        void TranscoderFactory::register_creator(
-            std::pair<key_type, boost::uint32_t> const & key_order, 
-            creator_type creator)
-        {
-            factory_type::register_creator(key_order.first, creator);
-            transcoder_t2 transcoder = std::make_pair(key_order.first, creator());
-            orders().insert(std::make_pair(key_order.second, transcoder));
-        }
-
-
         bool TranscoderFactory::create_transcodes(
             boost::uint32_t category, 
             boost::uint32_t input_codec, 

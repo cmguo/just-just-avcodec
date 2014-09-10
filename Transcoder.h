@@ -81,9 +81,14 @@ namespace ppbox
             : public util::tools::ClassFactory<TranscoderTraits>
         {
         public:
-            static void register_creator(
-                std::pair<key_type, boost::uint32_t> const & key_order, 
-                creator_type creator);
+            template <typename Transcoder>
+            static void register_class(
+                std::pair<key_type, boost::uint32_t> const & key_order)
+            {
+                factory_type::register_class<Transcoder>(key_order.first);
+                transcoder_t2 transcoder = std::make_pair(key_order.first, new Transcoder());
+                orders().insert(std::make_pair(key_order.second, transcoder));
+            }
 
         public:
             struct transcoder_t
