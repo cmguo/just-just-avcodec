@@ -31,37 +31,23 @@ namespace ppbox
             StreamInfo & info, 
             boost::system::error_code & ec)
         {
+            Debuger::reset(info, ec);
+
             HevcConfig const & config = 
                 ((HevcConfigHelper const *)info.context)->data();
             std::cout << "[Hevc Config] profile: " << config.general_profile_idc
                 << " level: " << config.general_level_idc << std::endl;
+            char start_code[] = {0, 0, 0, 1};
             for (boost::uint32_t i = 0; i < config.arrays.size(); i++) {
                 HevcConfig::ArrayElem const & array = config.arrays[i];
                 std::cout << "  [Array] type: " << HevcNaluType::type_str[array.NAL_unit_type]
                     << " size: " << array.nalUnitLength.size() << std::endl;
                 for (boost::uint32_t j = 0; j < array.nalUnitLength.size(); j++) {
                     std::cout << "    [Nalu] size: " << array.nalUnit[j].size() << std::endl;
-                    std::vector<boost::uint8_t> sps_vec = array.nalUnit[j];
-                    FormatBuffer buf((boost::uint8_t *)&sps_vec[0], sps_vec.size(), sps_vec.size());
-                    BitsBuffer<boost::uint8_t> bits_buf(buf);
-                    BitsIStream<boost::uint8_t> bits_reader(bits_buf);
-                    /*
-                    SeqParameterSetRbsp sps;
-                    bits_reader >> sps;
-                    //if (!sps.vui_parameters.fixed_frame_rate_flag) {
-                    //    sps.vui_parameters.num_units_in_tick = 1;
-                    //    sps.vui_parameters.time_scale = 50;
-                    //    sps.vui_parameters.fixed_frame_rate_flag = 1;
-                    //    sps_vec.resize(sps_vec.size() + 4);
-                    //    FormatBuffer buf((boost::uint8_t *)&sps_vec[0], sps_vec.size());
-                    //    BitsBuffer<boost::uint8_t> bits_buf(buf);
-                    //    BitsOStream<boost::uint8_t> bits_writer(bits_buf);
-                    //    bits_writer << sps;
-                    //    sps_vec.resize(buf.size());
-                    //    
-                    //}
-                    spss.insert(std::make_pair(sps.sps_seq_parameter_set_id, sps));
-                    */
+                    std::vector<boost::uint8_t> const & ps = array.nalUnit[j];
+
+                    dump(boost::asio::buffer(start_code, 4));
+                    dump(boost::asio::buffer(ps));
                 }
             }
 
@@ -74,6 +60,7 @@ namespace ppbox
         {
             NaluHelper & helper = *(NaluHelper *)sample.context;
             std::vector<ppbox::avcodec::NaluBuffer> const & nalus = helper.nalus();
+            char start_code[] = {0, 0, 0, 1};
             for (boost::uint32_t i = 0; i < nalus.size(); ++i) {
                 NaluBuffer const & nalu = nalus[i];
                 HevcNaluHeader nalu_header(nalu.begin.dereference_byte(), 0);
@@ -102,6 +89,12 @@ namespace ppbox
                         << std::endl;
                 }
                 */
+
+                if (i == 0)
+                    dump(boost::asio::buffer(start_code, 4));
+                else
+                    dump(boost::asio::buffer(start_code + 1, 3));
+                dump(nalu.buffers());
             }
 
             return true;

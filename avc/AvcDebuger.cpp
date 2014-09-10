@@ -30,10 +30,13 @@ namespace ppbox
             StreamInfo & info, 
             boost::system::error_code & ec)
         {
+            Debuger::reset(info, ec);
+
             AvcConfig const & config = 
                 ((AvcConfigHelper const *)info.context)->data();
             std::cout << "[Avc Config] profile: " << config.AVCProfileIndication
                 << " level: " << config.AVCLevelIndication << std::endl;
+            char start_code[] = {0, 0, 0, 1};
             for (boost::uint32_t i = 0; i < config.sequenceParameterSetNALUnit.size(); i++) {
                 std::cout << "  [SPS] size: " << config.sequenceParameterSetNALUnit[i].size() << std::endl;
                 std::vector<boost::uint8_t> sps_vec = config.sequenceParameterSetNALUnit[i];
@@ -55,6 +58,9 @@ namespace ppbox
                 //    
                 //}
                 spss.insert(std::make_pair(sps.sps_seq_parameter_set_id, sps));
+
+                dump(boost::asio::buffer(start_code, 4));
+                dump(boost::asio::buffer(sps_vec));
             }
             // pps
             for (boost::uint32_t i = 0; i < config.pictureParameterSetNALUnit.size(); i++) {
@@ -66,6 +72,9 @@ namespace ppbox
                 PicParameterSetRbsp pps(spss);
                 bits_reader >> pps;
                 ppss.insert(std::make_pair(pps.pps_pic_parameter_set_id, pps));
+
+                dump(boost::asio::buffer(start_code, 4));
+                dump(boost::asio::buffer(pps_vec));
             }
 
             return true;
@@ -77,6 +86,7 @@ namespace ppbox
         {
             NaluHelper & helper = *(NaluHelper *)sample.context;
             std::vector<ppbox::avcodec::NaluBuffer> const & nalus = helper.nalus();
+            char start_code[] = {0, 0, 0, 1};
             for (boost::uint32_t i = 0; i < nalus.size(); ++i) {
                 NaluBuffer const & nalu = nalus[i];
                 AvcNaluHeader nalu_header(nalu.begin.dereference_byte());
@@ -103,6 +113,12 @@ namespace ppbox
                             << AvcSliceType::type_str[slice.slice_header.slice_type] 
                         << std::endl;
                 }
+
+                if (i == 0)
+                    dump(boost::asio::buffer(start_code, 4));
+                else
+                    dump(boost::asio::buffer(start_code + 1, 3));
+                dump(nalu.buffers());
             }
 
             return true;

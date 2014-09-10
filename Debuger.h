@@ -8,6 +8,8 @@
 
 #include <util/tools/ClassFactory.h>
 
+#include <fstream>
+
 namespace ppbox
 {
     namespace avcodec
@@ -23,11 +25,29 @@ namespace ppbox
         public:
             virtual bool reset(
                 StreamInfo & info, 
-                boost::system::error_code & ec) = 0;
+                boost::system::error_code & ec);
 
             virtual bool debug(
                 Sample & sample, 
-                boost::system::error_code & ec) = 0;
+                boost::system::error_code & ec);
+
+        protected:
+            template <typename ConstBuffers>
+            void dump(
+                ConstBuffers const & buffers)
+            {
+                typename ConstBuffers::const_iterator beg = buffers.begin();
+                typename ConstBuffers::const_iterator end = buffers.end();
+                for (; beg != end; ++beg) {
+                    file_.write(
+                        boost::asio::buffer_cast<char const *>(*beg), 
+                        boost::asio::buffer_size(*beg));
+                }
+            }
+
+        private:
+            std::string dump_file_;
+            std::ofstream file_;
         };
 
         struct DebugerTraits
