@@ -33,6 +33,8 @@ namespace ppbox
                 config.from_es_data(info.format_data);
                 config.to_es_data(info.format_data);
             } else if (info.format_data.empty()) {
+                ec.clear();
+                return true;
             } else {
                 if (info.format_data.at(0) == 1) {
                     info.format_type = AvcFormatType::packet;
