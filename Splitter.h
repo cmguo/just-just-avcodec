@@ -3,8 +3,7 @@
 #ifndef _PPBOX_AVCODEC_SPLITTER_H_
 #define _PPBOX_AVCODEC_SPLITTER_H_
 
-#include "ppbox/avcodec/StreamInfo.h"
-#include "ppbox/avcodec/Sample.h"
+#include "ppbox/avcodec/Base.h"
 
 #include <util/tools/ClassFactory.h>
 

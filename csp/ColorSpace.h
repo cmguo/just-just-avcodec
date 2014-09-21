@@ -3,8 +3,7 @@
 #ifndef _PPBOX_AVCODEC_CSP_COLOR_SPACE_H_
 #define _PPBOX_AVCODEC_CSP_COLOR_SPACE_H_
 
-#include "ppbox/avcodec/StreamInfo.h"
-#include "ppbox/avcodec/Sample.h"
+#include "ppbox/avcodec/Base.h"
 
 namespace ppbox
 {

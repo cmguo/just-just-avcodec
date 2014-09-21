@@ -4,7 +4,7 @@
 #define _PPBOX_AVCODEC_AVC_AVC_PTS_CALC_H_
 
 #include "ppbox/avcodec/avc/AvcSpsPpsType.h"
-#include "ppbox/avcodec/Sample.h"
+#include "ppbox/avcodec/Base.h"
 
 namespace ppbox
 {
