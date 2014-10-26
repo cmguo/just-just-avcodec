@@ -28,15 +28,18 @@ namespace ppbox
             MpaConfigHelper config;
             if (!info.format_data.empty()) {
                 config.from_data(info.format_data);
-            } else if (info.sub_type == AudioSubType::MP1A 
-                || info.sub_type == AudioSubType::MP2A) {
-                    config.set_version(info.sub_type == AudioSubType::MP1A
-                        ? MpaConfigHelper::v1
-                        : MpaConfigHelper::v2);
-                    if (info.audio_format.sample_rate > 0) {
-                        config.set_format(info.audio_format);
-                        return true;
-                    }
+            } else if (info.audio_format.sample_rate) {
+                if (info.sub_type == AudioSubType::MP1A) { 
+                    config.set_version(MpaConfigHelper::v1);
+                } else if (info.sub_type == AudioSubType::MP2A) {
+                    config.set_version(MpaConfigHelper::v2);
+                } else if (info.sub_type == AudioSubType::MP2) {
+                    config.set_layer(MpaConfigHelper::l2);
+                } else if (info.sub_type == AudioSubType::MP3) {
+                    config.set_layer(MpaConfigHelper::l3);
+                }
+                config.set_format(info.audio_format);
+                return true;
             }
             if (!config.ready()) {
                 ec = framework::system::logic_error::item_not_exist;

@@ -50,7 +50,7 @@ namespace ppbox
          * 10 - Dual channel (Stereo)
          * 11 - Single channel (Mono)
          */
-        boost::uint32_t const MpaConfigHelper::channel_count_table[4] = // sample_per_frame_table[version][mode]
+        boost::uint32_t const MpaConfigHelper::channel_count_table[4] = // channel_count_table[mode]
         {
             2, 2, 2, 1, 
         };
@@ -213,7 +213,21 @@ namespace ppbox
                 return;
             }
             set_channel_count(info.channel_count);
+            data_->frequency_index = 3;
             set_frequency(info.sample_rate);
+            if (data_->frequency_index == 3) {
+                data_->version =  1 - data_->version;
+                set_frequency(info.sample_rate);
+            }
+            if (data_->layer == 0 && data_->frequency_index != 3) { // we can say version is correct now
+                boost::uint32_t const (&sample_per_frames)[4] = sample_per_frame_table[data_->version];
+                for (size_t i = 0; i < sizeof(sample_per_frames) / sizeof(sample_per_frames[0]); ++i) {
+                    if (info.sample_per_frame == sample_per_frames[i]) {
+                        data_->layer = i;
+                        break;
+                    }
+                }
+            }
         }
 
         void MpaConfigHelper::get_format(
