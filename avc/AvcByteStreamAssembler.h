@@ -34,7 +34,7 @@ namespace ppbox
             bool init_;
         };
 
-        PPBOX_REGISTER_ASSEMBLER(VideoSubType::AVC, AvcFormatType::byte_stream, AvcByteStreamAssembler);
+        PPBOX_REGISTER_ASSEMBLER(VideoType::AVC, AvcFormatType::byte_stream, AvcByteStreamAssembler);
 
     } // namespace avcodec
 } // namespace ppbox

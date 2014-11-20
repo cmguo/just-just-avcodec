@@ -22,7 +22,7 @@ namespace ppbox
             : Transcoder2(StreamType::AUDI)
         {
             impl_ = new fdk_aac_impl;
-            register_codec(AudioSubType::PCM, AudioSubType::AAC);
+            register_codec(AudioType::PCM, AudioType::AAC);
         }
 
         AacEncoder::~AacEncoder()

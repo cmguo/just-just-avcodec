@@ -35,7 +35,7 @@ namespace ppbox
             ppbox::avcodec::NaluHelper helper_;
         };
 
-        PPBOX_REGISTER_SPLITTER(VideoSubType::AVC, AvcFormatType::byte_stream, AvcByteStreamSplitter);
+        PPBOX_REGISTER_SPLITTER(VideoType::AVC, AvcFormatType::byte_stream, AvcByteStreamSplitter);
 
     } // namespace avcodec
 } // namespace ppbox

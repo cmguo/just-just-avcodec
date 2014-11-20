@@ -27,7 +27,7 @@ namespace ppbox
             std::vector<boost::uint8_t> adts_header_;
         };
 
-        PPBOX_REGISTER_DEBUGER(AudioSubType::AAC,  AacDebuger);
+        PPBOX_REGISTER_DEBUGER(AudioType::AAC,  AacDebuger);
 
     } // namespace avcodec
 } // namespace ppbox

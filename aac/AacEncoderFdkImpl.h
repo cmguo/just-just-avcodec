@@ -253,7 +253,7 @@ namespace ppbox
                 StreamInfo & output_format, 
                 boost::system::error_code & ec)
             {
-                assert(output_format.sub_type == AudioSubType::AAC);
+                assert(output_format.sub_type == AudioType::AAC);
                 if (output_format.format_type != AacFormatType::adts) {
                     output_format.format_type = AacFormatType::raw;
                 }

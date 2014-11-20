@@ -22,7 +22,7 @@ namespace ppbox
                 boost::system::error_code & ec);
         };
 
-        PPBOX_REGISTER_CODEC(VideoSubType::HEVC, HevcCodec);
+        PPBOX_REGISTER_CODEC(VideoType::HEVC, HevcCodec);
 
     } // namespace avcodec
 } // namespace ppbox

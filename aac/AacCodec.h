@@ -42,7 +42,7 @@ namespace ppbox
             AacConfigHelper config_helper_;
         };
 
-        PPBOX_REGISTER_CODEC(AudioSubType::AAC,  AacCodec);
+        PPBOX_REGISTER_CODEC(AudioType::AAC,  AacCodec);
 
     } // namespace avcodec
 } // namespace ppbox

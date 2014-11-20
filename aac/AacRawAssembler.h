@@ -29,7 +29,7 @@ namespace ppbox
                 boost::system::error_code & ec);
         };
 
-        PPBOX_REGISTER_ASSEMBLER(AudioSubType::AAC,  AacFormatType::raw, AacRawAssembler);
+        PPBOX_REGISTER_ASSEMBLER(AudioType::AAC,  AacFormatType::raw, AacRawAssembler);
 
     } // namespace avcodec
 } // namespace ppbox

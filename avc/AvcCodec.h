@@ -23,7 +23,7 @@ namespace ppbox
                 boost::system::error_code & ec);
         };
 
-        PPBOX_REGISTER_CODEC(VideoSubType::AVC, AvcCodec);
+        PPBOX_REGISTER_CODEC(VideoType::AVC, AvcCodec);
 
     } // namespace avcodec
 } // namespace ppbox

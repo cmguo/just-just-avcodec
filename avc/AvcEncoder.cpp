@@ -22,17 +22,17 @@ namespace ppbox
             : Transcoder2(StreamType::VIDE)
         {
             impl_ = new x264_impl;
-            register_codec(VideoSubType::I420, VideoSubType::AVC);
-            register_codec(VideoSubType::YV12, VideoSubType::AVC);
-            register_codec(VideoSubType::NV12, VideoSubType::AVC);
-            register_codec(VideoSubType::I422, VideoSubType::AVC);
-            register_codec(VideoSubType::YV16, VideoSubType::AVC);
-            register_codec(VideoSubType::NV16, VideoSubType::AVC);
-            register_codec(VideoSubType::I444, VideoSubType::AVC);
-            register_codec(VideoSubType::YV24, VideoSubType::AVC);
-            register_codec(VideoSubType::BGR8, VideoSubType::AVC);
-            register_codec(VideoSubType::BGRA, VideoSubType::AVC);
-            register_codec(VideoSubType::RGB8, VideoSubType::AVC);
+            register_codec(VideoType::I420, VideoType::AVC);
+            register_codec(VideoType::YV12, VideoType::AVC);
+            register_codec(VideoType::NV12, VideoType::AVC);
+            register_codec(VideoType::I422, VideoType::AVC);
+            register_codec(VideoType::YV16, VideoType::AVC);
+            register_codec(VideoType::NV16, VideoType::AVC);
+            register_codec(VideoType::I444, VideoType::AVC);
+            register_codec(VideoType::YV24, VideoType::AVC);
+            register_codec(VideoType::BGR8, VideoType::AVC);
+            register_codec(VideoType::BGRA, VideoType::AVC);
+            register_codec(VideoType::RGB8, VideoType::AVC);
         }
 
         AvcEncoder::~AvcEncoder()

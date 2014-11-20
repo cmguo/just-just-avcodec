@@ -32,7 +32,7 @@ namespace ppbox
             std::vector<boost::uint8_t> adts_header_;
         };
 
-        PPBOX_REGISTER_ASSEMBLER(AudioSubType::AAC,  AacFormatType::adts, AacAdtsAssembler);
+        PPBOX_REGISTER_ASSEMBLER(AudioType::AAC,  AacFormatType::adts, AacAdtsAssembler);
 
     } // namespace avcodec
 } // namespace ppbox

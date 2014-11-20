@@ -17,8 +17,8 @@ namespace ppbox
             FFMpegCodec const * table = FFMpegCodecMap::table();
             for (size_t i = 0; i < FFMpegCodecMap::count(); ++i) {
                 if (table[i].category == StreamType::AUDI) {
-                    register_codec(table[i].type, AudioSubType::PCM);
-                    register_codec(table[i].type, AudioSubType::FLT);
+                    register_codec(table[i].type, AudioType::PCM);
+                    register_codec(table[i].type, AudioType::FLT);
                 }
             }
         }

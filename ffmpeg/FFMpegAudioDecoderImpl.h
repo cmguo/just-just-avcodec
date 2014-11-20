@@ -57,9 +57,9 @@ namespace ppbox
                 pdst.sample_rate = ctx->sample_rate;
                 pdst.channels = ctx->channels;
                 pdst.channel_layout = av_get_default_channel_layout(pdst.channels);
-                if (output_format.sub_type == AudioSubType::PCM) {
+                if (output_format.sub_type == AudioType::PCM) {
                     pdst.sample_fmt = AV_SAMPLE_FMT_S16;
-                } else if (output_format.sub_type == AudioSubType::FLT) {
+                } else if (output_format.sub_type == AudioType::FLT) {
                     pdst.sample_fmt = AV_SAMPLE_FMT_FLT;
                 }
                 int bytes_per_sample = av_get_bytes_per_sample(pdst.sample_fmt);

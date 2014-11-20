@@ -20,7 +20,7 @@ namespace ppbox
             boost::uint32_t format;
             AVPixelFormat ff_format;
         } const ff_pixel_format_table[] = {
-            {VideoSubType::I420, AV_PIX_FMT_YUV420P}, 
+            {VideoType::I420, AV_PIX_FMT_YUV420P}, 
         };
 
         struct FFMpegVideoDecoderImpl

@@ -17,8 +17,8 @@ namespace ppbox
             FFMpegCodec const * table = FFMpegCodecMap::table();
             for (size_t i = 0; i < FFMpegCodecMap::count(); ++i) {
                 if (table[i].category == StreamType::VIDE) {
-                    register_codec(table[i].type, VideoSubType::I420);
-                    register_codec(table[i].type, VideoSubType::RGB8);
+                    register_codec(table[i].type, VideoType::I420);
+                    register_codec(table[i].type, VideoType::RGB8);
                 }
             }
         }

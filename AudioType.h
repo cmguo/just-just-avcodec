@@ -10,7 +10,7 @@ namespace ppbox
     namespace avcodec
     {
 
-        struct AudioSubType
+        struct AudioType
         {
             enum Enum
             {

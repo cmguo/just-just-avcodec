@@ -29,13 +29,13 @@ namespace ppbox
             if (!info.format_data.empty()) {
                 config.from_data(info.format_data);
             } else if (info.audio_format.sample_rate) {
-                if (info.sub_type == AudioSubType::MP1A) { 
+                if (info.sub_type == AudioType::MP1A) { 
                     config.set_version(MpaConfigHelper::v1);
-                } else if (info.sub_type == AudioSubType::MP2A) {
+                } else if (info.sub_type == AudioType::MP2A) {
                     config.set_version(MpaConfigHelper::v2);
-                } else if (info.sub_type == AudioSubType::MP2) {
+                } else if (info.sub_type == AudioType::MP2) {
                     config.set_layer(MpaConfigHelper::l2);
-                } else if (info.sub_type == AudioSubType::MP3) {
+                } else if (info.sub_type == AudioType::MP3) {
                     config.set_layer(MpaConfigHelper::l3);
                 }
                 config.set_format(info.audio_format);
@@ -46,9 +46,9 @@ namespace ppbox
                 return false;
             }
             if (config.get_layer() == MpaConfigHelper::l3)
-                info.sub_type = AudioSubType::MP3;
+                info.sub_type = AudioType::MP3;
             else if (config.get_layer() == MpaConfigHelper::l2)
-                info.sub_type = AudioSubType::MP2;
+                info.sub_type = AudioType::MP2;
             config.get_format(info.audio_format);
             return true;
         }

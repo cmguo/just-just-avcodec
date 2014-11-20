@@ -37,18 +37,18 @@ namespace ppbox
         };
 
         static x264_csp_t const x264_csp_tab[] = {
-            {VideoSubType::I420, X264_CSP_I420, NULL},
-            {VideoSubType::YV12, X264_CSP_YV12, NULL},
-            {VideoSubType::NV12, X264_CSP_NV12, NULL},
-            //{VideoSubType::NV21, X264_CSP_NV12, ColorSpace::transfer_nv21_nv12},
-            {VideoSubType::I422, X264_CSP_I422, NULL},
-            {VideoSubType::YV16, X264_CSP_YV16, NULL},
-            {VideoSubType::NV16, X264_CSP_NV16, NULL},
-            {VideoSubType::I444, X264_CSP_I444, NULL},
-            {VideoSubType::YV24, X264_CSP_YV24, NULL},
-            {VideoSubType::BGR8, X264_CSP_BGR , NULL},
-            {VideoSubType::BGRA, X264_CSP_BGRA, NULL},
-            {VideoSubType::RGB8, X264_CSP_RGB , NULL},
+            {VideoType::I420, X264_CSP_I420, NULL},
+            {VideoType::YV12, X264_CSP_YV12, NULL},
+            {VideoType::NV12, X264_CSP_NV12, NULL},
+            //{VideoType::NV21, X264_CSP_NV12, ColorSpace::transfer_nv21_nv12},
+            {VideoType::I422, X264_CSP_I422, NULL},
+            {VideoType::YV16, X264_CSP_YV16, NULL},
+            {VideoType::NV16, X264_CSP_NV16, NULL},
+            {VideoType::I444, X264_CSP_I444, NULL},
+            {VideoType::YV24, X264_CSP_YV24, NULL},
+            {VideoType::BGR8, X264_CSP_BGR , NULL},
+            {VideoType::BGRA, X264_CSP_BGRA, NULL},
+            {VideoType::RGB8, X264_CSP_RGB , NULL},
         };
 
         struct x264_csp_equal_type
@@ -220,7 +220,7 @@ namespace ppbox
                 panel_buffer_ = pic_in_.img.plane[0];
                 panel_size_ = picture_.total_size;
 
-                assert(output_format.sub_type == VideoSubType::AVC);
+                assert(output_format.sub_type == VideoType::AVC);
                 if (output_format.format_type != AvcFormatType::byte_stream) {
                     output_format.format_type = AvcFormatType::packet;
                 }
