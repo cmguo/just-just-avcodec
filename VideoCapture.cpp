@@ -2,7 +2,7 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/VideoCapture.h"
-#include "ppbox/avcodec/CodecType.h"
+#include "ppbox/avcodec/VideoType.h"
 
 #include <framework/string/Parse.h>
 #include <framework/string/Slice.h>

@@ -4,7 +4,7 @@
 #define _PPBOX_AACODEC_AAC_AAC_DEBUGER_H_
 
 #include "ppbox/avcodec/Debuger.h"
-#include "ppbox/avcodec/CodecType.h"
+#include "ppbox/avcodec/AudioType.h"
 
 namespace ppbox
 {

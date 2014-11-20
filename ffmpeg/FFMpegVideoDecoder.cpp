@@ -2,7 +2,7 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/ffmpeg/FFMpegVideoDecoder.h"
-#include "ppbox/avcodec/CodecType.h"
+#include "ppbox/avcodec/VideoType.h"
 #include "ppbox/avcodec/ffmpeg/FFMpegVideoDecoderImpl.h"
 
 namespace ppbox

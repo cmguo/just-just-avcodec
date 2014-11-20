@@ -4,6 +4,7 @@
 #define _PPBOX_AVCODEC_AVC_AVC_CODEC_H_
 
 #include "ppbox/avcodec/Codec.h"
+#include "ppbox/avcodec/VideoType.h"
 
 namespace ppbox
 {

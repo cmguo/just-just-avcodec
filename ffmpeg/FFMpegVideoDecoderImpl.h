@@ -1,6 +1,6 @@
 // FFMpegVideoDecoderImpl.h
 
-#include "ppbox/avcodec/CodecType.h"
+#include "ppbox/avcodec/VideoType.h"
 #include "ppbox/avcodec/ffmpeg/FFMpegDecoderImpl.h"
 
 extern "C"

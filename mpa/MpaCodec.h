@@ -4,6 +4,7 @@
 #define _PPBOX_AVCODEC_MPA_MPA_CODEC_H_
 
 #include "ppbox/avcodec/Codec.h"
+#include "ppbox/avcodec/AudioType.h"
 #include "ppbox/avcodec/mpa/MpaConfigHelper.h"
 
 namespace ppbox

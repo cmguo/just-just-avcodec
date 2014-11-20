@@ -2,7 +2,7 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/AudioCapture.h"
-#include "ppbox/avcodec/CodecType.h"
+#include "ppbox/avcodec/AudioType.h"
 
 #include <framework/string/Parse.h>
 using namespace framework::string;

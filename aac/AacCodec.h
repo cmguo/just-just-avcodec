@@ -4,6 +4,7 @@
 #define _PPBOX_AVCODEC_AAC_AAC_CODEC_H_
 
 #include "ppbox/avcodec/Codec.h"
+#include "ppbox/avcodec/AudioType.h"
 #include "ppbox/avcodec/aac/AacConfigHelper.h"
 
 namespace ppbox

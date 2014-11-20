@@ -142,11 +142,11 @@ namespace ppbox
             info.height = (2 - sps.frame_mbs_only_flag) * (sps.pic_height_in_map_units_minus1 + 1) * 16
                 - (sps.frame_crop_top_offset + sps.frame_crop_bottom_offset) * 2;
             if (sps.vui_parameters.timing_info_present_flag) {
-                info.frame_rate_num = sps.vui_parameters.time_scale;
-                info.frame_rate_den = sps.vui_parameters.num_units_in_tick;
-            } else {
-                info.frame_rate_num = 0;
-                info.frame_rate_den = 0;
+                if ((boost::uint64_t)info.frame_rate_num * sps.vui_parameters.num_units_in_tick * 2 
+                    != (boost::uint64_t)sps.vui_parameters.time_scale * info.frame_rate_den) {
+                        info.frame_rate_num = sps.vui_parameters.time_scale;
+                        info.frame_rate_den = sps.vui_parameters.num_units_in_tick;
+                }
             }
         }
 

@@ -4,7 +4,7 @@
 #define _PPBOX_HEVCODEC_HEVC_HEVC_DEBUGER_H_
 
 #include "ppbox/avcodec/Debuger.h"
-#include "ppbox/avcodec/CodecType.h"
+#include "ppbox/avcodec/VideoType.h"
 
 namespace ppbox
 {

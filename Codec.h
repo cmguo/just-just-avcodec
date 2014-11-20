@@ -4,7 +4,6 @@
 #define _PPBOX_AVCODEC_CODEC_H_
 
 #include "ppbox/avcodec/Base.h"
-#include "ppbox/avcodec/CodecType.h"
 
 #include <util/tools/ClassFactory.h>
 
