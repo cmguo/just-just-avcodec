@@ -3,18 +3,12 @@
 #ifndef _PPBOX_AVCODEC_CODEC_TYPE_H_
 #define _PPBOX_AVCODEC_CODEC_TYPE_H_
 
-#include <ppbox/avbase/StreamType.h>
+#include "ppbox/avcodec/VideoType.h"
+#include "ppbox/avcodec/AudioType.h"
+#include "ppbox/avcodec/SubtlType.h"
 
-namespace ppbox
-{
-    namespace avcodec
-    {
-
-        using ppbox::avbase::StreamType;
-        using ppbox::avbase::StreamSubType;
-        using ppbox::avbase::StreamFormatType;
-
-    } // namespace avcodec
-} // namespace ppbox
+#include "ppbox/avcodec/avc/AvcFormatType.h"
+#include "ppbox/avcodec/hevc/HevcFormatType.h"
+#include "ppbox/avcodec/aac/AacFormatType.h"
 
 #endif // _PPBOX_AVCODEC_CODEC_TYPE_H_

@@ -13,6 +13,8 @@ namespace ppbox
     {
 
         using ppbox::avbase::StreamType;
+        using ppbox::avbase::StreamSubType;
+        using ppbox::avbase::StreamFormatType;
         using ppbox::avbase::VideoInfo;
         using ppbox::avbase::AudioInfo;
         using ppbox::avbase::StreamInfoBase;

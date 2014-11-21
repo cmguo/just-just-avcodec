@@ -2,8 +2,7 @@
 
 #include "ppbox/avcodec/Common.h"
 #include "ppbox/avcodec/ffmpeg/FFMpegCodecMap.h"
-#include "ppbox/avcodec/VideoType.h"
-#include "ppbox/avcodec/AudioType.h"
+#include "ppbox/avcodec/CodecType.h"
 
 #include <ppbox/avbase/TypeMap.h>
 

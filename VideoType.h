@@ -3,7 +3,7 @@
 #ifndef _PPBOX_AVCODEC_VIDEO_TYPE_H_
 #define _PPBOX_AVCODEC_VIDEO_TYPE_H_
 
-#include "ppbox/avcodec/CodecType.h"
+#include "ppbox/avcodec/Base.h"
 
 namespace ppbox
 {
