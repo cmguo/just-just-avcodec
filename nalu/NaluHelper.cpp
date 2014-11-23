@@ -19,10 +19,6 @@ namespace ppbox
             : is_access_end_(is_access_end)
             , nalu_length_size_(nalu_length_size)
         {
-            nalu_start_code_[0] = 0;
-            nalu_start_code_[1] = 0;
-            nalu_start_code_[2] = 0;
-            nalu_start_code_[3] = 1;
         }
 
         void NaluHelper::nalus(
@@ -117,9 +113,15 @@ namespace ppbox
             boost::uint32_t & size, 
             buffers_t & datas)
         {
+#ifdef BOOST_BIG_ENDIAN
+            boost::uint32_t const start_code = 0x00000001;
+#else
+            boost::uint32_t const start_code = 0x01000000;
+#endif
             for (boost::uint32_t i = 0; i < nalus_.size(); ++i) {
-                NaluBuffer const & nalu = nalus_[i];
-                datas.push_back(boost::asio::buffer(nalu_start_code_));
+                NaluBuffer & nalu = nalus_[i];
+                nalu.length = start_code;
+                datas.push_back(boost::asio::buffer(nalu.start_code));
                 datas.insert(datas.end(), nalu.buffers_begin(), nalu.buffers_end());
                 size += nalu.size + 4;
             }
@@ -132,11 +134,10 @@ namespace ppbox
         {
             size_t n = 0;
             for (boost::uint32_t i = 0; i < nalus_.size(); ++i) {
-                NaluBuffer const & nalu = nalus_[i];
-                assert(n < sizeof(nalu_length_) / sizeof(nalu_length_[0]));
+                NaluBuffer & nalu = nalus_[i];
                 size += nalu.size + nalu_length_size_;
-                nalu_length_[n] = framework::system::BytesOrder::host_to_big_endian_long(nalu.size);
-                datas.push_back(boost::asio::buffer((boost::uint8_t*)&(nalu_length_[n]) + 4 - nalu_length_size_, nalu_length_size_));
+                nalu.length = framework::system::BytesOrder::host_to_big_endian_long(nalu.size);
+                datas.push_back(boost::asio::buffer((boost::uint8_t*)&nalu.length + 4 - nalu_length_size_, nalu_length_size_));
                 datas.insert(datas.end(), nalu.buffers_begin(), nalu.buffers_end());
                 ++n;
             }

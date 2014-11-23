@@ -73,10 +73,6 @@ namespace ppbox
         private:
             bool (*is_access_end_)(boost::uint8_t);
             boost::uint8_t nalu_length_size_;
-            union {
-                boost::uint32_t nalu_length_[3];
-                boost::uint8_t nalu_start_code_[4];
-            };
             std::vector<NaluBuffer> nalus_;
         };
 

@@ -21,6 +21,7 @@ namespace ppbox
                 , begin(b)
                 , end(e)
             {
+                length = 0;
             }
 
             NaluBuffer(
@@ -30,6 +31,7 @@ namespace ppbox
                 , begin(b)
                 , end(e)
             {
+                length = 0;
             }
 
             BufferIterator buffers_begin() const
@@ -63,6 +65,10 @@ namespace ppbox
             }
 
             boost::uint32_t size;
+            union {
+                boost::uint32_t length;
+                boost::uint8_t start_code[4];
+            };
             BuffersPosition begin;
             BuffersPosition end;
         };
