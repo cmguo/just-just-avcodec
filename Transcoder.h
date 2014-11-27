@@ -1,13 +1,13 @@
 // Transcoder.h
 
-#ifndef _PPBOX_AVCODEC_TRANSCODER_H_
-#define _PPBOX_AVCODEC_TRANSCODER_H_
+#ifndef _JUST_AVCODEC_TRANSCODER_H_
+#define _JUST_AVCODEC_TRANSCODER_H_
 
-#include "ppbox/avcodec/Base.h"
+#include "just/avcodec/Base.h"
 
 #include <util/tools/ClassFactory.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -122,16 +122,16 @@ namespace ppbox
                 std::vector<boost::uint32_t> & output_codecs);
 
         private:
-            typedef std::pair<std::string, ppbox::avcodec::Transcoder *> transcoder_t2;
+            typedef std::pair<std::string, just::avcodec::Transcoder *> transcoder_t2;
             typedef std::multimap<boost::uint32_t, transcoder_t2> orders_t;
 
             static orders_t & orders();
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#define PPBOX_REGISTER_TRANSCODER(key, order, cls) \
-    UTIL_REGISTER_CLASS(ppbox::avcodec::TranscoderFactory, std::make_pair(key, order), cls)
+#define JUST_REGISTER_TRANSCODER(key, order, cls) \
+    UTIL_REGISTER_CLASS(just::avcodec::TranscoderFactory, std::make_pair(key, order), cls)
 
-#endif // _PPBOX_AVCODEC_TRANSCODER_H_
+#endif // _JUST_AVCODEC_TRANSCODER_H_

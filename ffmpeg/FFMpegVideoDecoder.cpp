@@ -1,11 +1,11 @@
 // FFMpegVideoDecoder.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/ffmpeg/FFMpegVideoDecoder.h"
-#include "ppbox/avcodec/VideoType.h"
-#include "ppbox/avcodec/ffmpeg/FFMpegVideoDecoderImpl.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/ffmpeg/FFMpegVideoDecoder.h"
+#include "just/avcodec/VideoType.h"
+#include "just/avcodec/ffmpeg/FFMpegVideoDecoderImpl.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -91,4 +91,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

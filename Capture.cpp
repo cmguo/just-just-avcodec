@@ -1,14 +1,14 @@
 // Capture.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/Capture.h"
-#include "ppbox/avcodec/Error.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/Capture.h"
+#include "just/avcodec/Error.h"
 
 #include <util/tools/ClassRegister.h>
-#include "ppbox/avcodec/yuv/YuvCapture.h"
-#include "ppbox/avcodec/pcm/PcmCapture.h"
+#include "just/avcodec/yuv/YuvCapture.h"
+#include "just/avcodec/pcm/PcmCapture.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -34,4 +34,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

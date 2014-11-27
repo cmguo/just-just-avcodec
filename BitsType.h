@@ -1,30 +1,30 @@
 // BitsType.h
 
-#ifndef _PPBOX_AVCODEC_BITS_TYPE_H_
-#define _PPBOX_AVCODEC_BITS_TYPE_H_
+#ifndef _JUST_AVCODEC_BITS_TYPE_H_
+#define _JUST_AVCODEC_BITS_TYPE_H_
 
-#include <ppbox/avbase/stream/BitsType.h>
+#include <just/avbase/stream/BitsType.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
 
-        using ppbox::avbase::I;
-        using ppbox::avbase::U;
-        using ppbox::avbase::IV;
-        using ppbox::avbase::UV;
+        using just::avbase::I;
+        using just::avbase::U;
+        using just::avbase::IV;
+        using just::avbase::UV;
 
-        using ppbox::avbase::Minus;
-        using ppbox::avbase::minus;
-        using ppbox::avbase::PowerMinus;
-        using ppbox::avbase::power_minus;
+        using just::avbase::Minus;
+        using just::avbase::minus;
+        using just::avbase::PowerMinus;
+        using just::avbase::power_minus;
 
-        using ppbox::avbase::SE;
-        using ppbox::avbase::UE;
-        using ppbox::avbase::P;
+        using just::avbase::SE;
+        using just::avbase::UE;
+        using just::avbase::P;
 
     } // namespace avbase
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_BITS_TYPE_H_
+#endif // _JUST_AVCODEC_BITS_TYPE_H_

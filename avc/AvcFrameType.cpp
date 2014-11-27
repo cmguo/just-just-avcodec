@@ -1,16 +1,16 @@
 // AvcFrameType.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/avc/AvcFrameType.h"
-#include "ppbox/avcodec/avc/AvcEnum.h"
-#include "ppbox/avcodec/avc/AvcNaluHeader.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/avc/AvcFrameType.h"
+#include "just/avcodec/avc/AvcEnum.h"
+#include "just/avcodec/avc/AvcNaluHeader.h"
 
 #include <util/buffers/BuffersSize.h>
 #include <util/buffers/BuffersCopy.h>
 
 #include <framework/system/BytesOrder.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -180,4 +180,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

@@ -1,12 +1,12 @@
 // ColorSpace.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/csp/ColorSpace.h"
-#include "ppbox/avcodec/VideoType.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/csp/ColorSpace.h"
+#include "just/avcodec/VideoType.h"
 
-#include <ppbox/avbase/TypeMap.h>
+#include <just/avbase/TypeMap.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -58,7 +58,7 @@ namespace ppbox
             boost::system::error_code & ec)
         {
             assert(info.type == StreamType::VIDE);
-            csp_t const * csp = ppbox::avbase::type_map_find(
+            csp_t const * csp = just::avbase::type_map_find(
                 csp_tab, 
                 &csp_t::type, info.sub_type);
             if (csp == NULL) {
@@ -98,4 +98,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

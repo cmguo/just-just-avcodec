@@ -1,10 +1,10 @@
 // PcmCapture.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/pcm/PcmCapture.h"
-#include "ppbox/avcodec/AudioType.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/pcm/PcmCapture.h"
+#include "just/avcodec/AudioType.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -51,4 +51,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

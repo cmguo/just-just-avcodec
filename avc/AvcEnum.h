@@ -1,9 +1,9 @@
 // AvcEnum.h
 
-#ifndef _PPBOX_AVCODEC_AVC_AVC_ENUM_H_
-#define _PPBOX_AVCODEC_AVC_AVC_ENUM_H_
+#ifndef _JUST_AVCODEC_AVC_AVC_ENUM_H_
+#define _JUST_AVCODEC_AVC_AVC_ENUM_H_
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -58,6 +58,6 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AVC_AVC_ENUM_H_
+#endif // _JUST_AVCODEC_AVC_AVC_ENUM_H_

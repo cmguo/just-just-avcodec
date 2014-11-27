@@ -1,18 +1,18 @@
 // HevcType.h
 
-#ifndef _PPBOX_HEVCODEC_HEVC_HEVC_TYPE_H_
-#define _PPBOX_HEVCODEC_HEVC_HEVC_TYPE_H_
+#ifndef _JUST_HEVCODEC_HEVC_HEVC_TYPE_H_
+#define _JUST_HEVCODEC_HEVC_HEVC_TYPE_H_
 
-//#include "ppbox/avcodec/hevc/HevcSpsPpsType.h"
-//#include "ppbox/avcodec/hevc/HevcSeiType.h"
-//#include "ppbox/avcodec/hevc/HevcSliceType.h"
+//#include "just/avcodec/hevc/HevcSpsPpsType.h"
+//#include "just/avcodec/hevc/HevcSeiType.h"
+//#include "just/avcodec/hevc/HevcSliceType.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_HEVCODEC_HEVC_HEVC_TYPE_H_
+#endif // _JUST_HEVCODEC_HEVC_HEVC_TYPE_H_

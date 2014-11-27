@@ -1,14 +1,14 @@
 // NaluHelper.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/nalu/NaluHelper.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/nalu/NaluHelper.h"
 
 #include <util/buffers/BuffersSize.h>
 #include <util/buffers/BuffersCopy.h>
 
 #include <framework/system/BytesOrder.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -159,4 +159,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

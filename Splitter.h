@@ -1,13 +1,13 @@
 // Splitter.h
 
-#ifndef _PPBOX_AVCODEC_SPLITTER_H_
-#define _PPBOX_AVCODEC_SPLITTER_H_
+#ifndef _JUST_AVCODEC_SPLITTER_H_
+#define _JUST_AVCODEC_SPLITTER_H_
 
-#include "ppbox/avcodec/Base.h"
+#include "just/avcodec/Base.h"
 
 #include <util/tools/ClassFactory.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -49,9 +49,9 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#define PPBOX_REGISTER_SPLITTER(codec_type, format, cls) \
-    UTIL_REGISTER_CLASS(ppbox::avcodec::SplitterFactory, ((boost::uint64_t)codec_type << 32) | format, cls)
+#define JUST_REGISTER_SPLITTER(codec_type, format, cls) \
+    UTIL_REGISTER_CLASS(just::avcodec::SplitterFactory, ((boost::uint64_t)codec_type << 32) | format, cls)
 
-#endif // _PPBOX_AVCODEC_SPLITTER_H_
+#endif // _JUST_AVCODEC_SPLITTER_H_

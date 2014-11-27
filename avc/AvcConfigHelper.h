@@ -1,9 +1,9 @@
 // AvcConfigHelper.h
 
-#ifndef _PPBOX_AVCODEC_AVC_AVC_CONFIG_HELPER_H_
-#define _PPBOX_AVCODEC_AVC_AVC_CONFIG_HELPER_H_
+#ifndef _JUST_AVCODEC_AVC_AVC_CONFIG_HELPER_H_
+#define _JUST_AVCODEC_AVC_AVC_CONFIG_HELPER_H_
 
-namespace ppbox
+namespace just
 {
     namespace avbase
     {
@@ -53,13 +53,13 @@ namespace ppbox
             bool ready() const;
 
             void get_format(
-                ppbox::avbase::VideoInfo & info) const;
+                just::avbase::VideoInfo & info) const;
 
         private:
             AvcConfig * data_;
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AVC_AVC_CONFIG_HELPER_H_
+#endif // _JUST_AVCODEC_AVC_AVC_CONFIG_HELPER_H_

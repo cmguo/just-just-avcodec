@@ -1,5 +1,5 @@
 // Version.cpp
 
-#include "ppbox/avcodec/Common.h"
+#include "just/avcodec/Common.h"
 #define VERSION_SOURCE
-#include "ppbox/avcodec/Version.h"
+#include "just/avcodec/Version.h"

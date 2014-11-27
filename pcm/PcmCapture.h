@@ -1,12 +1,12 @@
 // PcmCapture.h
 
-#ifndef _PPBOX_AVCODEC_PCM_PCM_CAPTURE_H_
-#define _PPBOX_AVCODEC_PCM_PCM_CAPTURE_H_
+#ifndef _JUST_AVCODEC_PCM_PCM_CAPTURE_H_
+#define _JUST_AVCODEC_PCM_PCM_CAPTURE_H_
 
-#include "ppbox/avcodec/csp/ColorSpace.h"
-#include "ppbox/avcodec/AudioCapture.h"
+#include "just/avcodec/csp/ColorSpace.h"
+#include "just/avcodec/AudioCapture.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -36,9 +36,9 @@ namespace ppbox
             std::vector<boost::uint8_t> buffer_;
         };
 
-        PPBOX_REGISTER_CAPTURE("pcm", PcmCapture);
+        JUST_REGISTER_CAPTURE("pcm", PcmCapture);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_PCM_PCM_CAPTURE_H_
+#endif // _JUST_AVCODEC_PCM_PCM_CAPTURE_H_

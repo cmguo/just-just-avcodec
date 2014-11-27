@@ -1,22 +1,22 @@
 // AvcConfigHelper.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/avc/AvcConfigHelper.h"
-#include "ppbox/avcodec/avc/AvcConfig.h"
-#include "ppbox/avcodec/avc/AvcSpsPpsType.h"
-#include "ppbox/avcodec/avc/AvcEnum.h"
-#include "ppbox/avcodec/avc/AvcNaluHeader.h"
-#include "ppbox/avcodec/nalu/NaluHelper.h"
-#include "ppbox/avcodec/nalu/NaluBuffer.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/avc/AvcConfigHelper.h"
+#include "just/avcodec/avc/AvcConfig.h"
+#include "just/avcodec/avc/AvcSpsPpsType.h"
+#include "just/avcodec/avc/AvcEnum.h"
+#include "just/avcodec/avc/AvcNaluHeader.h"
+#include "just/avcodec/nalu/NaluHelper.h"
+#include "just/avcodec/nalu/NaluBuffer.h"
 
-#include <ppbox/avbase/stream/BitsIStream.h>
-#include <ppbox/avbase/stream/BitsOStream.h>
-#include <ppbox/avbase/stream/BitsBuffer.h>
-#include <ppbox/avbase/stream/FormatBuffer.h>
-#include <ppbox/avbase/StreamInfo.h>
-using namespace ppbox::avbase;
+#include <just/avbase/stream/BitsIStream.h>
+#include <just/avbase/stream/BitsOStream.h>
+#include <just/avbase/stream/BitsBuffer.h>
+#include <just/avbase/stream/FormatBuffer.h>
+#include <just/avbase/StreamInfo.h>
+using namespace just::avbase;
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -151,4 +151,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

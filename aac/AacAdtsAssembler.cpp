@@ -1,10 +1,10 @@
 // AacAdtsAssembler.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/aac/AacAdtsAssembler.h"
-#include "ppbox/avcodec/aac/AacConfigHelper.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/aac/AacAdtsAssembler.h"
+#include "just/avcodec/aac/AacConfigHelper.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -43,4 +43,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

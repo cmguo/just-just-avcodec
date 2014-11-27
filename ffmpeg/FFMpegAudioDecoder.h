@@ -1,13 +1,13 @@
 // FFMpegAudioDecoder.h
 
-#ifndef _PPBOX_AACODEC_FFMPEG_FFMPEG_AUDIO_DECODER_H_
-#define _PPBOX_AACODEC_FFMPEG_FFMPEG_AUDIO_DECODER_H_
+#ifndef _JUST_AACODEC_FFMPEG_FFMPEG_AUDIO_DECODER_H_
+#define _JUST_AACODEC_FFMPEG_FFMPEG_AUDIO_DECODER_H_
 
-#include "ppbox/avcodec/Transcoder2.h"
+#include "just/avcodec/Transcoder2.h"
 
 struct AVCodecContext;
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -54,9 +54,9 @@ namespace ppbox
             FFMpegAudioDecoderImpl * impl_;
         };
 
-        PPBOX_REGISTER_TRANSCODER("ffmpeg-audio-dec", 10, FFMpegAudioDecoder);
+        JUST_REGISTER_TRANSCODER("ffmpeg-audio-dec", 10, FFMpegAudioDecoder);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AACODEC_FFMPEG_FFMPEG_AUDIO_DECODER_H_
+#endif // _JUST_AACODEC_FFMPEG_FFMPEG_AUDIO_DECODER_H_

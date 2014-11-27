@@ -1,13 +1,13 @@
 // Capture.h
 
-#ifndef _PPBOX_AVCODEC_CAPTURE_H_
-#define _PPBOX_AVCODEC_CAPTURE_H_
+#ifndef _JUST_AVCODEC_CAPTURE_H_
+#define _JUST_AVCODEC_CAPTURE_H_
 
-#include "ppbox/avcodec/Base.h"
+#include "just/avcodec/Base.h"
 
 #include <util/tools/ClassFactory.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -65,8 +65,8 @@ namespace ppbox
         typedef util::tools::ClassFactory<CaptureTraits> CaptureFactory;
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#define PPBOX_REGISTER_CAPTURE(key, cls) UTIL_REGISTER_CLASS(ppbox::avcodec::CaptureFactory, key, cls)
+#define JUST_REGISTER_CAPTURE(key, cls) UTIL_REGISTER_CLASS(just::avcodec::CaptureFactory, key, cls)
 
-#endif // _PPBOX_AVCODEC_CAPTURE_H_
+#endif // _JUST_AVCODEC_CAPTURE_H_

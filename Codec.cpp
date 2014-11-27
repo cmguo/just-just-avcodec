@@ -1,23 +1,23 @@
 // Codec.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/Codec.h"
-#include "ppbox/avcodec/Error.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/Codec.h"
+#include "just/avcodec/Error.h"
 
-#include "ppbox/avcodec/Assembler.h"
-#include "ppbox/avcodec/Splitter.h"
-#include "ppbox/avcodec/Debuger.h"
+#include "just/avcodec/Assembler.h"
+#include "just/avcodec/Splitter.h"
+#include "just/avcodec/Debuger.h"
 
 #include <util/tools/ClassRegister.h>
-#include "ppbox/avcodec/avc/AvcCodec.h"
-#include "ppbox/avcodec/hevc/HevcCodec.h"
-#include "ppbox/avcodec/mpa/MpaCodec.h"
-#include "ppbox/avcodec/aac/AacCodec.h"
-#ifndef PPBOX_DISABLE_FFMPEG
-#  include "ppbox/avcodec/ffmpeg/FFMpegCodec.h"
+#include "just/avcodec/avc/AvcCodec.h"
+#include "just/avcodec/hevc/HevcCodec.h"
+#include "just/avcodec/mpa/MpaCodec.h"
+#include "just/avcodec/aac/AacCodec.h"
+#ifndef JUST_DISABLE_FFMPEG
+#  include "just/avcodec/ffmpeg/FFMpegCodec.h"
 #endif
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -82,4 +82,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

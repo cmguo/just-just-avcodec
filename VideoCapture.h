@@ -1,11 +1,11 @@
 // VideoCapture.h
 
-#ifndef _PPBOX_AVCODEC_VIDEO_CAPTURE_H_
-#define _PPBOX_AVCODEC_VIDEO_CAPTURE_H_
+#ifndef _JUST_AVCODEC_VIDEO_CAPTURE_H_
+#define _JUST_AVCODEC_VIDEO_CAPTURE_H_
 
-#include "ppbox/avcodec/Capture.h"
+#include "just/avcodec/Capture.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -36,6 +36,6 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_YUV_YUV_CAPTURE_H_
+#endif // _JUST_AVCODEC_YUV_YUV_CAPTURE_H_

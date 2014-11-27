@@ -1,16 +1,16 @@
 // AacAdtsSplitter.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/aac/AacAdtsSplitter.h"
-#include "ppbox/avcodec/aac/AacAdts.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/aac/AacAdtsSplitter.h"
+#include "just/avcodec/aac/AacAdts.h"
 
-#include <ppbox/avbase/stream/BitsIStream.h>
-#include <ppbox/avbase/stream/SampleBuffers.h>
-using namespace ppbox::avbase;
+#include <just/avbase/stream/BitsIStream.h>
+#include <just/avbase/stream/SampleBuffers.h>
+using namespace just::avbase;
 
 #include <util/buffers/CycleBuffers.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -63,4 +63,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

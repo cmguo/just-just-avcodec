@@ -1,25 +1,25 @@
 // Base.h
 
-#ifndef _PPBOX_AVCODEC_BASE_H_
-#define _PPBOX_AVCODEC_BASE_H_
+#ifndef _JUST_AVCODEC_BASE_H_
+#define _JUST_AVCODEC_BASE_H_
 
-#include <ppbox/avbase/StreamType.h>
-#include <ppbox/avbase/StreamInfo.h>
-#include <ppbox/avbase/Sample.h>
+#include <just/avbase/StreamType.h>
+#include <just/avbase/StreamInfo.h>
+#include <just/avbase/Sample.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
 
-        using ppbox::avbase::StreamType;
-        using ppbox::avbase::StreamSubType;
-        using ppbox::avbase::StreamFormatType;
-        using ppbox::avbase::VideoInfo;
-        using ppbox::avbase::AudioInfo;
-        using ppbox::avbase::StreamInfoBase;
-        using ppbox::avbase::StreamInfo;
-        using ppbox::avbase::Sample;
+        using just::avbase::StreamType;
+        using just::avbase::StreamSubType;
+        using just::avbase::StreamFormatType;
+        using just::avbase::VideoInfo;
+        using just::avbase::AudioInfo;
+        using just::avbase::StreamInfoBase;
+        using just::avbase::StreamInfo;
+        using just::avbase::Sample;
 
         class Codec;
         class Debuger;
@@ -27,6 +27,6 @@ namespace ppbox
         class Assembler;
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_BASE_H_
+#endif // _JUST_AVCODEC_BASE_H_

@@ -1,16 +1,16 @@
 // MpaConfigHelper.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/mpa/MpaConfigHelper.h"
-#include "ppbox/avcodec/mpa/MpaConfig.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/mpa/MpaConfigHelper.h"
+#include "just/avcodec/mpa/MpaConfig.h"
 
-#include <ppbox/avbase/stream/BitsIStream.h>
-#include <ppbox/avbase/stream/BitsOStream.h>
-#include <ppbox/avbase/stream/FormatBuffer.h>
-#include <ppbox/avbase/StreamInfo.h>
-using namespace ppbox::avbase;
+#include <just/avbase/stream/BitsIStream.h>
+#include <just/avbase/stream/BitsOStream.h>
+#include <just/avbase/stream/FormatBuffer.h>
+#include <just/avbase/StreamInfo.h>
+using namespace just::avbase;
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -242,4 +242,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

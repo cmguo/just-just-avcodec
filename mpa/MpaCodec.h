@@ -1,13 +1,13 @@
 // MpaCodec.h
 
-#ifndef _PPBOX_AVCODEC_MPA_MPA_CODEC_H_
-#define _PPBOX_AVCODEC_MPA_MPA_CODEC_H_
+#ifndef _JUST_AVCODEC_MPA_MPA_CODEC_H_
+#define _JUST_AVCODEC_MPA_MPA_CODEC_H_
 
-#include "ppbox/avcodec/Codec.h"
-#include "ppbox/avcodec/AudioType.h"
-#include "ppbox/avcodec/mpa/MpaConfigHelper.h"
+#include "just/avcodec/Codec.h"
+#include "just/avcodec/AudioType.h"
+#include "just/avcodec/mpa/MpaConfigHelper.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -42,12 +42,12 @@ namespace ppbox
             MpaConfigHelper config_helper_;
         };
 
-        PPBOX_REGISTER_CODEC(AudioType::MP1A, MpaCodec);
-        PPBOX_REGISTER_CODEC(AudioType::MP2A, MpaCodec);
-        PPBOX_REGISTER_CODEC(AudioType::MP2, MpaCodec);
-        PPBOX_REGISTER_CODEC(AudioType::MP3, MpaCodec);
+        JUST_REGISTER_CODEC(AudioType::MP1A, MpaCodec);
+        JUST_REGISTER_CODEC(AudioType::MP2A, MpaCodec);
+        JUST_REGISTER_CODEC(AudioType::MP2, MpaCodec);
+        JUST_REGISTER_CODEC(AudioType::MP3, MpaCodec);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_MPA_MPA_CODEC_H_
+#endif // _JUST_AVCODEC_MPA_MPA_CODEC_H_

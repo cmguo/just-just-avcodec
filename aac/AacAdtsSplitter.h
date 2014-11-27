@@ -1,13 +1,13 @@
 // AacAdtsSplitter.h
 
-#ifndef _PPBOX_AVCODEC_AAC_AAC_ADTS_SPLITTER_H_
-#define _PPBOX_AVCODEC_AAC_AAC_ADTS_SPLITTER_H_
+#ifndef _JUST_AVCODEC_AAC_AAC_ADTS_SPLITTER_H_
+#define _JUST_AVCODEC_AAC_AAC_ADTS_SPLITTER_H_
 
-#include "ppbox/avcodec/Splitter.h"
-#include "ppbox/avcodec/aac/AacFormatType.h"
-#include "ppbox/avcodec/aac/AacConfigHelper.h"
+#include "just/avcodec/Splitter.h"
+#include "just/avcodec/aac/AacFormatType.h"
+#include "just/avcodec/aac/AacConfigHelper.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -33,9 +33,9 @@ namespace ppbox
             AacConfigHelper config_;
         };
 
-        PPBOX_REGISTER_SPLITTER(AudioType::AAC,  AacFormatType::adts, AacAdtsSplitter);
+        JUST_REGISTER_SPLITTER(AudioType::AAC,  AacFormatType::adts, AacAdtsSplitter);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AAC_AAC_ADTS_SPLITTER_H_
+#endif // _JUST_AVCODEC_AAC_AAC_ADTS_SPLITTER_H_

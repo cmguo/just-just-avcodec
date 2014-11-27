@@ -1,11 +1,11 @@
 // AvcEncoder.h
 
-#ifndef _PPBOX_AVCODEC_AVC_AVC_ENCODER_H_
-#define _PPBOX_AVCODEC_AVC_AVC_ENCODER_H_
+#ifndef _JUST_AVCODEC_AVC_AVC_ENCODER_H_
+#define _JUST_AVCODEC_AVC_AVC_ENCODER_H_
 
-#include "ppbox/avcodec/Transcoder2.h"
+#include "just/avcodec/Transcoder2.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -52,9 +52,9 @@ namespace ppbox
             x264_impl * impl_;
         };
 
-        PPBOX_REGISTER_TRANSCODER("avc-enc", 10, AvcEncoder);
+        JUST_REGISTER_TRANSCODER("avc-enc", 10, AvcEncoder);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AVC_AVC_ENCODER_H_
+#endif // _JUST_AVCODEC_AVC_AVC_ENCODER_H_

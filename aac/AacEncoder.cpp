@@ -1,20 +1,20 @@
 // AacEncoder.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/aac/AacEncoder.h"
-#include "ppbox/avcodec/aac/AacFormatType.h"
-#ifndef PPBOX_DISABLE_FDK_AAC
-#  include "ppbox/avcodec/aac/AacEncoderFdkImpl.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/aac/AacEncoder.h"
+#include "just/avcodec/aac/AacFormatType.h"
+#ifndef JUST_DISABLE_FDK_AAC
+#  include "just/avcodec/aac/AacEncoderFdkImpl.h"
 #else
-#  include "ppbox/avcodec/FakeTranscoder.h"
+#  include "just/avcodec/FakeTranscoder.h"
 #endif
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
 
-#ifdef PPBOX_DISABLE_FDK_AAC
+#ifdef JUST_DISABLE_FDK_AAC
         struct fdk_aac_impl : FakeTranscoder {};
 #endif
 
@@ -79,4 +79,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

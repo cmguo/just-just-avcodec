@@ -1,11 +1,11 @@
 // SubtlType.h
 
-#ifndef _PPBOX_AVCODEC_SUBTL_TYPE_H_
-#define _PPBOX_AVCODEC_SUBTL_TYPE_H_
+#ifndef _JUST_AVCODEC_SUBTL_TYPE_H_
+#define _JUST_AVCODEC_SUBTL_TYPE_H_
 
-#include "ppbox/avcodec/Base.h"
+#include "just/avcodec/Base.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -19,6 +19,6 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_SUBTL_TYPE_H_
+#endif // _JUST_AVCODEC_SUBTL_TYPE_H_

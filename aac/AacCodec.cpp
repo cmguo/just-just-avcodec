@@ -1,18 +1,18 @@
 // AacType.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/aac/AacCodec.h"
-#include "ppbox/avcodec/aac/AacFormatType.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/aac/AacCodec.h"
+#include "just/avcodec/aac/AacFormatType.h"
 
 #include <util/tools/ClassRegister.h>
-#include "ppbox/avcodec/aac/AacRawAssembler.h"
-#include "ppbox/avcodec/aac/AacAdtsAssembler.h"
-#include "ppbox/avcodec/aac/AacRawSplitter.h"
-#include "ppbox/avcodec/aac/AacAdtsSplitter.h"
-#include "ppbox/avcodec/aac/AacDebuger.h"
-#include "ppbox/avcodec/aac/AacEncoder.h"
+#include "just/avcodec/aac/AacRawAssembler.h"
+#include "just/avcodec/aac/AacAdtsAssembler.h"
+#include "just/avcodec/aac/AacRawSplitter.h"
+#include "just/avcodec/aac/AacAdtsSplitter.h"
+#include "just/avcodec/aac/AacDebuger.h"
+#include "just/avcodec/aac/AacEncoder.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -64,4 +64,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

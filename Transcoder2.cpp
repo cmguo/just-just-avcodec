@@ -1,9 +1,9 @@
 // Transcoder2.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/Transcoder2.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/Transcoder2.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -64,4 +64,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

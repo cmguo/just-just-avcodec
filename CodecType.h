@@ -1,14 +1,14 @@
 // CodecType.h
 
-#ifndef _PPBOX_AVCODEC_CODEC_TYPE_H_
-#define _PPBOX_AVCODEC_CODEC_TYPE_H_
+#ifndef _JUST_AVCODEC_CODEC_TYPE_H_
+#define _JUST_AVCODEC_CODEC_TYPE_H_
 
-#include "ppbox/avcodec/VideoType.h"
-#include "ppbox/avcodec/AudioType.h"
-#include "ppbox/avcodec/SubtlType.h"
+#include "just/avcodec/VideoType.h"
+#include "just/avcodec/AudioType.h"
+#include "just/avcodec/SubtlType.h"
 
-#include "ppbox/avcodec/avc/AvcFormatType.h"
-#include "ppbox/avcodec/hevc/HevcFormatType.h"
-#include "ppbox/avcodec/aac/AacFormatType.h"
+#include "just/avcodec/avc/AvcFormatType.h"
+#include "just/avcodec/hevc/HevcFormatType.h"
+#include "just/avcodec/aac/AacFormatType.h"
 
-#endif // _PPBOX_AVCODEC_CODEC_TYPE_H_
+#endif // _JUST_AVCODEC_CODEC_TYPE_H_

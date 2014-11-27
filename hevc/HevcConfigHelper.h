@@ -1,9 +1,9 @@
 // HevcConfigHelper.h
 
-#ifndef _PPBOX_HEVCODEC_HEVC_HEVC_CONFIG_HELPER_H_
-#define _PPBOX_HEVCODEC_HEVC_HEVC_CONFIG_HELPER_H_
+#ifndef _JUST_HEVCODEC_HEVC_HEVC_CONFIG_HELPER_H_
+#define _JUST_HEVCODEC_HEVC_HEVC_CONFIG_HELPER_H_
 
-namespace ppbox
+namespace just
 {
     namespace avbase
     {
@@ -65,13 +65,13 @@ namespace ppbox
             bool ready() const;
 
             void get_format(
-                ppbox::avbase::VideoInfo & info) const;
+                just::avbase::VideoInfo & info) const;
 
         private:
             HevcConfig * data_;
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_HEVCODEC_HEVC_HEVC_CONFIG_HELPER_H_
+#endif // _JUST_HEVCODEC_HEVC_HEVC_CONFIG_HELPER_H_

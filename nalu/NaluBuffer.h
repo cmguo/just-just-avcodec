@@ -1,17 +1,17 @@
 // NaluBuffer.h
 
-#ifndef _PPBOX_AVCODEC_NALU_NALU_BUFFER_H_
-#define _PPBOX_AVCODEC_NALU_NALU_BUFFER_H_
+#ifndef _JUST_AVCODEC_NALU_NALU_BUFFER_H_
+#define _JUST_AVCODEC_NALU_NALU_BUFFER_H_
 
-#include <ppbox/avbase/stream/SampleBuffers.h>
+#include <just/avbase/stream/SampleBuffers.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
 
         struct NaluBuffer
-            : ppbox::avbase::SampleBuffers
+            : just::avbase::SampleBuffers
         {
             NaluBuffer(
                 boost::uint32_t s, 
@@ -74,6 +74,6 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_NALU_NALU_BUFFER_H_
+#endif // _JUST_AVCODEC_NALU_NALU_BUFFER_H_

@@ -1,10 +1,10 @@
 // FFMpegCodecMap.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/ffmpeg/FFMpegCodecMap.h"
-#include "ppbox/avcodec/CodecType.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/ffmpeg/FFMpegCodecMap.h"
+#include "just/avcodec/CodecType.h"
 
-#include <ppbox/avbase/TypeMap.h>
+#include <just/avbase/TypeMap.h>
 
 extern "C"
 {
@@ -12,7 +12,7 @@ extern "C"
 #include <libavcodec/avcodec.h>
 }
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -48,7 +48,7 @@ namespace ppbox
             boost::uint32_t category, 
             boost::uint32_t type)
         {
-            FFMpegCodec const * codec = ppbox::avbase::type_map_find(
+            FFMpegCodec const * codec = just::avbase::type_map_find(
                 table_, 
                 &FFMpegCodec::category, category, 
                 &FFMpegCodec::type, type);
@@ -59,7 +59,7 @@ namespace ppbox
             boost::uint32_t category, 
             boost::uint32_t ffmpeg_type)
         {
-            FFMpegCodec const * codec = ppbox::avbase::type_map_find(
+            FFMpegCodec const * codec = just::avbase::type_map_find(
                 table_, 
                 &FFMpegCodec::category, category, 
                 &FFMpegCodec::ffmpeg_type, ffmpeg_type);
@@ -77,4 +77,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

@@ -1,11 +1,11 @@
 // HevcFormatType.h
 
-#ifndef _PPBOX_HEVCODEC_HEVC_HEVC_FORMAT_TYPE_H_
-#define _PPBOX_HEVCODEC_HEVC_HEVC_FORMAT_TYPE_H_
+#ifndef _JUST_HEVCODEC_HEVC_HEVC_FORMAT_TYPE_H_
+#define _JUST_HEVCODEC_HEVC_HEVC_FORMAT_TYPE_H_
 
-#include "ppbox/avcodec/VideoType.h"
+#include "just/avcodec/VideoType.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -20,6 +20,6 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_HEVCODEC_HEVC_HEVC_FORMAT_TYPE_H_
+#endif // _JUST_HEVCODEC_HEVC_HEVC_FORMAT_TYPE_H_

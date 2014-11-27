@@ -1,10 +1,10 @@
 // AvcPacketSplitter.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/avc/AvcPacketSplitter.h"
-#include "ppbox/avcodec/avc/AvcConfig.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/avc/AvcPacketSplitter.h"
+#include "just/avcodec/avc/AvcConfig.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -36,4 +36,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

@@ -1,13 +1,13 @@
 // AacCodec.h
 
-#ifndef _PPBOX_AVCODEC_AAC_AAC_CODEC_H_
-#define _PPBOX_AVCODEC_AAC_AAC_CODEC_H_
+#ifndef _JUST_AVCODEC_AAC_AAC_CODEC_H_
+#define _JUST_AVCODEC_AAC_AAC_CODEC_H_
 
-#include "ppbox/avcodec/Codec.h"
-#include "ppbox/avcodec/AudioType.h"
-#include "ppbox/avcodec/aac/AacConfigHelper.h"
+#include "just/avcodec/Codec.h"
+#include "just/avcodec/AudioType.h"
+#include "just/avcodec/aac/AacConfigHelper.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -42,9 +42,9 @@ namespace ppbox
             AacConfigHelper config_helper_;
         };
 
-        PPBOX_REGISTER_CODEC(AudioType::AAC,  AacCodec);
+        JUST_REGISTER_CODEC(AudioType::AAC,  AacCodec);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AAC_AAC_CODEC_H_
+#endif // _JUST_AVCODEC_AAC_AAC_CODEC_H_

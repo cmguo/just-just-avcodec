@@ -1,10 +1,10 @@
 // AvcType.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/avc/AvcType.h"
-#include "ppbox/avcodec/avc/AvcEnum.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/avc/AvcType.h"
+#include "just/avcodec/avc/AvcEnum.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -35,4 +35,4 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

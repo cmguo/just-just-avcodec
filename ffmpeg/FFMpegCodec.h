@@ -1,9 +1,9 @@
 // FFMpegCodec.h
 
-#ifndef _PPBOX_AVCODEC_FFMPEG_FFMPEG_CODEC_H_
-#define _PPBOX_AVCODEC_FFMPEG_FFMPEG_CODEC_H_
+#ifndef _JUST_AVCODEC_FFMPEG_FFMPEG_CODEC_H_
+#define _JUST_AVCODEC_FFMPEG_FFMPEG_CODEC_H_
 
-#include "ppbox/avcodec/ffmpeg/FFMpegVideoDecoder.h"
-#include "ppbox/avcodec/ffmpeg/FFMpegAudioDecoder.h"
+#include "just/avcodec/ffmpeg/FFMpegVideoDecoder.h"
+#include "just/avcodec/ffmpeg/FFMpegAudioDecoder.h"
 
-#endif // _PPBOX_AVCODEC_FFMPEG_FFMPEG_CODEC_H_
+#endif // _JUST_AVCODEC_FFMPEG_FFMPEG_CODEC_H_

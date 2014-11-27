@@ -1,11 +1,11 @@
 // AacAdts.h
 
-#ifndef _PPBOX_AVCODEC_AAC_AAC_ADTS_H_
-#define _PPBOX_AVCODEC_AAC_AAC_ADTS_H_
+#ifndef _JUST_AVCODEC_AAC_AAC_ADTS_H_
+#define _JUST_AVCODEC_AAC_AAC_ADTS_H_
 
-#include "ppbox/avcodec/BitsType.h"
+#include "just/avcodec/BitsType.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -85,6 +85,6 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AAC_AAC_ADTS_H_
+#endif // _JUST_AVCODEC_AAC_AAC_ADTS_H_

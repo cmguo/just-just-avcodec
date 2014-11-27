@@ -1,20 +1,20 @@
 // AvcPtsCalc.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/avc/AvcPtsCalc.h"
-#include "ppbox/avcodec/avc/AvcSliceType.h"
-#include "ppbox/avcodec/avc/AvcEnum.h"
-#include "ppbox/avcodec/nalu/NaluBuffer.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/avc/AvcPtsCalc.h"
+#include "just/avcodec/avc/AvcSliceType.h"
+#include "just/avcodec/avc/AvcEnum.h"
+#include "just/avcodec/nalu/NaluBuffer.h"
 
-#include <ppbox/avbase/stream/BitsIStream.h>
-#include <ppbox/avbase/stream/BitsOStream.h>
-#include <ppbox/avbase/stream/FormatBuffer.h>
-#include <ppbox/avbase/stream/BitsBuffer.h>
-using namespace ppbox::avbase;
+#include <just/avbase/stream/BitsIStream.h>
+#include <just/avbase/stream/BitsOStream.h>
+#include <just/avbase/stream/FormatBuffer.h>
+#include <just/avbase/stream/BitsBuffer.h>
+using namespace just::avbase;
 
 #include <util/buffers/CycleBuffers.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -84,4 +84,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

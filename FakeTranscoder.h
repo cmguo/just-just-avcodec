@@ -1,13 +1,13 @@
 // FakeTranscoder.h
 
-#ifndef _PPBOX_AVCODEC_FAKE_TRANSCODER_H_
-#define _PPBOX_AVCODEC_FAKE_TRANSCODER_H_
+#ifndef _JUST_AVCODEC_FAKE_TRANSCODER_H_
+#define _JUST_AVCODEC_FAKE_TRANSCODER_H_
 
-#include "ppbox/avcodec/Transcoder.h"
+#include "just/avcodec/Transcoder.h"
 
 #include <framework/system/LogicError.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -81,6 +81,6 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_FAKE_TRANSCODER_H_
+#endif // _JUST_AVCODEC_FAKE_TRANSCODER_H_

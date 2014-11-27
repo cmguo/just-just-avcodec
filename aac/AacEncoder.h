@@ -1,11 +1,11 @@
 // AacEncoder.h
 
-#ifndef _PPBOX_AACODEC_AAC_AAC_ENCODER_H_
-#define _PPBOX_AACODEC_AAC_AAC_ENCODER_H_
+#ifndef _JUST_AACODEC_AAC_AAC_ENCODER_H_
+#define _JUST_AACODEC_AAC_AAC_ENCODER_H_
 
-#include "ppbox/avcodec/Transcoder2.h"
+#include "just/avcodec/Transcoder2.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -52,9 +52,9 @@ namespace ppbox
             fdk_aac_impl * impl_;
         };
 
-        PPBOX_REGISTER_TRANSCODER("aac-enc", 10, AacEncoder);
+        JUST_REGISTER_TRANSCODER("aac-enc", 10, AacEncoder);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AACODEC_AAC_AAC_ENCODER_H_
+#endif // _JUST_AACODEC_AAC_AAC_ENCODER_H_

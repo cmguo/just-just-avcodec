@@ -1,14 +1,14 @@
 // AvcByteStreamSplitter.h
 
-#ifndef _PPBOX_AVCODEC_AVC_AVC_BYTE_STREAM_SPLITTER_H_
-#define _PPBOX_AVCODEC_AVC_AVC_BYTE_STREAM_SPLITTER_H_
+#ifndef _JUST_AVCODEC_AVC_AVC_BYTE_STREAM_SPLITTER_H_
+#define _JUST_AVCODEC_AVC_AVC_BYTE_STREAM_SPLITTER_H_
 
-#include "ppbox/avcodec/Splitter.h"
-#include "ppbox/avcodec/avc/AvcConfigHelper.h"
-#include "ppbox/avcodec/avc/AvcFormatType.h"
-#include "ppbox/avcodec/nalu/NaluHelper.h"
+#include "just/avcodec/Splitter.h"
+#include "just/avcodec/avc/AvcConfigHelper.h"
+#include "just/avcodec/avc/AvcFormatType.h"
+#include "just/avcodec/nalu/NaluHelper.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -31,13 +31,13 @@ namespace ppbox
                 boost::system::error_code & ec);
 
         private:
-            ppbox::avcodec::AvcConfigHelper config_;
-            ppbox::avcodec::NaluHelper helper_;
+            just::avcodec::AvcConfigHelper config_;
+            just::avcodec::NaluHelper helper_;
         };
 
-        PPBOX_REGISTER_SPLITTER(VideoType::AVC, AvcFormatType::byte_stream, AvcByteStreamSplitter);
+        JUST_REGISTER_SPLITTER(VideoType::AVC, AvcFormatType::byte_stream, AvcByteStreamSplitter);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AVC_AVC_BYTE_STREAM_SPLITTER_H_
+#endif // _JUST_AVCODEC_AVC_AVC_BYTE_STREAM_SPLITTER_H_

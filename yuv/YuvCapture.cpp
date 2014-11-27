@@ -1,10 +1,10 @@
 // YuvCapture.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/yuv/YuvCapture.h"
-#include "ppbox/avcodec/VideoType.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/yuv/YuvCapture.h"
+#include "just/avcodec/VideoType.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -50,4 +50,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

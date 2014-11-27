@@ -1,13 +1,13 @@
 // AvcSpsPpsType.h
 
-#ifndef _PPBOX_AVCODEC_AVC_AVC_SPS_PPS_TYPE_H_
-#define _PPBOX_AVCODEC_AVC_AVC_SPS_PPS_TYPE_H_
+#ifndef _JUST_AVCODEC_AVC_AVC_SPS_PPS_TYPE_H_
+#define _JUST_AVCODEC_AVC_AVC_SPS_PPS_TYPE_H_
 
-#include "ppbox/avcodec/avc/AvcAgorithm.h"
-#include "ppbox/avcodec/avc/AvcVuiType.h"
-#include "ppbox/avcodec/avc/AvcNaluHeader.h"
+#include "just/avcodec/avc/AvcAgorithm.h"
+#include "just/avcodec/avc/AvcVuiType.h"
+#include "just/avcodec/avc/AvcNaluHeader.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -339,6 +339,6 @@ namespace ppbox
        };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AVC_AVC_SPS_PPS_TYPE_H_
+#endif // _JUST_AVCODEC_AVC_AVC_SPS_PPS_TYPE_H_

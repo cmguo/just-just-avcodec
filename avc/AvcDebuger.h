@@ -1,12 +1,12 @@
 // AvcDebuger.h
 
-#ifndef _PPBOX_AVCODEC_AVC_AVC_DEBUGER_H_
-#define _PPBOX_AVCODEC_AVC_AVC_DEBUGER_H_
+#ifndef _JUST_AVCODEC_AVC_AVC_DEBUGER_H_
+#define _JUST_AVCODEC_AVC_AVC_DEBUGER_H_
 
-#include "ppbox/avcodec/Debuger.h"
-#include "ppbox/avcodec/VideoType.h"
+#include "just/avcodec/Debuger.h"
+#include "just/avcodec/VideoType.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -24,9 +24,9 @@ namespace ppbox
                 boost::system::error_code & ec);
         };
 
-        PPBOX_REGISTER_DEBUGER(VideoType::AVC, AvcDebuger);
+        JUST_REGISTER_DEBUGER(VideoType::AVC, AvcDebuger);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AVC_AVC_DEBUGER_H_
+#endif // _JUST_AVCODEC_AVC_AVC_DEBUGER_H_

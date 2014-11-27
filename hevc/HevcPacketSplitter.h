@@ -1,14 +1,14 @@
 // HevcPacketSplitter.h
 
-#ifndef _PPBOX_HEVCODEC_HEVC_HEVC_PACKET_SPLITTER_H_
-#define _PPBOX_HEVCODEC_HEVC_HEVC_PACKET_SPLITTER_H_
+#ifndef _JUST_HEVCODEC_HEVC_HEVC_PACKET_SPLITTER_H_
+#define _JUST_HEVCODEC_HEVC_HEVC_PACKET_SPLITTER_H_
 
-#include "ppbox/avcodec/Splitter.h"
-#include "ppbox/avcodec/hevc/HevcConfigHelper.h"
-#include "ppbox/avcodec/hevc/HevcFormatType.h"
-#include "ppbox/avcodec/nalu/NaluHelper.h"
+#include "just/avcodec/Splitter.h"
+#include "just/avcodec/hevc/HevcConfigHelper.h"
+#include "just/avcodec/hevc/HevcFormatType.h"
+#include "just/avcodec/nalu/NaluHelper.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -31,13 +31,13 @@ namespace ppbox
                 boost::system::error_code & ec);
 
         private:
-            ppbox::avcodec::HevcConfigHelper config_;
-            ppbox::avcodec::NaluHelper helper_;
+            just::avcodec::HevcConfigHelper config_;
+            just::avcodec::NaluHelper helper_;
         };
 
-        PPBOX_REGISTER_SPLITTER(VideoType::HEVC, HevcFormatType::packet, HevcPacketSplitter);
+        JUST_REGISTER_SPLITTER(VideoType::HEVC, HevcFormatType::packet, HevcPacketSplitter);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_HEVCODEC_HEVC_HEVC_PACKET_SPLITTER_H_
+#endif // _JUST_HEVCODEC_HEVC_HEVC_PACKET_SPLITTER_H_

@@ -1,10 +1,10 @@
 // Assembler.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/Assembler.h"
-#include "ppbox/avcodec/Error.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/Assembler.h"
+#include "just/avcodec/Error.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -31,4 +31,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

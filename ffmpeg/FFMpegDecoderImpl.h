@@ -1,10 +1,10 @@
 // FFMpegDecoderImpl.h
 
-#include "ppbox/avcodec/CodecType.h"
-#include "ppbox/avcodec/ffmpeg/FFMpegCodecMap.h"
-#include "ppbox/avcodec/ffmpeg/FFMpegLog.h"
+#include "just/avcodec/CodecType.h"
+#include "just/avcodec/ffmpeg/FFMpegCodecMap.h"
+#include "just/avcodec/ffmpeg/FFMpegLog.h"
 
-#include <ppbox/avbase/TypeMap.h>
+#include <just/avbase/TypeMap.h>
 
 #include <util/buffers/BuffersCopy.h>
 
@@ -14,7 +14,7 @@ extern "C"
 #include <libavcodec/avcodec.h>
 }
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -168,4 +168,4 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

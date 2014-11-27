@@ -1,9 +1,9 @@
 // Error.h
 
-#ifndef _PPBOX_AVCODEC_ERROR_H_
-#define _PPBOX_AVCODEC_ERROR_H_
+#ifndef _JUST_AVCODEC_ERROR_H_
+#define _JUST_AVCODEC_ERROR_H_
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -74,7 +74,7 @@ namespace ppbox
         } // namespace live_error
 
     } // namespace live
-} // namespace ppbox
+} // namespace just
 
 namespace boost
 {
@@ -82,16 +82,16 @@ namespace boost
     {
 
         template<>
-        struct is_error_code_enum<ppbox::avcodec::error::errors>
+        struct is_error_code_enum<just::avcodec::error::errors>
         {
             BOOST_STATIC_CONSTANT(bool, value = true);
         };
 
 #ifdef BOOST_NO_ARGUMENT_DEPENDENT_LOOKUP
-        using ppbox::avcodec::error::make_error_code;
+        using just::avcodec::error::make_error_code;
 #endif
 
     }
 }
 
-#endif // _PPBOX_AVCODEC_ERROR_H_
+#endif // _JUST_AVCODEC_ERROR_H_

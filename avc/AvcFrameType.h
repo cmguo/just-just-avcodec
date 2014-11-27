@@ -1,13 +1,13 @@
 // AvcFrameType.h
 
-#ifndef _PPBOX_AVCODEC_AVC_AVC_FRAME_TYPE_H_
-#define _PPBOX_AVCODEC_AVC_AVC_FRAME_TYPE_H_
+#ifndef _JUST_AVCODEC_AVC_AVC_FRAME_TYPE_H_
+#define _JUST_AVCODEC_AVC_AVC_FRAME_TYPE_H_
 
-#include "ppbox/avcodec/nalu/NaluHelper.h"
+#include "just/avcodec/nalu/NaluHelper.h"
 
 #include <istream>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -58,6 +58,6 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AVC_AVC_FRAME_TYPE_H_
+#endif // _JUST_AVCODEC_AVC_AVC_FRAME_TYPE_H_

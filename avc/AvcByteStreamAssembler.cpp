@@ -1,13 +1,13 @@
 // AvcByteStreamAssembler.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/avc/AvcByteStreamAssembler.h"
-#include "ppbox/avcodec/avc/AvcEnum.h"
-#include "ppbox/avcodec/avc/AvcConfigHelper.h"
-#include "ppbox/avcodec/avc/AvcNaluHeader.h"
-#include "ppbox/avcodec/nalu/NaluHelper.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/avc/AvcByteStreamAssembler.h"
+#include "just/avcodec/avc/AvcEnum.h"
+#include "just/avcodec/avc/AvcConfigHelper.h"
+#include "just/avcodec/avc/AvcNaluHeader.h"
+#include "just/avcodec/nalu/NaluHelper.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -51,7 +51,7 @@ namespace ppbox
                 init_ = true;
                 bool need_aud = true;
                 bool need_sps_pps = true;
-                std::vector<ppbox::avcodec::NaluBuffer> const & nalus = helper.nalus();
+                std::vector<just::avcodec::NaluBuffer> const & nalus = helper.nalus();
                 for (boost::uint32_t i = 0; i < nalus.size(); ++i) {
                     NaluBuffer const & nalu = nalus[i];
                     AvcNaluHeader nalu_header(nalu.begin.dereference_byte());
@@ -93,4 +93,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

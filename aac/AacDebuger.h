@@ -1,12 +1,12 @@
 // AacDebuger.h
 
-#ifndef _PPBOX_AACODEC_AAC_AAC_DEBUGER_H_
-#define _PPBOX_AACODEC_AAC_AAC_DEBUGER_H_
+#ifndef _JUST_AACODEC_AAC_AAC_DEBUGER_H_
+#define _JUST_AACODEC_AAC_AAC_DEBUGER_H_
 
-#include "ppbox/avcodec/Debuger.h"
-#include "ppbox/avcodec/AudioType.h"
+#include "just/avcodec/Debuger.h"
+#include "just/avcodec/AudioType.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -27,9 +27,9 @@ namespace ppbox
             std::vector<boost::uint8_t> adts_header_;
         };
 
-        PPBOX_REGISTER_DEBUGER(AudioType::AAC,  AacDebuger);
+        JUST_REGISTER_DEBUGER(AudioType::AAC,  AacDebuger);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AACODEC_AAC_AAC_DEBUGER_H_
+#endif // _JUST_AACODEC_AAC_AAC_DEBUGER_H_

@@ -1,24 +1,24 @@
 // AvcDebuger.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/avc/AvcDebuger.h"
-#include "ppbox/avcodec/avc/AvcConfig.h"
-#include "ppbox/avcodec/avc/AvcConfigHelper.h"
-#include "ppbox/avcodec/avc/AvcType.h"
-#include "ppbox/avcodec/avc/AvcEnum.h"
-#include "ppbox/avcodec/nalu/NaluHelper.h"
-#include "ppbox/avcodec/nalu/NaluBuffer.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/avc/AvcDebuger.h"
+#include "just/avcodec/avc/AvcConfig.h"
+#include "just/avcodec/avc/AvcConfigHelper.h"
+#include "just/avcodec/avc/AvcType.h"
+#include "just/avcodec/avc/AvcEnum.h"
+#include "just/avcodec/nalu/NaluHelper.h"
+#include "just/avcodec/nalu/NaluBuffer.h"
 
-#include <ppbox/avbase/stream/BitsOStream.h>
-#include <ppbox/avbase/stream/BitsIStream.h>
-#include <ppbox/avbase/stream/BitsBuffer.h>
-#include <ppbox/avbase/stream/FormatBuffer.h>
-using namespace ppbox::avbase;
+#include <just/avbase/stream/BitsOStream.h>
+#include <just/avbase/stream/BitsIStream.h>
+#include <just/avbase/stream/BitsBuffer.h>
+#include <just/avbase/stream/FormatBuffer.h>
+using namespace just::avbase;
 
 #include <util/archive/ArchiveBuffer.h>
 #include <util/buffers/CycleBuffers.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -85,7 +85,7 @@ namespace ppbox
             boost::system::error_code & ec)
         {
             NaluHelper & helper = *(NaluHelper *)sample.context;
-            std::vector<ppbox::avcodec::NaluBuffer> const & nalus = helper.nalus();
+            std::vector<just::avcodec::NaluBuffer> const & nalus = helper.nalus();
             char start_code[] = {0, 0, 0, 1};
             for (boost::uint32_t i = 0; i < nalus.size(); ++i) {
                 NaluBuffer const & nalu = nalus[i];
@@ -125,4 +125,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

@@ -1,20 +1,20 @@
 // AudioCapture.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/AudioCapture.h"
-#include "ppbox/avcodec/AudioType.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/AudioCapture.h"
+#include "just/avcodec/AudioType.h"
 
 #include <framework/string/Parse.h>
 using namespace framework::string;
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
 
         AudioCapture::AudioCapture()
         {
-            info_.type = ppbox::avbase::StreamType::AUDI;
+            info_.type = just::avbase::StreamType::AUDI;
             info_.audio_format.channel_count = 1;
             info_.audio_format.sample_size = 8;
             info_.audio_format.sample_rate = 22050;
@@ -34,7 +34,7 @@ namespace ppbox
                 std::string const & key = iter->first;
                 std::string const & value = iter->second;
                 if (key == "type") {
-                    info_.sub_type = ppbox::avbase::FourCC::from_string(value);
+                    info_.sub_type = just::avbase::FourCC::from_string(value);
                 } else if (key == "channel_count") {
                     parse2(value, info_.audio_format.channel_count);
                 } else if (key == "sample_size") {
@@ -65,4 +65,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

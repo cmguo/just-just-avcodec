@@ -1,14 +1,14 @@
 // FFMpegAudioDecoderImpl.h
 
-#include "ppbox/avcodec/AudioType.h"
-#include "ppbox/avcodec/ffmpeg/FFMpegDecoderImpl.h"
+#include "just/avcodec/AudioType.h"
+#include "just/avcodec/ffmpeg/FFMpegDecoderImpl.h"
 
 extern "C"
 {
 #include <libswresample/swresample.h>
 }
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -164,4 +164,4 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

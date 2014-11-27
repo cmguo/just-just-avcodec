@@ -1,8 +1,8 @@
 // VideoCapture.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/VideoCapture.h"
-#include "ppbox/avcodec/VideoType.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/VideoCapture.h"
+#include "just/avcodec/VideoType.h"
 
 #include <framework/string/Parse.h>
 #include <framework/string/Slice.h>
@@ -10,14 +10,14 @@ using namespace framework::string;
 
 #include <iterator>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
 
         VideoCapture::VideoCapture()
         {
-            info_.type = ppbox::avbase::StreamType::VIDE;
+            info_.type = just::avbase::StreamType::VIDE;
             info_.video_format.width = 640;
             info_.video_format.height = 480;
             info_.video_format.frame_rate_num = 20;
@@ -37,7 +37,7 @@ namespace ppbox
                 std::string const & key = iter->first;
                 std::string const & value = iter->second;
                 if (key == "type") {
-                    info_.sub_type = ppbox::avbase::FourCC::from_string(value);
+                    info_.sub_type = just::avbase::FourCC::from_string(value);
                 } else if (key == "width") {
                     parse2(value, info_.video_format.width);
                 } else if (key == "height") {
@@ -72,4 +72,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

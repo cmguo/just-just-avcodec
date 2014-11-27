@@ -1,19 +1,19 @@
 // HevcCodec.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/hevc/HevcCodec.h"
-#include "ppbox/avcodec/hevc/HevcFormatType.h"
-#include "ppbox/avcodec/hevc/HevcConfigHelper.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/hevc/HevcCodec.h"
+#include "just/avcodec/hevc/HevcFormatType.h"
+#include "just/avcodec/hevc/HevcConfigHelper.h"
 
 #include <util/tools/ClassRegister.h>
-#include "ppbox/avcodec/hevc/HevcPacketAssembler.h"
-#include "ppbox/avcodec/hevc/HevcByteStreamAssembler.h"
-#include "ppbox/avcodec/hevc/HevcPacketSplitter.h"
-#include "ppbox/avcodec/hevc/HevcByteStreamSplitter.h"
-#include "ppbox/avcodec/hevc/HevcDebuger.h"
-//#include "ppbox/avcodec/hevc/HevcEncoder.h"
+#include "just/avcodec/hevc/HevcPacketAssembler.h"
+#include "just/avcodec/hevc/HevcByteStreamAssembler.h"
+#include "just/avcodec/hevc/HevcPacketSplitter.h"
+#include "just/avcodec/hevc/HevcByteStreamSplitter.h"
+#include "just/avcodec/hevc/HevcDebuger.h"
+//#include "just/avcodec/hevc/HevcEncoder.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -53,4 +53,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

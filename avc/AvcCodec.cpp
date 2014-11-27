@@ -1,19 +1,19 @@
 // AvcCodec.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/avc/AvcCodec.h"
-#include "ppbox/avcodec/avc/AvcFormatType.h"
-#include "ppbox/avcodec/avc/AvcConfigHelper.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/avc/AvcCodec.h"
+#include "just/avcodec/avc/AvcFormatType.h"
+#include "just/avcodec/avc/AvcConfigHelper.h"
 
 #include <util/tools/ClassRegister.h>
-#include "ppbox/avcodec/avc/AvcPacketAssembler.h"
-#include "ppbox/avcodec/avc/AvcByteStreamAssembler.h"
-#include "ppbox/avcodec/avc/AvcPacketSplitter.h"
-#include "ppbox/avcodec/avc/AvcByteStreamSplitter.h"
-#include "ppbox/avcodec/avc/AvcDebuger.h"
-#include "ppbox/avcodec/avc/AvcEncoder.h"
+#include "just/avcodec/avc/AvcPacketAssembler.h"
+#include "just/avcodec/avc/AvcByteStreamAssembler.h"
+#include "just/avcodec/avc/AvcPacketSplitter.h"
+#include "just/avcodec/avc/AvcByteStreamSplitter.h"
+#include "just/avcodec/avc/AvcDebuger.h"
+#include "just/avcodec/avc/AvcEncoder.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -55,4 +55,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

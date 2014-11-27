@@ -1,10 +1,10 @@
 // AvcEncoderX264Impl.h
 
-#include "ppbox/avcodec/avc/AvcConfigHelper.h"
-#include "ppbox/avcodec/nalu/NaluHelper.h"
-#include "ppbox/avcodec/csp/ColorSpace.h"
+#include "just/avcodec/avc/AvcConfigHelper.h"
+#include "just/avcodec/nalu/NaluHelper.h"
+#include "just/avcodec/csp/ColorSpace.h"
 
-#include <ppbox/avbase/TypeMap.h>
+#include <just/avbase/TypeMap.h>
 
 #include <util/buffers/BuffersCopy.h>
 
@@ -24,7 +24,7 @@ extern "C"
 #include <x264.h>
 };
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -206,7 +206,7 @@ namespace ppbox
                 StreamInfo & output_format, 
                 boost::system::error_code & ec)
             {
-                x264_csp_t const * csp = ppbox::avbase::type_map_find(
+                x264_csp_t const * csp = just::avbase::type_map_find(
                     x264_csp_tab, 
                     &x264_csp_t::type, input_format.sub_type);
                 if (csp == NULL) {
@@ -366,4 +366,4 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

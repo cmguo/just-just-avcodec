@@ -1,17 +1,17 @@
 // AacConfigHelper.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/aac/AacConfigHelper.h"
-#include "ppbox/avcodec/aac/AacConfig.h"
-#include "ppbox/avcodec/aac/AacAdts.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/aac/AacConfigHelper.h"
+#include "just/avcodec/aac/AacConfig.h"
+#include "just/avcodec/aac/AacAdts.h"
 
-#include <ppbox/avbase/stream/BitsIStream.h>
-#include <ppbox/avbase/stream/BitsOStream.h>
-#include <ppbox/avbase/stream/FormatBuffer.h>
-#include <ppbox/avbase/StreamInfo.h>
-using namespace ppbox::avbase;
+#include <just/avbase/stream/BitsIStream.h>
+#include <just/avbase/stream/BitsOStream.h>
+#include <just/avbase/stream/FormatBuffer.h>
+#include <just/avbase/StreamInfo.h>
+using namespace just::avbase;
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -245,4 +245,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

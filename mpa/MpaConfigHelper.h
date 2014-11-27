@@ -1,9 +1,9 @@
 // MpaConfigHelper.h
 
-#ifndef _PPBOX_AVCODEC_MPA_MPA_CONFIG_HELPER_H_
-#define _PPBOX_AVCODEC_MPA_MPA_CONFIG_HELPER_H_
+#ifndef _JUST_AVCODEC_MPA_MPA_CONFIG_HELPER_H_
+#define _JUST_AVCODEC_MPA_MPA_CONFIG_HELPER_H_
 
-namespace ppbox
+namespace just
 {
     namespace avbase
     {
@@ -109,10 +109,10 @@ namespace ppbox
             bool ready() const;
 
             void set_format(
-                ppbox::avbase::AudioInfo const & info);
+                just::avbase::AudioInfo const & info);
 
             void get_format(
-                ppbox::avbase::AudioInfo & info) const;
+                just::avbase::AudioInfo & info) const;
 
         private:
             MpaConfig * data_;
@@ -130,6 +130,6 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_MPA_MPA_CONFIG_HELPER_H_
+#endif // _JUST_AVCODEC_MPA_MPA_CONFIG_HELPER_H_

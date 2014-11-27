@@ -1,11 +1,11 @@
 // FFMpegAudioDecoder.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/ffmpeg/FFMpegAudioDecoder.h"
-#include "ppbox/avcodec/AudioType.h"
-#include "ppbox/avcodec/ffmpeg/FFMpegAudioDecoderImpl.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/ffmpeg/FFMpegAudioDecoder.h"
+#include "just/avcodec/AudioType.h"
+#include "just/avcodec/ffmpeg/FFMpegAudioDecoderImpl.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -77,4 +77,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

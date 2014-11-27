@@ -1,6 +1,6 @@
 // AacEncoderFdkImpl.h
 
-#include "ppbox/avcodec/aac/AacConfigHelper.h"
+#include "just/avcodec/aac/AacConfigHelper.h"
 
 #include <util/buffers/BuffersCopy.h>
 
@@ -90,7 +90,7 @@ namespace boost
     }
 }
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -349,4 +349,4 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

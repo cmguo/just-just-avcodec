@@ -1,9 +1,9 @@
 // MpaType.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/mpa/MpaCodec.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/mpa/MpaCodec.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -54,4 +54,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

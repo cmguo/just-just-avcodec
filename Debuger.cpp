@@ -1,12 +1,12 @@
 // Debuger.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/Debuger.h"
-#include "ppbox/avcodec/Error.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/Debuger.h"
+#include "just/avcodec/Error.h"
 
-#include <ppbox/avbase/FourCC.h>
+#include <just/avbase/FourCC.h>
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -25,7 +25,7 @@ namespace ppbox
         {
             dump_file_.append(1, (char)info.index + '0');
             dump_file_.append(1, '.');
-            dump_file_ += ppbox::avbase::FourCC::to_string(info.sub_type);
+            dump_file_ += just::avbase::FourCC::to_string(info.sub_type);
             file_.open(dump_file_.c_str(), std::ios::binary | std::ios::trunc);
             return true;
         }
@@ -44,4 +44,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

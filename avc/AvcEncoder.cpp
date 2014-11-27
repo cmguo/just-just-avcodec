@@ -1,20 +1,20 @@
 // AvcEncoder.cpp
 
-#include "ppbox/avcodec/Common.h"
-#include "ppbox/avcodec/avc/AvcEncoder.h"
-#include "ppbox/avcodec/avc/AvcFormatType.h"
-#ifndef PPBOX_DISABLE_X264
-#  include "ppbox/avcodec/avc/AvcEncoderX264Impl.h"
+#include "just/avcodec/Common.h"
+#include "just/avcodec/avc/AvcEncoder.h"
+#include "just/avcodec/avc/AvcFormatType.h"
+#ifndef JUST_DISABLE_X264
+#  include "just/avcodec/avc/AvcEncoderX264Impl.h"
 #else
-#  include "ppbox/avcodec/FakeTranscoder.h"
+#  include "just/avcodec/FakeTranscoder.h"
 #endif
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
 
-#ifdef PPBOX_DISABLE_X264
+#ifdef JUST_DISABLE_X264
         struct x264_impl : FakeTranscoder {};
 #endif
 
@@ -89,4 +89,4 @@ namespace ppbox
         }
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

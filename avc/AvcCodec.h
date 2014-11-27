@@ -1,12 +1,12 @@
 // AvcCodec.h
 
-#ifndef _PPBOX_AVCODEC_AVC_AVC_CODEC_H_
-#define _PPBOX_AVCODEC_AVC_AVC_CODEC_H_
+#ifndef _JUST_AVCODEC_AVC_AVC_CODEC_H_
+#define _JUST_AVCODEC_AVC_AVC_CODEC_H_
 
-#include "ppbox/avcodec/Codec.h"
-#include "ppbox/avcodec/VideoType.h"
+#include "just/avcodec/Codec.h"
+#include "just/avcodec/VideoType.h"
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -23,9 +23,9 @@ namespace ppbox
                 boost::system::error_code & ec);
         };
 
-        PPBOX_REGISTER_CODEC(VideoType::AVC, AvcCodec);
+        JUST_REGISTER_CODEC(VideoType::AVC, AvcCodec);
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AVC_AVC_CODEC_H_
+#endif // _JUST_AVCODEC_AVC_AVC_CODEC_H_

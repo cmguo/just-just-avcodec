@@ -1,9 +1,9 @@
 // FFMpegCodecMap.h
 
-#ifndef _PPBOX_AVCODEC_FFMPEG_FFMPEG_CODEC_MAP_H_
-#define _PPBOX_AVCODEC_FFMPEG_FFMPEG_CODEC_MAP_H_
+#ifndef _JUST_AVCODEC_FFMPEG_FFMPEG_CODEC_MAP_H_
+#define _JUST_AVCODEC_FFMPEG_FFMPEG_CODEC_MAP_H_
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -35,6 +35,6 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_FFMPEG_FFMPEG_CODEC_MAP_H_
+#endif // _JUST_AVCODEC_FFMPEG_FFMPEG_CODEC_MAP_H_

@@ -1,7 +1,7 @@
 // FFMpegVideoDecoderImpl.h
 
-#include "ppbox/avcodec/VideoType.h"
-#include "ppbox/avcodec/ffmpeg/FFMpegDecoderImpl.h"
+#include "just/avcodec/VideoType.h"
+#include "just/avcodec/ffmpeg/FFMpegDecoderImpl.h"
 
 extern "C"
 {
@@ -10,7 +10,7 @@ extern "C"
 #include <libavutil/imgutils.h>
 }
 
-namespace ppbox
+namespace just
 {
     namespace avcodec
     {
@@ -64,7 +64,7 @@ namespace ppbox
                 }
                 pdst.width = ctx->width;
                 pdst.height = ctx->height;
-                ff_pixel_format const * fmt = ppbox::avbase::type_map_find(
+                ff_pixel_format const * fmt = just::avbase::type_map_find(
                     ff_pixel_format_table, 
                     &ff_pixel_format::format, output_format.sub_type);
                 pdst.pixel_fmt = fmt->ff_format;
@@ -126,4 +126,4 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just

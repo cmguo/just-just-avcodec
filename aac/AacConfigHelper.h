@@ -1,9 +1,9 @@
 // AacConfigHelper.h
 
-#ifndef _PPBOX_AVCODEC_AAC_AAC_CONFIG_HELPER_H_
-#define _PPBOX_AVCODEC_AAC_AAC_CONFIG_HELPER_H_
+#ifndef _JUST_AVCODEC_AAC_AAC_CONFIG_HELPER_H_
+#define _JUST_AVCODEC_AAC_AAC_CONFIG_HELPER_H_
 
-namespace ppbox
+namespace just
 {
     namespace avbase
     {
@@ -78,7 +78,7 @@ namespace ppbox
             bool ready() const;
 
             void get_format(
-                ppbox::avbase::AudioInfo & info) const;
+                just::avbase::AudioInfo & info) const;
 
         private:
             AacConfig * data_;
@@ -88,6 +88,6 @@ namespace ppbox
         };
 
     } // namespace avcodec
-} // namespace ppbox
+} // namespace just
 
-#endif // _PPBOX_AVCODEC_AAC_AAC_CONFIG_HELPER_H_
+#endif // _JUST_AVCODEC_AAC_AAC_CONFIG_HELPER_H_
