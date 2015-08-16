@@ -7,6 +7,7 @@
 
 #include <util/buffers/BuffersSize.h>
 #include <util/buffers/BuffersCopy.h>
+#include <util/archive/Ctype.h>
 
 #include <framework/system/BytesOrder.h>
 
