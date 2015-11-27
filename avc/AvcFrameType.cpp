@@ -89,7 +89,7 @@ namespace just
                         return type_;
                     skip = nalu.begin.skipped_bytes();
                 }
-                if (is.eof())
+                if (!is)
                     return 0;
                 boost::uint32_t old_size = data.size();
                 data.resize(old_size + 32);
