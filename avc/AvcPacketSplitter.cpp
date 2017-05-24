@@ -3,13 +3,14 @@
 #include "just/avcodec/Common.h"
 #include "just/avcodec/avc/AvcPacketSplitter.h"
 #include "just/avcodec/avc/AvcConfig.h"
-
+#include "just/avcodec/avc/AvcEnum.h"
 namespace just
 {
     namespace avcodec
     {
 
         AvcPacketSplitter::AvcPacketSplitter()
+        : helper_(AvcNaluType::is_access_end)
         {
         }
 
