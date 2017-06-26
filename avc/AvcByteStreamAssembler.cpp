@@ -35,7 +35,7 @@ namespace just
             access_unit_delimiter_.push_back(0xF0);
             // sps
             sps_pps_ = info.format_data;
-
+            info.format_data.insert(info.format_data.begin(), access_unit_delimiter_.begin(), access_unit_delimiter_.end());
             init_ = false;
 
             return true;
