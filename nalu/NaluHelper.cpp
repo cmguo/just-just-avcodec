@@ -92,9 +92,9 @@ namespace just
                 position.increment_bytes(end, nalu_length_size_);
                 NaluBuffer::BuffersPosition pos = position;
                 position.increment_bytes(end, len);
+                if (is_access_end_ && !is_access_end_(pos.dereference_byte()))
+                    continue;
                 nalus_.push_back(NaluBuffer(pos, position));
-                if (is_access_end_ && is_access_end_(pos.dereference_byte()))
-                    break;
             }
             return true;
         }
