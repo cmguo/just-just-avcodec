@@ -210,7 +210,7 @@ namespace just
             adts.version = 0; // MPEG4 part 3
             adts.layer = 0;
             adts.protection_absent = 1;
-            adts.profile = data_->audioObjectType - 1;
+            adts.profile = get_object_type() - 1;
             adts.sampling_frequency_index = data_->samplingFrequencyIndex;
             adts.private_bit = 0;
             adts.channel_configuration = (boost::uint8_t)data_->channelConfiguration;
