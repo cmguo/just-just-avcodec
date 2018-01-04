@@ -39,6 +39,8 @@ namespace just
             }
 
         private:
+            void gen_format_data(StreamInfo &info, AacConfigHelper &config);
+
             AacConfigHelper config_helper_;
         };
 

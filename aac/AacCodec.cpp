@@ -38,7 +38,11 @@ namespace just
         {
             AacConfigHelper config;
             if (info.format_type == AacFormatType::raw) {
-                config.from_data(info.format_data);
+                if (info.format_data.empty()) {
+                    gen_format_data(info, config);
+                }else{
+                    config.from_data(info.format_data);
+                }
             } else if (info.format_type == AacFormatType::adts) {
                 config.from_adts_data(info.format_data);
                 config.to_adts_data(0, info.format_data);
@@ -63,5 +67,18 @@ namespace just
             return true;
         }
 
+        void AacCodec::gen_format_data(StreamInfo &info, AacConfigHelper &config)
+        {
+            // used for gen adts header
+            // AAC LC or backwards compatible HE-AAC (Most realworld AAC falls in one of these cases)
+            boost::uint32_t object_type = 2;
+            boost::uint32_t frequency = info.audio_format.sample_rate;
+            int channel_count = info.audio_format.channel_count;
+            config.set_object_type(object_type);
+            config.set_frequency(frequency);
+            config.set_channel_count(channel_count);
+
+            config.to_data(info.format_data);
+        }
     } // namespace avcodec
 } // namespace just
